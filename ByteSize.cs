@@ -101,7 +101,12 @@ namespace ByteSize
             string symbol;
             double value;
             
-            if (GigaBytes >= 1)
+            if (TeraBytes >= 1)
+            {
+                value = this.TeraBytes;
+                symbol = ByteSize.TeraByteSymbol;
+            }
+            else if (GigaBytes >= 1)
             {
                 value = this.GigaBytes;
                 symbol = ByteSize.GigaByteSymbol;
