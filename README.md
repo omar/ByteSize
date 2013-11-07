@@ -27,8 +27,9 @@ MaxFileSize.KiloBytes;
 You can create a `ByteSize` object from `bits`, `bytes`, `kilobytes`, `megabytes`, `gigabytes`, and `terabytes`.
 
 ```
+new ByteSize(1.5);           // Constructor takes in bytes
 ByteSize.FromBits(10);
-ByteSize.FromBytes(1.5);
+ByteSize.FromBytes(1.5);     // Same as constructor
 ByteSize.FromKiloBytes(1.5);
 ByteSize.FromMegaBytes(1.5);
 ByteSize.FromGigaBytes(1.5);
@@ -57,7 +58,7 @@ ByteSize.FromKiloBytes(.5).ToString();   // 512 B
 ByteSize.FromKiloBytes(1000).ToString(); // 1000 KB
 ByteSize.FromKiloBytes(1024).ToString(); // 1 MB
 ByteSize.FromGigabytes(.5).ToString();   // 512 MB
-ByteSize.FromGigabytes(1024).ToString();   // 1 TB
+ByteSize.FromGigabytes(1024).ToString(); // 1 TB
 ```
 
 #### Author and License
