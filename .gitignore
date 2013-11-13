@@ -29,6 +29,7 @@ obj/
 _ReSharper*/**
 NDependOut/**
 packages/**
+src/packages/**
 [Tt]humbs.db
 [Tt]est[Rr]esult*
 [Bb]uild[Ll]og.*

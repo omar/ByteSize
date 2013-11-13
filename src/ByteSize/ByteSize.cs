@@ -53,6 +53,53 @@ namespace ByteSize
         public double GigaBytes { get; private set; }
         public double TeraBytes { get; private set; }
 
+        public string LargestWholeNumberSymbol
+        {
+            get
+            {
+                // Absolute value is used to deal with negative values
+                if (Math.Abs(this.TeraBytes) >= 1)
+                    return ByteSize.TeraByteSymbol;
+                
+                if (Math.Abs(this.GigaBytes) >= 1)
+                    return ByteSize.GigaByteSymbol;
+
+                if (Math.Abs(this.MegaBytes) >= 1)
+                    return ByteSize.MegaByteSymbol;
+
+                if (Math.Abs(this.KiloBytes) >= 1)
+                    return ByteSize.KiloByteSymbol;
+                
+                if (Math.Abs(this.Bytes) >= 1)
+                    return ByteSize.ByteSymbol;
+                
+                return ByteSize.BitSymbol;
+            }
+        }
+        public double LargestWholeNumberValue
+        {
+            get
+            {
+                // Absolute value is used to deal with negative values
+                if (Math.Abs(this.TeraBytes) >= 1)
+                    return this.TeraBytes;
+
+                if (Math.Abs(this.GigaBytes) >= 1)
+                    return this.GigaBytes;
+
+                if (Math.Abs(this.MegaBytes) >= 1)
+                    return this.MegaBytes;
+
+                if (Math.Abs(this.KiloBytes) >= 1)
+                    return this.KiloBytes;
+
+                if (Math.Abs(this.Bytes) >= 1)
+                    return this.Bytes;
+
+                return this.Bits;
+            }
+        }
+
         public ByteSize(double byteSize)
             : this()
         {
@@ -68,7 +115,7 @@ namespace ByteSize
 
         public static ByteSize FromBits(long value)
         {
-            return new ByteSize(value / BitsInByte);
+            return new ByteSize(value / (double)BitsInByte);
         }
 
         public static ByteSize FromBytes(double value)
@@ -104,40 +151,34 @@ namespace ByteSize
         /// </summary>
         public override string ToString()
         {
-            string symbol;
-            double value;
+            return string.Format("{0} {1}", this.LargestWholeNumberValue, this.LargestWholeNumberSymbol);
+        }
 
-            if (this.TeraBytes >= 1)
-            {
-                value = this.TeraBytes;
-                symbol = ByteSize.TeraByteSymbol;
-            }
-            else if (this.GigaBytes >= 1)
-            {
-                value = this.GigaBytes;
-                symbol = ByteSize.GigaByteSymbol;
-            }
-            else if (this.MegaBytes >= 1)
-            {
-                value = this.MegaBytes;
-                symbol = ByteSize.MegaByteSymbol;
-            }
-            else if (this.KiloBytes >= 1)
-            {
-                value = this.KiloBytes;
-                symbol = ByteSize.KiloByteSymbol;
-            }
-            else if (this.Bytes >= 1)
-            {
-                value = this.Bytes;
-                symbol = ByteSize.ByteSymbol;
-            }
-            else
-            {
-                value = this.Bits;
-                symbol = ByteSize.BitSymbol;
-            }
-            return string.Format("{0} {1}", value, symbol);
+        public string ToString(string format)
+        {
+            if (!format.Contains("#") && !format.Contains("0"))
+                format = "#.## " + format;
+
+            Func<string, bool> has = s => format.IndexOf(s, StringComparison.CurrentCultureIgnoreCase) != -1;
+            Func<double, string> output = n => n.ToString(format);
+
+            if (has("TB"))
+                return output(this.TeraBytes);
+            if (has("GB"))
+                return output(this.GigaBytes);
+            if (has("MB"))
+                return output(this.MegaBytes);
+            if (has("KB"))
+                return output(this.KiloBytes);
+
+            // Byte and Bit symbol look must be case-sensitive
+            if (format.IndexOf(ByteSize.ByteSymbol) != -1)
+                return output(this.Bytes);
+
+            if (format.IndexOf(ByteSize.BitSymbol) != -1)
+                return output(this.Bits);
+
+            return string.Format("{0} {1}", this.LargestWholeNumberValue.ToString(format), this.LargestWholeNumberSymbol);
         }
 
         public override bool Equals(object value)
@@ -174,6 +215,36 @@ namespace ByteSize
             return new ByteSize(this.Bits + bs.Bits);
         }
 
+        public ByteSize AddBits(long value)
+        {
+            return new ByteSize(this.Bits + value);
+        }
+
+        public ByteSize AddBytes(double value)
+        {
+            return this + ByteSize.FromBytes(value);
+        }
+
+        public ByteSize AddKiloBytes(double value)
+        {
+            return this + ByteSize.FromKiloBytes(value);
+        }
+
+        public ByteSize AddMegaBytes(double value)
+        {
+            return this + ByteSize.FromMegaBytes(value);
+        }
+
+        public ByteSize AddGigaBytes(double value)
+        {
+            return this + ByteSize.FromGigaBytes(value);
+        }
+
+        public ByteSize AddTeraBytes(double value)
+        {
+            return this + ByteSize.FromTeraBytes(value);
+        }
+
         public ByteSize Subtract(ByteSize bs)
         {
             return new ByteSize(this.Bits - bs.Bits);
@@ -187,6 +258,11 @@ namespace ByteSize
         public static ByteSize operator ++(ByteSize b)
         {
             return new ByteSize(b.Bits++);
+        }
+
+        public static ByteSize operator -(ByteSize b)
+        {
+            return new ByteSize(-b.Bits);
         }
 
         public static ByteSize operator --(ByteSize b)
