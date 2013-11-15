@@ -23,6 +23,24 @@ public static readonly MaxFileSize = ByteSize.FromMegaBytes(1.5);
 // I have it in KBs!
 MaxFileSize.KiloBytes;
 ```
+
+`ByeSize` behaves like any other struct backed by a numerical value.
+
+```
+// Add
+var monthlyUsage = ByteSize.FromGigaBytes(10);
+var currentUsage = ByteSize.FromMegaBytes(512);
+ByteSize total = monthlyUsage + currentUsage;
+
+total.Add(ByteSize.FromKiloBytes(10));
+total.AddGigaBytes(10);
+
+// Subtract
+var delta = total.Subtract(ByteSize.FromKiloBytes(10));
+delta = delta - ByteSize.FromGigaBytes(100);
+delta = delta.AddMegaBytes(-100);
+```
+
 ### Constructors
 
 You can create a `ByteSize` object from `bits`, `bytes`, `kilobytes`, `megabytes`, `gigabytes`, and `terabytes`.
