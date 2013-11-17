@@ -121,6 +121,10 @@ b.ToString("#.#### MB");  // .0103 MB
 b.ToString("0.00 GB");    // 0 GB
 b.ToString("#.## B");     // 10757.12 B```
 
+#### TODO
+
+- Add `Parse` and `TryParse` methods
+
 #### Author and License
 
 Omar Khudeira ([http://omar.io](http://omar.io))
