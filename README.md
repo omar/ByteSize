@@ -12,7 +12,7 @@ Without `ByteSize`:
 public static readonly double MaxFileSizeMBs = 1.5;
 
 // I need it in KBs!
-var kilobytes = MaxFileSizeMBs / 1024;
+var kilobytes = MaxFileSizeMBs * 1024;
 ```
 
 With `ByteSize`:
