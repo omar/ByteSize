@@ -4,6 +4,12 @@
 
 `ByteSize` is to bytes what `System.TimeSpan` is to time.
 
+#### NuGet Package
+Command: `Install-Package ByteSize`
+
+URL: [nuget.org/packages/ByteSize](https://www.nuget.org/packages/ByteSize)
+
+
 ## Usage 
 
 Without `ByteSize`:
