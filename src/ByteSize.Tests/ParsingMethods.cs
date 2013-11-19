@@ -35,6 +35,17 @@ namespace ByteSize.Tests
             Assert.Equal(expected, resultByteSize);
         }
 
+        [Fact]
+        public void ParseDecimalMB()
+        {
+            string val = "100.5MB";
+            var expected = ByteSize.FromMegaBytes(100.5);
+
+            var result = ByteSize.Parse(val);
+
+            Assert.Equal(expected, result);
+        }
+
         // Failure modes
         [Fact]
         public void TryParseReturnsFalseOnBadValue()
@@ -81,6 +92,14 @@ namespace ByteSize.Tests
             var result = ByteSize.Parse(val);
 
             Assert.Equal(expected, result);
+        }
+
+        [Fact]
+        public void ParsePartialBits()
+        {
+            string val = "10.5b";
+
+            Assert.Throws<FormatException>(() => { ByteSize.Parse(val); });
         }
 
 

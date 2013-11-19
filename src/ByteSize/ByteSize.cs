@@ -314,7 +314,7 @@ namespace ByteSize
             s = s.TrimStart(); // Protect against leading spaces
             var num = s
                 .Select((val, index) => new {val, index}) // Get current char & index
-                .FirstOrDefault(x => !char.IsDigit(x.val)); // Pick the first non-digit char
+                .FirstOrDefault(x => !(char.IsDigit(x.val) || x.val == '.')); // Pick the first non-digit char
 
             if (num == null)
                 return false;
@@ -326,15 +326,18 @@ namespace ByteSize
             string sizePart = s.Substring(lastNumber, s.Length - lastNumber).Trim();
 
             // Get the numeric part
-            int number;
-            if (!int.TryParse(numberPart, out number))
+            double number;
+            if (!double.TryParse(numberPart, out number))
                 return false;
 
             // Get the magnitude part
             switch (sizePart)
             {
                 case "b":
-                    result = FromBits(number);
+                    if (number % 1 != 0) // Can't have partial bits
+                        return false;
+
+                    result = FromBits((long)number);
                     break;
 
                 case "B":
