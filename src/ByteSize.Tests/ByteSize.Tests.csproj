@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CreatingMethods.cs" />
+    <Compile Include="ParsingMethods.cs" />
     <Compile Include="ToStringMethod.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

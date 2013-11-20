@@ -22,6 +22,7 @@
 #endregion
 
 using System;
+using System.Linq;
 
 namespace ByteSize
 {
@@ -298,6 +299,87 @@ namespace ByteSize
         public static bool operator >=(ByteSize b1, ByteSize b2)
         {
             return b1.Bits >= b2.Bits;
+        }
+
+        public static bool TryParse(string s, out ByteSize result)
+        {
+            // Arg checking
+            if (string.IsNullOrWhiteSpace(s))
+                throw new ArgumentNullException("s", "String is null or whitespace");
+
+            // Setup the result
+            result = new ByteSize();
+            
+            // Get the index of the first non-digit character
+            s = s.TrimStart(); // Protect against leading spaces
+            var num = s
+                .Select((val, index) => new {val, index}) // Get current char & index
+                .FirstOrDefault(x => !(char.IsDigit(x.val) || x.val == '.')); // Pick the first non-digit char
+
+            if (num == null)
+                return false;
+            
+            int lastNumber = num.index;
+
+            // Cut the input string in half
+            string numberPart = s.Substring(0, lastNumber).Trim();
+            string sizePart = s.Substring(lastNumber, s.Length - lastNumber).Trim();
+
+            // Get the numeric part
+            double number;
+            if (!double.TryParse(numberPart, out number))
+                return false;
+
+            // Get the magnitude part
+            switch (sizePart)
+            {
+                case "b":
+                    if (number % 1 != 0) // Can't have partial bits
+                        return false;
+
+                    result = FromBits((long)number);
+                    break;
+
+                case "B":
+                    result = FromBytes(number);
+                    break;
+
+                case "KB":
+                case "kB":
+                case "kb":
+                    result = FromKiloBytes(number);
+                    break;
+
+                case "MB":
+                case "mB":
+                case "mb":
+                    result = FromMegaBytes(number);
+                    break;
+
+                case "GB":
+                case "gB":
+                case "gb":
+                    result = FromGigaBytes(number);
+                    break;
+
+                case "TB":
+                case "tB":
+                case "tb":
+                    result = FromTeraBytes(number);
+                    break;
+            }
+
+            return true;
+        }
+
+        public static ByteSize Parse(string s)
+        {
+            ByteSize result;
+            
+            if (TryParse(s, out result))
+                return result;
+            
+            throw new FormatException("Value is not in the correct format");
         }
     }
 }
