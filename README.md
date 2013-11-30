@@ -89,6 +89,8 @@ maxFileSize.LargestWholeNumberValue;   // 10
 
 ### String Representation
 
+#### ToString
+
 `ByteSize` comes with a handy `ToString` method that uses the largest metric prefix whose value is greater than or equal to 1.
 
 ```
@@ -101,7 +103,7 @@ ByteSize.FromGigabytes(.5).ToString();   // 512 MB
 ByteSize.FromGigabytes(1024).ToString(); // 1 TB
 ```
 
-#### String Formatting
+#### Formatting
 
 The `ToString` method accepts a single `string` parameter to format the output. The formatter can contain the symbol of the value to display: `b`, `B`, `KB`, `MB`, `GB`, `TB`. The formatter uses the built in [`double.ToString` method](http://msdn.microsoft.com/en-us/library/kfsatb94\(v=vs.110\).aspx). The default number format is `#.##` which rounds the number to two decimal places.
 
@@ -126,6 +128,21 @@ b.ToString("000.00");     // 010.51 KB
 b.ToString("#.#### MB");  // .0103 MB
 b.ToString("0.00 GB");    // 0 GB
 b.ToString("#.## B");     // 10757.12 B```
+#### Parsing
+`ByteSize` has a `Parse` and `TryParse` method similar to other base classes.
+Like other `TryParse` methods, `ByteSize.TryParse` returns `boolean` value indicating whether or not the parsing was successful. If the value is parsed it is output to the `out` parameter supplied.
+```
+ByteSize output;
+ByteSize.TryParse("1.5mb", out output);
+
+// Invalid
+ByteSize.Parse("1.5 b");   // Can't have partial bits
+
+// Valid
+ByteSize.Parse("5b");
+ByteSize.Parse("1.55B");
+ByteSize.Parse("1.55KB");
+ByteSize.Parse("1.55 kB "); // Spaces are trimmedByteSize.Parse("1.55 kb");ByteSize.Parse("1.55 MB");ByteSize.Parse("1.55 mB");ByteSize.Parse("1.55 mb");ByteSize.Parse("1.55 GB");ByteSize.Parse("1.55 gB");ByteSize.Parse("1.55 gb");ByteSize.Parse("1.55 TB");ByteSize.Parse("1.55 tB");ByteSize.Parse("1.55 tb");```
 
 #### Author and License
 
