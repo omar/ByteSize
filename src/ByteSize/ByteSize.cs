@@ -309,17 +309,25 @@ namespace ByteSize
 
             // Setup the result
             result = new ByteSize();
-            
+
             // Get the index of the first non-digit character
             s = s.TrimStart(); // Protect against leading spaces
-            var num = s
-                .Select((val, index) => new {val, index}) // Get current char & index
-                .FirstOrDefault(x => !(char.IsDigit(x.val) || x.val == '.')); // Pick the first non-digit char
 
-            if (num == null)
+            var num = 0;
+            var found = false;
+
+            // Pick first non-digit number
+            for (num = 0; num < s.Length; num++)
+                if (!(char.IsDigit(s[num]) || s[num] == '.'))
+                {
+                    found = true;
+                    break;
+                }
+
+            if (found == false)
                 return false;
-            
-            int lastNumber = num.index;
+
+            int lastNumber = num;
 
             // Cut the input string in half
             string numberPart = s.Substring(0, lastNumber).Trim();

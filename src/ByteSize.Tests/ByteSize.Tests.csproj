@@ -52,7 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ByteSize\ByteSize.csproj">
-      <Project>{6603f9a8-af5e-4236-9519-0033281cc4af}</Project>
+      <Project>{5044c7a8-4ec1-4eb5-97d4-8b641303f166}</Project>
       <Name>ByteSize</Name>
     </ProjectReference>
   </ItemGroup>
