@@ -1,5 +1,4 @@
 using System;
-using System.Linq;
 
 namespace ByteSize
 {
@@ -38,7 +37,7 @@ namespace ByteSize
                 // Absolute value is used to deal with negative values
                 if (Math.Abs(this.TeraBytes) >= 1)
                     return ByteSize.TeraByteSymbol;
-                
+
                 if (Math.Abs(this.GigaBytes) >= 1)
                     return ByteSize.GigaByteSymbol;
 
@@ -47,10 +46,10 @@ namespace ByteSize
 
                 if (Math.Abs(this.KiloBytes) >= 1)
                     return ByteSize.KiloByteSymbol;
-                
+
                 if (Math.Abs(this.Bytes) >= 1)
                     return ByteSize.ByteSymbol;
-                
+
                 return ByteSize.BitSymbol;
             }
         }
@@ -360,10 +359,10 @@ namespace ByteSize
         public static ByteSize Parse(string s)
         {
             ByteSize result;
-            
+
             if (TryParse(s, out result))
                 return result;
-            
+
             throw new FormatException("Value is not in the correct format");
         }
     }
