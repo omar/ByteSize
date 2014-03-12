@@ -148,7 +148,7 @@ ByteSize.Parse("1.55 kB "); // Spaces are trimmedByteSize.Parse("1.55 kb");Byt
 
 Omar Khudeira ([http://omar.io](http://omar.io))
 
-Copyright (c) 2013 Omar Khudeira. All rights reserved.
+Copyright (c) 2013-2014 Omar Khudeira. All rights reserved.
 
-Released under [Apache License 2.0](http://www.apache.org/licenses/LICENSE-2.0).
+Released under MIT License (see LICENSE file).
 
