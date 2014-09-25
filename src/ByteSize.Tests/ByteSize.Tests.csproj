@@ -42,6 +42,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ArithmeticMethods.cs" />
     <Compile Include="CreatingMethods.cs" />
     <Compile Include="ParsingMethods.cs" />
     <Compile Include="ToStringMethod.cs" />
