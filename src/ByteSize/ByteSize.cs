@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 
 namespace ByteSize
 {
@@ -128,7 +129,7 @@ namespace ByteSize
         /// </summary>
         public override string ToString()
         {
-            return string.Format("{0} {1}", this.LargestWholeNumberValue, this.LargestWholeNumberSymbol);
+            return string.Format(CultureInfo.InvariantCulture, "{0} {1}", this.LargestWholeNumberValue, this.LargestWholeNumberSymbol);
         }
 
         public string ToString(string format)
@@ -137,7 +138,7 @@ namespace ByteSize
                 format = "#.## " + format;
 
             Func<string, bool> has = s => format.IndexOf(s, StringComparison.CurrentCultureIgnoreCase) != -1;
-            Func<double, string> output = n => n.ToString(format);
+            Func<double, string> output = n => n.ToString(format, CultureInfo.InvariantCulture);
 
             if (has("TB"))
                 return output(this.TeraBytes);
@@ -155,7 +156,7 @@ namespace ByteSize
             if (format.IndexOf(ByteSize.BitSymbol) != -1)
                 return output(this.Bits);
 
-            return string.Format("{0} {1}", this.LargestWholeNumberValue.ToString(format), this.LargestWholeNumberSymbol);
+            return string.Format("{0} {1}", this.LargestWholeNumberValue.ToString(format, CultureInfo.InvariantCulture), this.LargestWholeNumberSymbol);
         }
 
         public override bool Equals(object value)
@@ -311,7 +312,7 @@ namespace ByteSize
 
             // Get the numeric part
             double number;
-            if (!double.TryParse(numberPart, out number))
+            if (!double.TryParse(numberPart, NumberStyles.Float | NumberStyles.AllowThousands, NumberFormatInfo.InvariantInfo, out number))
                 return false;
 
             // Get the magnitude part
