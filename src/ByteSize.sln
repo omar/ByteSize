@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
+# Visual Studio 2012
 VisualStudioVersion = 12.0.30110.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{BF53BB43-EB17-4F09-945B-50720C20C77E}"
@@ -15,14 +15,19 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{C50AC1B6-1FBD-4BFB-86A7-4D3760AC4E22}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C50AC1B6-1FBD-4BFB-86A7-4D3760AC4E22}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C50AC1B6-1FBD-4BFB-86A7-4D3760AC4E22}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C50AC1B6-1FBD-4BFB-86A7-4D3760AC4E22}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5044C7A8-4EC1-4EB5-97D4-8B641303F166}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5044C7A8-4EC1-4EB5-97D4-8B641303F166}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5044C7A8-4EC1-4EB5-97D4-8B641303F166}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5044C7A8-4EC1-4EB5-97D4-8B641303F166}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C50AC1B6-1FBD-4BFB-86A7-4D3760AC4E22}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C50AC1B6-1FBD-4BFB-86A7-4D3760AC4E22}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C50AC1B6-1FBD-4BFB-86A7-4D3760AC4E22}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C50AC1B6-1FBD-4BFB-86A7-4D3760AC4E22}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = ByteSize.Tests\ByteSize.Tests.csproj
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

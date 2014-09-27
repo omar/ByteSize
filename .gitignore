@@ -1,6 +1,7 @@
 # use glob syntax
 syntax: glob
 
+*.userprefs
 *.obj
 *.pdb
 *.user
