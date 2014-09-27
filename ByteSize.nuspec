@@ -2,6 +2,7 @@
 <package >
     <metadata>
         <id>ByteSize</id>
+        <title>ByteSize</title>
         <version>0.2.0</version>
         <authors>Omar Khudeira</authors>
         <owners>Omar Khudeira</owners>
@@ -17,3 +18,4 @@
         <file src="src/ByteSize/bin/Release/ByteSize.dll" target="lib/portable-net4+sl5+netcore45+wp8+MonoAndroid1+MonoTouch1"/>
     </files>
 </package>
+
