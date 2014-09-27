@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 
 namespace ByteSize
 {
@@ -128,7 +129,7 @@ namespace ByteSize
         /// </summary>
         public override string ToString()
         {
-            return string.Format("{0} {1}", this.LargestWholeNumberValue, this.LargestWholeNumberSymbol);
+            return string.Format(CultureInfo.InvariantCulture, "{0} {1}", this.LargestWholeNumberValue, this.LargestWholeNumberSymbol);
         }
 
         public string ToString(string format)
@@ -137,7 +138,7 @@ namespace ByteSize
                 format = "#.## " + format;
 
             Func<string, bool> has = s => format.IndexOf(s, StringComparison.CurrentCultureIgnoreCase) != -1;
-            Func<double, string> output = n => n.ToString(format);
+            Func<double, string> output = n => n.ToString(format, CultureInfo.InvariantCulture);
 
             if (has("TB"))
                 return output(this.TeraBytes);
@@ -155,7 +156,7 @@ namespace ByteSize
             if (format.IndexOf(ByteSize.BitSymbol) != -1)
                 return output(this.Bits);
 
-            return string.Format("{0} {1}", this.LargestWholeNumberValue.ToString(format), this.LargestWholeNumberSymbol);
+            return string.Format("{0} {1}", this.LargestWholeNumberValue.ToString(format, CultureInfo.InvariantCulture), this.LargestWholeNumberSymbol);
         }
 
         public override bool Equals(object value)
@@ -189,12 +190,12 @@ namespace ByteSize
 
         public ByteSize Add(ByteSize bs)
         {
-            return new ByteSize(this.Bits + bs.Bits);
+            return new ByteSize(this.Bytes + bs.Bytes);
         }
 
         public ByteSize AddBits(long value)
         {
-            return new ByteSize(this.Bits + value);
+            return this + FromBits(value);
         }
 
         public ByteSize AddBytes(double value)
@@ -224,27 +225,27 @@ namespace ByteSize
 
         public ByteSize Subtract(ByteSize bs)
         {
-            return new ByteSize(this.Bits - bs.Bits);
+            return new ByteSize(this.Bytes - bs.Bytes);
         }
 
         public static ByteSize operator +(ByteSize b1, ByteSize b2)
         {
-            return new ByteSize(b1.Bits + b2.Bits);
+            return new ByteSize(b1.Bytes + b2.Bytes);
         }
 
         public static ByteSize operator ++(ByteSize b)
         {
-            return new ByteSize(b.Bits++);
+            return new ByteSize(b.Bytes + 1);
         }
 
         public static ByteSize operator -(ByteSize b)
         {
-            return new ByteSize(-b.Bits);
+            return new ByteSize(-b.Bytes);
         }
 
         public static ByteSize operator --(ByteSize b)
         {
-            return new ByteSize(b.Bits--);
+            return new ByteSize(b.Bytes - 1);
         }
 
         public static bool operator ==(ByteSize b1, ByteSize b2)
@@ -311,7 +312,7 @@ namespace ByteSize
 
             // Get the numeric part
             double number;
-            if (!double.TryParse(numberPart, out number))
+            if (!double.TryParse(numberPart, NumberStyles.Float | NumberStyles.AllowThousands, NumberFormatInfo.InvariantInfo, out number))
                 return false;
 
             // Get the magnitude part
