@@ -185,5 +185,16 @@ namespace ByteSize.Tests
 
             Assert.Equal(expected, result);
         }
+
+        [Fact]
+        public void ParsePB()
+        {
+            string val = "100PB";
+            var expected = ByteSize.FromPetaBytes(100);
+
+            var result = ByteSize.Parse(val);
+
+            Assert.Equal(expected, result);
+        }
     }
 }
