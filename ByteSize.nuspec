@@ -3,14 +3,14 @@
     <metadata>
         <id>ByteSize</id>
         <title>ByteSize</title>
-        <version>0.2.0</version>
+        <version>0.3.0</version>
         <authors>Omar Khudeira</authors>
         <owners>Omar Khudeira</owners>
         <licenseUrl>https://raw.githubusercontent.com/omar/ByteSize/master/LICENSE</licenseUrl>
         <projectUrl>https://github.com/omar/ByteSize</projectUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>ByteSize is a utility class that makes byte size representation in code easier by removing ambiguity of the value being represented. ByteSize is to bytes what System.TimeSpan is to time.</description>
-        <releaseNotes>Add Parse/TryParse, fix arithmitic operations, convert to PCL.</releaseNotes>
+        <releaseNotes>Add PetaByte support.</releaseNotes>
         <copyright>Copyright 2013-2014</copyright>
         <tags>bytes</tags>
     </metadata>
