@@ -13,18 +13,19 @@ namespace ByteSize.Tests
         public void Constructor()
         {
             // Arrange
-            double byteSize = 1099511627776;
+            double byteSize = 1125899906842624;
 
             // Act
             var result = new ByteSize(byteSize);
 
             // Assert
-            Assert.Equal(8.796093022208e12, result.Bits);
-            Assert.Equal(1099511627776, result.Bytes);
-            Assert.Equal(1073741824, result.KiloBytes);
-            Assert.Equal(1048576, result.MegaBytes);
-            Assert.Equal(1024, result.GigaBytes);
-            Assert.Equal(1, result.TeraBytes);
+            Assert.Equal(byteSize * 8, result.Bits);
+            Assert.Equal(byteSize, result.Bytes);
+            Assert.Equal(byteSize / 1024, result.KiloBytes);
+            Assert.Equal(byteSize / 1024 / 1024, result.MegaBytes);
+            Assert.Equal(byteSize / 1024 / 1024 / 1024, result.GigaBytes);
+            Assert.Equal(byteSize / 1024 / 1024 / 1024 / 1024, result.TeraBytes);
+            Assert.Equal(1, result.PetaBytes);
         }
 
         [Fact]
@@ -109,6 +110,20 @@ namespace ByteSize.Tests
             // Assert
             Assert.Equal(1649267441664, result.Bytes);
             Assert.Equal(1.5, result.TeraBytes);
+        }
+
+        [Fact]
+        public void FromPetaBytesMethod()
+        {
+            // Arrange
+            double value = 1.5;
+
+            // Act
+            var result = ByteSize.FromPetaBytes(value);
+
+            // Assert
+            Assert.Equal(1688849860263936, result.Bytes);
+            Assert.Equal(1.5, result.PetaBytes);
         }
     }
 }

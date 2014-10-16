@@ -127,6 +127,19 @@ namespace ByteSize.Tests
         }
 
         [Fact]
+        public void ReturnsPetaBytes()
+        {
+            // Arrange
+            var b = ByteSize.FromPetaBytes(10);
+
+            // Act
+            var result = b.ToString("##.#### PB");
+
+            // Assert
+            Assert.Equal("10 PB", result);
+        }
+
+        [Fact]
         public void ReturnsSelectedFormat()
         {
             // Arrange

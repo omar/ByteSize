@@ -84,6 +84,20 @@ namespace ByteSize.Tests
         }
 
         [Fact]
+        public void AddPetaBytesMethod()
+        {
+            var size = ByteSize.FromPetaBytes(2).AddPetaBytes(2);
+
+            Assert.Equal(4d * 1024 * 1024 * 1024 * 1024 * 1024 * 8, size.Bits);
+            Assert.Equal(4d * 1024 * 1024 * 1024 * 1024 * 1024, size.Bytes);
+            Assert.Equal(4d * 1024 * 1024 * 1024 * 1024, size.KiloBytes);
+            Assert.Equal(4d * 1024 * 1024 * 1024, size.MegaBytes);
+            Assert.Equal(4d * 1024 * 1024, size.GigaBytes);
+            Assert.Equal(4d * 1024, size.TeraBytes);
+            Assert.Equal(4d, size.PetaBytes);
+        }
+
+        [Fact]
         public void SubtractMethod()
         {
             var size = ByteSize.FromBytes(4).Subtract(ByteSize.FromBytes(2));

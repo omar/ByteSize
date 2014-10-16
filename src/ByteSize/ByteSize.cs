@@ -16,6 +16,7 @@ namespace ByteSize
         public const long BytesInMegaByte = 1048576;
         public const long BytesInGigaByte = 1073741824;
         public const long BytesInTeraByte = 1099511627776;
+        public const long BytesInPetaByte = 1125899906842624;
 
         public const string BitSymbol = "b";
         public const string ByteSymbol = "B";
@@ -23,6 +24,7 @@ namespace ByteSize
         public const string MegaByteSymbol = "MB";
         public const string GigaByteSymbol = "GB";
         public const string TeraByteSymbol = "TB";
+        public const string PetaByteSymbol = "PB";
 
         public long Bits { get; private set; }
         public double Bytes { get; private set; }
@@ -30,12 +32,16 @@ namespace ByteSize
         public double MegaBytes { get; private set; }
         public double GigaBytes { get; private set; }
         public double TeraBytes { get; private set; }
+        public double PetaBytes { get; private set; }
 
         public string LargestWholeNumberSymbol
         {
             get
             {
                 // Absolute value is used to deal with negative values
+                if (Math.Abs(this.PetaBytes) >= 1)
+                    return ByteSize.PetaByteSymbol;
+
                 if (Math.Abs(this.TeraBytes) >= 1)
                     return ByteSize.TeraByteSymbol;
 
@@ -59,6 +65,9 @@ namespace ByteSize
             get
             {
                 // Absolute value is used to deal with negative values
+                if (Math.Abs(this.PetaBytes) >= 1)
+                    return this.PetaBytes;
+
                 if (Math.Abs(this.TeraBytes) >= 1)
                     return this.TeraBytes;
 
@@ -89,6 +98,7 @@ namespace ByteSize
             MegaBytes = byteSize / BytesInMegaByte;
             GigaBytes = byteSize / BytesInGigaByte;
             TeraBytes = byteSize / BytesInTeraByte;
+            PetaBytes = byteSize / BytesInPetaByte;
         }
 
         public static ByteSize FromBits(long value)
@@ -121,6 +131,11 @@ namespace ByteSize
             return new ByteSize(value * BytesInTeraByte);
         }
 
+        public static ByteSize FromPetaBytes(double value)
+        {
+            return new ByteSize(value * BytesInPetaByte);
+        }
+
         /// <summary>
         /// Converts the value of the current ByteSize object to a string.
         /// The metric prefix symbol (bit, byte, kilo, mega, giga, tera) used is
@@ -140,6 +155,8 @@ namespace ByteSize
             Func<string, bool> has = s => format.IndexOf(s, StringComparison.CurrentCultureIgnoreCase) != -1;
             Func<double, string> output = n => n.ToString(format, CultureInfo.InvariantCulture);
 
+            if (has("PB"))
+                return output(this.PetaBytes);
             if (has("TB"))
                 return output(this.TeraBytes);
             if (has("GB"))
@@ -221,6 +238,11 @@ namespace ByteSize
         public ByteSize AddTeraBytes(double value)
         {
             return this + ByteSize.FromTeraBytes(value);
+        }
+
+        public ByteSize AddPetaBytes(double value)
+        {
+            return this + ByteSize.FromPetaBytes(value);
         }
 
         public ByteSize Subtract(ByteSize bs)
@@ -351,6 +373,12 @@ namespace ByteSize
                 case "tB":
                 case "tb":
                     result = FromTeraBytes(number);
+                    break;
+
+                case "PB":
+                case "pB":
+                case "pb":
+                    result = FromPetaBytes(number);
                     break;
             }
 
