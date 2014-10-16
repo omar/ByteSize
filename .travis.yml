@@ -12,3 +12,4 @@ before_install:
  
 script:
  - make test
+
