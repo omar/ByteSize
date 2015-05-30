@@ -1,7 +1,7 @@
 using System;
 using System.Globalization;
 
-namespace ByteSize
+namespace ByteSizeLib
 {
     /// <summary>
     /// Represents a byte size value.
@@ -60,6 +60,7 @@ namespace ByteSize
                 return ByteSize.BitSymbol;
             }
         }
+
         public double LargestWholeNumberValue
         {
             get
