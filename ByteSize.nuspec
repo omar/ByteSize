@@ -3,19 +3,19 @@
     <metadata>
         <id>ByteSize</id>
         <title>ByteSize</title>
-        <version>0.3.0</version>
+        <version>1.0.0</version>
         <authors>Omar Khudeira</authors>
         <owners>Omar Khudeira</owners>
         <licenseUrl>https://raw.githubusercontent.com/omar/ByteSize/master/LICENSE</licenseUrl>
         <projectUrl>https://github.com/omar/ByteSize</projectUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>ByteSize is a utility class that makes byte size representation in code easier by removing ambiguity of the value being represented. ByteSize is to bytes what System.TimeSpan is to time.</description>
-        <releaseNotes>Add PetaByte support.</releaseNotes>
-        <copyright>Copyright 2013-2014</copyright>
+        <releaseNotes>Change namespace to ByteSizeLib.</releaseNotes>
+        <copyright>Copyright 2013-2015</copyright>
         <tags>bytes</tags>
     </metadata>
     <files>
-        <file src="src/ByteSize/bin/Release/ByteSize.dll" target="lib/portable-net4+sl5+netcore45+wp8+MonoAndroid1+MonoTouch1"/>
+        <file src="src/ByteSizeLib/bin/Release/ByteSizeLib.dll" target="lib/portable-net4+sl5+netcore45+wp8+MonoAndroid1+MonoTouch1"/>
     </files>
 </package>
 

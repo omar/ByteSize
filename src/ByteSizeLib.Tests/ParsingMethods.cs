@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.SqlServer.Server;
 using Xunit;
 
-namespace ByteSize.Tests
+namespace ByteSizeLib.Tests
 {
     public class ParsingMethods
     {
@@ -99,7 +94,10 @@ namespace ByteSize.Tests
         {
             string val = "10.5b";
 
-            Assert.Throws<FormatException>(() => { ByteSize.Parse(val); });
+            Assert.Throws<FormatException>(() =>
+                {
+                    ByteSize.Parse(val);
+                });
         }
 
 
@@ -109,13 +107,19 @@ namespace ByteSize.Tests
         {
             string badValue = "Unexpected Value";
 
-            Assert.Throws<FormatException>(() => { ByteSize.Parse(badValue); });
+            Assert.Throws<FormatException>(() =>
+                {
+                    ByteSize.Parse(badValue);
+                });
         }
 
         [Fact]
         public void ParseThrowsOnNull()
         {
-            Assert.Throws<ArgumentNullException>(() => { ByteSize.Parse(null); });
+            Assert.Throws<ArgumentNullException>(() =>
+                {
+                    ByteSize.Parse(null);
+                });
         }
 
 
