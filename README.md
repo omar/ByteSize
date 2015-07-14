@@ -4,6 +4,8 @@
 
 `ByteSize` is to bytes what `System.TimeSpan` is to time.
 
+[![](https://travis-ci.org/omar/ByteSize.svg?branch=master)](https://travis-ci.org/omar/ByteSize)
+
 #### NuGet Package
 Command: `Install-Package ByteSize`
 
@@ -127,11 +129,16 @@ b.ToString("000.00");     // 010.51 KB
 // You can include number format and symbols
 b.ToString("#.#### MB");  // .0103 MB
 b.ToString("0.00 GB");    // 0 GB
-b.ToString("#.## B");     // 10757.12 B```
-#### Parsing
-`ByteSize` has a `Parse` and `TryParse` method similar to other base classes.
-Like other `TryParse` methods, `ByteSize.TryParse` returns `boolean` value indicating whether or not the parsing was successful. If the value is parsed it is output to the `out` parameter supplied.
-```
+b.ToString("#.## B");     // 10757.12 B
+```
+
+#### Parsing
+
+`ByteSize` has a `Parse` and `TryParse` method similar to other base classes.
+
+Like other `TryParse` methods, `ByteSize.TryParse` returns `boolean` value indicating whether or not the parsing was successful. If the value is parsed it is output to the `out` parameter supplied.
+
+```
 ByteSize output;
 ByteSize.TryParse("1.5mb", out output);
 
@@ -142,7 +149,18 @@ ByteSize.Parse("1.5 b");   // Can't have partial bits
 ByteSize.Parse("5b");
 ByteSize.Parse("1.55B");
 ByteSize.Parse("1.55KB");
-ByteSize.Parse("1.55 kB "); // Spaces are trimmedByteSize.Parse("1.55 kb");ByteSize.Parse("1.55 MB");ByteSize.Parse("1.55 mB");ByteSize.Parse("1.55 mb");ByteSize.Parse("1.55 GB");ByteSize.Parse("1.55 gB");ByteSize.Parse("1.55 gb");ByteSize.Parse("1.55 TB");ByteSize.Parse("1.55 tB");ByteSize.Parse("1.55 tb");```
+ByteSize.Parse("1.55 kB "); // Spaces are trimmed
+ByteSize.Parse("1.55 kb");
+ByteSize.Parse("1.55 MB");
+ByteSize.Parse("1.55 mB");
+ByteSize.Parse("1.55 mb");
+ByteSize.Parse("1.55 GB");
+ByteSize.Parse("1.55 gB");
+ByteSize.Parse("1.55 gb");
+ByteSize.Parse("1.55 TB");
+ByteSize.Parse("1.55 tB");
+ByteSize.Parse("1.55 tb");
+```
 
 #### Author and License
 
