@@ -6,7 +6,7 @@ namespace ByteSizeLib
     /// <summary>
     /// Represents a byte size value.
     /// </summary>
-    public struct ByteSize : IComparable<ByteSize>, IEquatable<ByteSize>
+    public struct ByteSize : IComparable<ByteSize>, IEquatable<ByteSize>, IFormattable
     {
         public static readonly ByteSize MinValue = ByteSize.FromBits(long.MinValue);
         public static readonly ByteSize MaxValue = ByteSize.FromBits(long.MaxValue);
@@ -145,16 +145,23 @@ namespace ByteSizeLib
         /// </summary>
         public override string ToString()
         {
-            return string.Format(CultureInfo.InvariantCulture, "{0} {1}", this.LargestWholeNumberValue, this.LargestWholeNumberSymbol);
+            return this.ToString("", CultureInfo.CurrentCulture);
         }
 
         public string ToString(string format)
         {
+            return this.ToString(format, CultureInfo.CurrentCulture);
+        }
+
+        public string ToString(string format, IFormatProvider provider)
+        {
             if (!format.Contains("#") && !format.Contains("0"))
-                format = "#.## " + format;
+                format = ("#.## " + format).Trim();
+
+            if (provider == null) provider = CultureInfo.CurrentCulture;
 
             Func<string, bool> has = s => format.IndexOf(s, StringComparison.CurrentCultureIgnoreCase) != -1;
-            Func<double, string> output = n => n.ToString(format, CultureInfo.InvariantCulture);
+            Func<double, string> output = n => n.ToString(format, provider);
 
             if (has("PB"))
                 return output(this.PetaBytes);
@@ -167,14 +174,14 @@ namespace ByteSizeLib
             if (has("KB"))
                 return output(this.KiloBytes);
 
-            // Byte and Bit symbol look must be case-sensitive
+            // Byte and Bit symbol must be case-sensitive
             if (format.IndexOf(ByteSize.ByteSymbol) != -1)
                 return output(this.Bytes);
 
             if (format.IndexOf(ByteSize.BitSymbol) != -1)
                 return output(this.Bits);
 
-            return string.Format("{0} {1}", this.LargestWholeNumberValue.ToString(format, CultureInfo.InvariantCulture), this.LargestWholeNumberSymbol);
+            return string.Format("{0} {1}", this.LargestWholeNumberValue.ToString(format, provider), this.LargestWholeNumberSymbol);
         }
 
         public override bool Equals(object value)
