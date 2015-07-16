@@ -145,7 +145,7 @@ namespace ByteSizeLib
         /// </summary>
         public override string ToString()
         {
-            return this.ToString("", CultureInfo.CurrentCulture);
+            return this.ToString("#.##", CultureInfo.CurrentCulture);
         }
 
         public string ToString(string format)
@@ -156,7 +156,7 @@ namespace ByteSizeLib
         public string ToString(string format, IFormatProvider provider)
         {
             if (!format.Contains("#") && !format.Contains("0"))
-                format = ("#.## " + format).Trim();
+                format = "#.## " + format;
 
             if (provider == null) provider = CultureInfo.CurrentCulture;
 
