@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Globalization;
+using System.Threading;
 using Xunit;
 
 namespace ByteSizeLib.Tests
@@ -172,6 +174,37 @@ namespace ByteSizeLib.Tests
 
             // Assert
             Assert.Equal("-512 KB", result);
+        }
+
+        [Fact]
+        public void ReturnsLargestMetricSuffixUsingCurrentCulture()
+        {
+            var originalCulture = Thread.CurrentThread.CurrentCulture;
+            Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture("fr-FR");
+
+            // Arrange
+            var b = ByteSize.FromKiloBytes(10000);
+
+            // Act
+            var result = b.ToString();
+
+            // Assert
+            Assert.Equal("9,77 MB", result);
+
+            Thread.CurrentThread.CurrentCulture = originalCulture;
+        }
+
+        [Fact]
+        public void ReturnsLargestMetricSuffixUsingSpecifiedCulture()
+        {
+            // Arrange
+            var b = ByteSize.FromKiloBytes(10000);
+
+            // Act
+            var result = b.ToString("#.#", CultureInfo.CreateSpecificCulture("fr-FR"));
+
+            // Assert
+            Assert.Equal("9,8 MB", result);
         }
     }
 }
