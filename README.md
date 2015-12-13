@@ -5,11 +5,7 @@
 `ByteSize` is to bytes what `System.TimeSpan` is to time.
 
 [![](https://travis-ci.org/omar/ByteSize.svg?branch=master)](https://travis-ci.org/omar/ByteSize)
-
-#### NuGet Package
-Command: `Install-Package ByteSize`
-
-URL: [nuget.org/packages/ByteSize](https://www.nuget.org/packages/ByteSize)
+[![Stable nuget](https://img.shields.io/nuget/v/ByteSize.svg)](https://www.nuget.org/packages/ByteSize/)
 
 #### Building
 
