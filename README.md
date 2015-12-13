@@ -11,6 +11,13 @@ Command: `Install-Package ByteSize`
 
 URL: [nuget.org/packages/ByteSize](https://www.nuget.org/packages/ByteSize)
 
+#### Building
+
+* Windows: use Visual Studio
+* Mac OS X
+   * Install [Mono](http://www.mono-project.com/download/).
+   * Run `make build` in terminal.
+   * NOTE: using `brew install mono` will not install the PCL libraries required to build the PCL compatible project (`ByteSize.Dotnet.csproj`). The PCL libraries can be installed by running the installer downloaded from http://www.mono-project.com/download/.
 
 ## Usage 
 
