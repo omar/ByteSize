@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
-<package >
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
     <metadata>
         <id>ByteSize</id>
         <title>ByteSize</title>
-        <version>1.1.0</version>
+        <version>1.1.1</version>
         <authors>Omar Khudeira</authors>
         <owners>Omar Khudeira</owners>
         <licenseUrl>https://raw.githubusercontent.com/omar/ByteSize/master/LICENSE</licenseUrl>
@@ -13,9 +13,18 @@
         <releaseNotes>Change namespace to ByteSizeLib.</releaseNotes>
         <copyright>Copyright 2013-2015</copyright>
         <tags>bytes</tags>
+	    <dependencies>
+          <group targetFramework=".NETPlatform5.0">
+            <dependency id="System.Globalization" version="4.0.0" />
+            <dependency id="System.Resources.ResourceManager" version="4.0.0" />
+            <dependency id="System.Runtime" version="4.0.0" />
+            <dependency id="System.Runtime.Extensions" version="4.0.0" />
+          </group>
+	    </dependencies>
     </metadata>
     <files>
-        <file src="src/ByteSizeLib/bin/Release/ByteSizeLib.dll" target="lib/portable-net4+sl5+netcore45+wp8+MonoAndroid1+MonoTouch1"/>
+        <file src="src/ByteSizeLib/bin/portable-net4/Release/ByteSizeLib.dll" target="lib/portable-net4+sl5+netcore45+wp8+MonoAndroid1+MonoTouch1"/>
+        <file src="src/ByteSizeLib/bin/dotnet/Release/ByteSizeLib.dll" target="lib\dotnet"/>
     </files>
 </package>
 
