@@ -17,7 +17,7 @@ namespace ByteSizeLib.Tests
             var result = b.ToString();
 
             // Assert
-            Assert.Equal("10.5 KB", result);
+            Assert.Equal(10.5.ToString("0.0 KB"), result);
         }
 
         [Fact]
@@ -30,7 +30,7 @@ namespace ByteSizeLib.Tests
             var result = b.ToString("KB");
 
             // Assert
-            Assert.Equal("10.5 KB", result);
+            Assert.Equal(10.5.ToString("0.0 KB"), result);
         }
 
         [Fact]
@@ -43,7 +43,7 @@ namespace ByteSizeLib.Tests
             var result = b.ToString("#.#### KB");
 
             // Assert
-            Assert.Equal("10.1234 KB", result);
+            Assert.Equal(10.1234.ToString("0.0000 KB"), result);
         }
 
         [Fact]
@@ -147,7 +147,7 @@ namespace ByteSizeLib.Tests
             var result = b.ToString("0.0 TB");
 
             // Assert
-            Assert.Equal("10.0 TB", result);
+            Assert.Equal(10.ToString("0.0 TB"), result);
         }
 
         [Fact]
@@ -205,6 +205,20 @@ namespace ByteSizeLib.Tests
 
             // Assert
             Assert.Equal("9,8 MB", result);
-        }
-    }
+		}
+
+		[Fact]
+		public void ReturnsCultureSpecificFormat()
+		{
+			// Arrange
+			var b = ByteSize.FromKiloBytes(10.5);
+
+			// Act
+			var deCulture = new CultureInfo("de-DE");
+			var result = b.ToString("0.0 KB", deCulture);
+
+			// Assert
+			Assert.Equal(10.5.ToString("0.0 KB", deCulture), result);
+		}
+	}
 }
