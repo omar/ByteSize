@@ -8,7 +8,7 @@ namespace ByteSizeLib
     /// </summary>
     public struct ByteSize : IComparable<ByteSize>, IEquatable<ByteSize>
     {
-        public static readonly ByteSize MinValue = ByteSize.FromBits(long.MinValue);
+        public static readonly ByteSize MinValue = ByteSize.FromBits(0);
         public static readonly ByteSize MaxValue = ByteSize.FromBits(long.MaxValue);
 
         public const long BitsInByte = 8;
