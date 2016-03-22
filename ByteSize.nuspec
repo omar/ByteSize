@@ -3,15 +3,15 @@
     <metadata>
         <id>ByteSize</id>
         <title>ByteSize</title>
-        <version>1.1.1</version>
+        <version>1.1.2</version>
         <authors>Omar Khudeira</authors>
         <owners>Omar Khudeira</owners>
         <licenseUrl>https://raw.githubusercontent.com/omar/ByteSize/master/LICENSE</licenseUrl>
         <projectUrl>https://github.com/omar/ByteSize</projectUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>ByteSize is a utility class that makes byte size representation in code easier by removing ambiguity of the value being represented. ByteSize is to bytes what System.TimeSpan is to time.</description>
-        <releaseNotes>Change namespace to ByteSizeLib.</releaseNotes>
-        <copyright>Copyright 2013-2015</copyright>
+        <releaseNotes>Use 0 as ByteSize.MinValue and fix unit tests for locals.</releaseNotes>
+        <copyright>Copyright 2013-2016</copyright>
         <tags>bytes</tags>
 	    <dependencies>
           <group targetFramework=".NETPlatform5.0">
@@ -27,4 +27,3 @@
         <file src="src/ByteSizeLib/bin/dotnet/Release/ByteSizeLib.dll" target="lib\dotnet"/>
     </files>
 </package>
-
