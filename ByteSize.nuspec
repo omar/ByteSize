@@ -13,14 +13,20 @@
         <releaseNotes>Use 0 as ByteSize.MinValue and fix unit tests for locals.</releaseNotes>
         <copyright>Copyright 2013-2016</copyright>
         <tags>bytes</tags>
-	    <dependencies>
-          <group targetFramework=".NETPlatform5.0">
-            <dependency id="System.Globalization" version="4.0.0" />
-            <dependency id="System.Resources.ResourceManager" version="4.0.0" />
-            <dependency id="System.Runtime" version="4.0.0" />
-            <dependency id="System.Runtime.Extensions" version="4.0.0" />
-          </group>
-	    </dependencies>
+	<dependencies>
+            <group targetFramework=".NETFramework4.5" />
+            <group targetFramework=".NETFramework4.0" />
+            <group targetFramework=".NETFramework3.5" />
+            <group targetFramework=".NETFramework2.0" />
+            <group targetFramework=".NETPortable4.5-Profile259" />
+            <group targetFramework=".NETPortable4.0-Profile328" />
+            <group targetFramework=".NETStandard1.0">
+            	<dependency id="System.Globalization" version="4.0.0" />
+            	<dependency id="System.Resources.ResourceManager" version="4.0.0" />
+            	<dependency id="System.Runtime" version="4.0.0" />
+            	<dependency id="System.Runtime.Extensions" version="4.0.0" />
+            </group>
+	</dependencies>
     </metadata>
     <files>
         <file src="src/ByteSizeLib/bin/portable-net4/Release/ByteSizeLib.dll" target="lib/portable-net4+sl5+netcore45+wp8+MonoAndroid1+MonoTouch1"/>
