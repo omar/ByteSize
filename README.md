@@ -17,22 +17,24 @@
 
 ## Usage 
 
+`ByteSize` assumes `1 kilobyte` = `1024 bytes`.
+
 Without `ByteSize`:
 
 ```
-public static readonly double MaxFileSizeMBs = 1.5;
+static double MaxFileSizeMBs = 1.5;
 
 // I need it in KBs!
-var kilobytes = MaxFileSizeMBs * 1024;
+var kilobytes = MaxFileSizeMBs * 1024; // 1536
 ```
 
 With `ByteSize`:
 
 ```
-public static readonly MaxFileSize = ByteSize.FromMegaBytes(1.5);
+static MaxFileSize = ByteSize.FromMegaBytes(1.5);
 
 // I have it in KBs!
-MaxFileSize.KiloBytes;
+MaxFileSize.KiloBytes;  // 1536
 ```
 
 `ByeSize` behaves like any other struct backed by a numerical value.
@@ -93,6 +95,8 @@ maxFileSize.LargestWholeNumberValue;   // 10
 ```
 
 ### String Representation
+
+All string operations are localized to use the number decimal separator of the culture set in `Thread.CurrentThread.CurrentCulture`.
 
 #### ToString
 
@@ -163,13 +167,14 @@ ByteSize.Parse("1.55 gb");
 ByteSize.Parse("1.55 TB");
 ByteSize.Parse("1.55 tB");
 ByteSize.Parse("1.55 tb");
+ByteSize.Parse("1,55 kb"); // de-DE culture
 ```
 
 #### Author and License
 
 Omar Khudeira ([http://omar.io](http://omar.io))
 
-Copyright (c) 2013-2014 Omar Khudeira. All rights reserved.
+Copyright (c) 2013-2016 Omar Khudeira. All rights reserved.
 
 Released under MIT License (see LICENSE file).
 
