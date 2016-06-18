@@ -10,7 +10,9 @@
         <projectUrl>https://github.com/omar/ByteSize</projectUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>ByteSize is a utility class that makes byte size representation in code easier by removing ambiguity of the value being represented. ByteSize is to bytes what System.TimeSpan is to time.</description>
-        <releaseNotes>Localize number decimal separator for Parse and TryParse methods.</releaseNotes>
+<releaseNotes>Localize number decimal separator for Parse and TryParse methods.
+
+View all release notes at https://github.com/omar/ByteSize/releases.</releaseNotes>
         <copyright>Copyright 2013-2016</copyright>
         <tags>bytes</tags>
         <dependencies>
