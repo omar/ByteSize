@@ -3,14 +3,14 @@
     <metadata>
         <id>ByteSize</id>
         <title>ByteSize</title>
-        <version>1.1.3</version>
+        <version>1.2.0</version>
         <authors>Omar Khudeira</authors>
         <owners>Omar Khudeira</owners>
         <licenseUrl>https://raw.githubusercontent.com/omar/ByteSize/master/LICENSE</licenseUrl>
         <projectUrl>https://github.com/omar/ByteSize</projectUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>ByteSize is a utility class that makes byte size representation in code easier by removing ambiguity of the value being represented. ByteSize is to bytes what System.TimeSpan is to time.</description>
-        <releaseNotes>Remove extra dependencies when targeting full framework or portable class library.</releaseNotes>
+        <releaseNotes>Localize number decimal separator for Parse and TryParse methods.</releaseNotes>
         <copyright>Copyright 2013-2016</copyright>
         <tags>bytes</tags>
         <dependencies>

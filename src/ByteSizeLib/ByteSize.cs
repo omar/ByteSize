@@ -323,9 +323,11 @@ namespace ByteSizeLib
             var num = 0;
             var found = false;
 
+            var separator = Convert.ToChar(NumberFormatInfo.CurrentInfo.NumberDecimalSeparator);
+
             // Pick first non-digit number
             for (num = 0; num < s.Length; num++)
-                if (!(char.IsDigit(s[num]) || s[num] == '.'))
+                if (!(char.IsDigit(s[num]) || s[num] == separator))
                 {
                     found = true;
                     break;
@@ -342,7 +344,7 @@ namespace ByteSizeLib
 
             // Get the numeric part
             double number;
-            if (!double.TryParse(numberPart, NumberStyles.Float | NumberStyles.AllowThousands, NumberFormatInfo.InvariantInfo, out number))
+            if (!double.TryParse(numberPart, NumberStyles.Float | NumberStyles.AllowThousands, NumberFormatInfo.CurrentInfo, out number))
                 return false;
 
             // Get the magnitude part
