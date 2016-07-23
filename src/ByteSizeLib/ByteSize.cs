@@ -323,11 +323,12 @@ namespace ByteSizeLib
             var num = 0;
             var found = false;
 
-            var separator = Convert.ToChar(NumberFormatInfo.CurrentInfo.NumberDecimalSeparator);
+            var decimalSeparator = Convert.ToChar(NumberFormatInfo.CurrentInfo.NumberDecimalSeparator);
+            var groupSeparator = Convert.ToChar(NumberFormatInfo.CurrentInfo.NumberGroupSeparator);
 
             // Pick first non-digit number
             for (num = 0; num < s.Length; num++)
-                if (!(char.IsDigit(s[num]) || s[num] == separator))
+                if (!(char.IsDigit(s[num]) || s[num] == decimalSeparator || s[num] == groupSeparator))
                 {
                     found = true;
                     break;

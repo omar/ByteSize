@@ -208,8 +208,8 @@ namespace ByteSizeLib.Tests
         {
             Thread.CurrentThread.CurrentCulture = new CultureInfo("de-DE");
 
-            string val = "1,5 MB";
-            var expected = ByteSize.FromMegaBytes(1.5);
+            string val = "1.500,5 MB";
+            var expected = ByteSize.FromMegaBytes(1500.5);
 
             var result = ByteSize.Parse(val);
 
