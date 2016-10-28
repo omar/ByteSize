@@ -28,11 +28,11 @@ namespace ByteSizeLib
 
         public long Bits { get; private set; }
         public double Bytes { get; private set; }
-        public double KiloBytes { get; private set; }
-        public double MegaBytes { get; private set; }
-        public double GigaBytes { get; private set; }
-        public double TeraBytes { get; private set; }
-        public double PetaBytes { get; private set; }
+        public double KiloBytes => Bytes / BytesInKiloByte;
+        public double MegaBytes => Bytes / BytesInMegaByte;
+        public double GigaBytes => Bytes / BytesInGigaByte;
+        public double TeraBytes => Bytes / BytesInTeraByte;
+        public double PetaBytes => Bytes / BytesInPetaByte;
 
         public string LargestWholeNumberSymbol
         {
@@ -95,11 +95,6 @@ namespace ByteSizeLib
             Bits = (long)Math.Ceiling(byteSize * BitsInByte);
 
             Bytes = byteSize;
-            KiloBytes = byteSize / BytesInKiloByte;
-            MegaBytes = byteSize / BytesInMegaByte;
-            GigaBytes = byteSize / BytesInGigaByte;
-            TeraBytes = byteSize / BytesInTeraByte;
-            PetaBytes = byteSize / BytesInPetaByte;
         }
 
         public static ByteSize FromBits(long value)
