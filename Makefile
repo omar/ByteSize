@@ -5,7 +5,7 @@ build:
 test:
 	pwd
 	ls
-	mono tools/nuget.exe restore src/ByteSize.sln
+	mono --version
 	xbuild src/ByteSizeLib.Tests/ByteSizeLib.Tests.csproj
 	mono tools/xunit/xunit.console.clr4.exe src/ByteSizeLib.Tests/bin/Debug/ByteSizeLib.Tests.dll
 
