@@ -220,5 +220,18 @@ namespace ByteSizeLib.Tests
 			// Assert
 			Assert.Equal(10.5.ToString("0.0 KB", deCulture), result);
 		}
+
+        [Fact]
+		public void ReturnsZeroBits()
+		{
+			// Arrange
+			var b = ByteSize.FromBits(0);
+
+			// Act
+			var result = b.ToString();
+
+			// Assert
+			Assert.Equal("0 b", result);
+		}
 	}
 }
