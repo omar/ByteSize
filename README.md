@@ -114,14 +114,14 @@ ByteSize.FromGigabytes(1024).ToString(); // 1 TB
 
 #### Formatting
 
-The `ToString` method accepts a single `string` parameter to format the output. The formatter can contain the symbol of the value to display: `b`, `B`, `KB`, `MB`, `GB`, `TB`. The formatter uses the built in [`double.ToString` method](http://msdn.microsoft.com/en-us/library/kfsatb94\(v=vs.110\).aspx). The default number format is `#.##` which rounds the number to two decimal places.
+The `ToString` method accepts a single `string` parameter to format the output. The formatter can contain the symbol of the value to display: `b`, `B`, `KB`, `MB`, `GB`, `TB`. The formatter uses the built in [`double.ToString` method](http://msdn.microsoft.com/en-us/library/kfsatb94\(v=vs.110\).aspx). The default number format is `0.##` which rounds the number to two decimal places.
 
 You can include symbol and number formats.
 
 ```
 var b = ByteSize.FromKiloBytes(10.505);
 
-// Default number format is #.##
+// Default number format is 0.##
 b.ToString("KB");         // 10.52 KB
 b.ToString("MB");         // .01 MB
 b.ToString("b");          // 86057 b
@@ -137,6 +137,12 @@ b.ToString("000.00");     // 010.51 KB
 b.ToString("#.#### MB");  // .0103 MB
 b.ToString("0.00 GB");    // 0 GB
 b.ToString("#.## B");     // 10757.12 B
+
+// ByteSize object of value 0
+var zeroBytes = ByteSize.FromKiloBytes(0); 
+zeroBytes.ToString();           // 0 b
+zeroBytes.ToString("0 kb");     // 0 kb
+zeroBytes.ToString("0.## mb");  // 0 mb
 ```
 
 #### Parsing
