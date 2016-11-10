@@ -114,7 +114,9 @@ ByteSize.FromGigabytes(1024).ToString(); // 1 TB
 
 #### Formatting
 
-The `ToString` method accepts a single `string` parameter to format the output. The formatter can contain the symbol of the value to display: `b`, `B`, `KB`, `MB`, `GB`, `TB`. The formatter uses the built in [`double.ToString` method](http://msdn.microsoft.com/en-us/library/kfsatb94\(v=vs.110\).aspx). The default number format is `0.##` which rounds the number to two decimal places.
+The `ToString` method accepts a single `string` parameter to format the output. The formatter can contain the symbol of the value to display: `b`, `B`, `KB`, `MB`, `GB`, `TB`. The formatter uses the built in [`double.ToString` method](http://msdn.microsoft.com/en-us/library/kfsatb94\(v=vs.110\).aspx). 
+
+The default number format is `0.##` which rounds the number to two decimal places and outputs only `0` if the value is `0`.
 
 You can include symbol and number formats.
 
