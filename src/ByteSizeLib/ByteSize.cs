@@ -303,7 +303,7 @@ namespace ByteSizeLib
             return b1.Bits >= b2.Bits;
         }
 
-        public static bool TryParse(string s, out ByteSize result)
+        private static bool PrivateTryParse(string s, out ByteSize result)
         {
             // Arg checking
             if (string.IsNullOrWhiteSpace(s))
@@ -391,11 +391,25 @@ namespace ByteSizeLib
             return true;
         }
 
+        public static bool TryParse(string s, out ByteSize result)
+        {
+            result = new ByteSize(0);
+
+            try 
+            {
+                return PrivateTryParse(s, out result);
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
         public static ByteSize Parse(string s)
         {
             ByteSize result;
 
-            if (TryParse(s, out result))
+            if (PrivateTryParse(s, out result))
                 return result;
 
             throw new FormatException("Value is not in the correct format");
