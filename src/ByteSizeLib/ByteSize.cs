@@ -8,15 +8,21 @@ namespace ByteSizeLib
     /// </summary>
     public struct ByteSize : IComparable<ByteSize>, IEquatable<ByteSize>
     {
+        /// <summary>
+        /// When set to true, 1 kb = 1024 bytes. (default) 
+        /// When set to false, 1 kb = 1000 bytes.
+        /// </summary>
+        public static bool UseBinaryByte = true;
+         
         public static readonly ByteSize MinValue = ByteSize.FromBits(0);
         public static readonly ByteSize MaxValue = ByteSize.FromBits(long.MaxValue);
 
-        public const long BitsInByte = 8;
-        public const long BytesInKiloByte = 1024;
-        public const long BytesInMegaByte = 1048576;
-        public const long BytesInGigaByte = 1073741824;
-        public const long BytesInTeraByte = 1099511627776;
-        public const long BytesInPetaByte = 1125899906842624;
+        public static long BitsInByte = 8;
+        public static long BytesInKiloByte => UseBinaryByte ? 1024 : 1000;
+        public static long BytesInMegaByte => UseBinaryByte ? 1048576 : 1000000;
+        public static long BytesInGigaByte => UseBinaryByte ? 1073741824 : 1000000000;
+        public static long BytesInTeraByte => UseBinaryByte ? 1099511627776 : 1000000000000;
+        public static long BytesInPetaByte => UseBinaryByte ? 1125899906842624 : 1000000000000000;
 
         public const string BitSymbol = "b";
         public const string ByteSymbol = "B";
