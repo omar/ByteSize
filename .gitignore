@@ -38,4 +38,4 @@ src/packages/**
 *.resharper
 *.ncrunch*
 *.ndproj
-.nupkg
+*.nupkg
