@@ -303,14 +303,11 @@ namespace ByteSizeLib
             return b1.Bits >= b2.Bits;
         }
 
-        private static bool PrivateTryParse(string s, out ByteSize result)
+        public static ByteSize Parse(string s)
         {
             // Arg checking
             if (string.IsNullOrWhiteSpace(s))
                 throw new ArgumentNullException("s", "String is null or whitespace");
-
-            // Setup the result
-            result = new ByteSize();
 
             // Get the index of the first non-digit character
             s = s.TrimStart(); // Protect against leading spaces
@@ -330,7 +327,7 @@ namespace ByteSizeLib
                 }
 
             if (found == false)
-                return false;
+                throw new FormatException($"No byte indicator found in value '{ s }'.");
 
             int lastNumber = num;
 
@@ -341,78 +338,62 @@ namespace ByteSizeLib
             // Get the numeric part
             double number;
             if (!double.TryParse(numberPart, NumberStyles.Float | NumberStyles.AllowThousands, NumberFormatInfo.CurrentInfo, out number))
-                return false;
+                throw new FormatException($"No number found in value '{ s }'.");
 
             // Get the magnitude part
             switch (sizePart)
             {
                 case "b":
                     if (number % 1 != 0) // Can't have partial bits
-                        return false;
+                        throw new FormatException($"Can't have partial bits for value '{ s }'.");
 
-                    result = FromBits((long)number);
-                    break;
+                    return FromBits((long)number);
 
                 case "B":
-                    result = FromBytes(number);
-                    break;
+                    return FromBytes(number);
 
                 case "KB":
                 case "kB":
                 case "kb":
-                    result = FromKiloBytes(number);
-                    break;
+                    return FromKiloBytes(number);
 
                 case "MB":
                 case "mB":
                 case "mb":
-                    result = FromMegaBytes(number);
-                    break;
+                    return FromMegaBytes(number);
 
                 case "GB":
                 case "gB":
                 case "gb":
-                    result = FromGigaBytes(number);
-                    break;
+                    return FromGigaBytes(number);
 
                 case "TB":
                 case "tB":
                 case "tb":
-                    result = FromTeraBytes(number);
-                    break;
+                    return FromTeraBytes(number);
 
                 case "PB":
                 case "pB":
                 case "pb":
-                    result = FromPetaBytes(number);
-                    break;
+                    return FromPetaBytes(number);
+                
+                default:
+                    throw new FormatException($"Bytes of magnitude '{ sizePart }' is not supported.");
             }
-
-            return true;
         }
 
         public static bool TryParse(string s, out ByteSize result)
         {
-            result = new ByteSize(0);
-
             try 
             {
-                return PrivateTryParse(s, out result);
+                result = Parse(s);
+                return true;
             }
             catch
             {
+                result = new ByteSize();
                 return false;
             }
-        }
-
-        public static ByteSize Parse(string s)
-        {
-            ByteSize result;
-
-            if (PrivateTryParse(s, out result))
-                return result;
-
-            throw new FormatException("Value is not in the correct format");
         }
     }
 }
