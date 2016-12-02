@@ -305,9 +305,43 @@ namespace ByteSizeLib
 
         public static ByteSize Parse(string s)
         {
+            return TryParse(s).Value;
+        }
+
+        public static bool TryParse(string s, out ByteSize result)
+        {
+            var parseResult = TryParse(s, CachedError);
+            result = parseResult.GetValueOrDefault();
+            return !parseResult.IsError;
+        }
+
+        static readonly Exception CachedError = new Exception();
+
+        struct ParseResult
+        {
+            readonly ByteSize _value;
+
+            public ByteSize Value  { get { if (IsError) throw Error; return _value; } }
+            public Exception Error { get; }
+            public bool IsError    => Error != null;
+
+            ParseResult(ByteSize value, Exception error)
+            {
+                Error = error;
+                _value = value;
+            }
+
+            public ByteSize GetValueOrDefault() => IsError ? default(ByteSize) : Value;
+
+            public static implicit operator ParseResult(Exception error) => new ParseResult(default(ByteSize), error);
+            public static implicit operator ParseResult(ByteSize value) => new ParseResult(value, null);
+        }
+
+        static ParseResult TryParse(string s, Exception error = null)
+        {
             // Arg checking
             if (string.IsNullOrWhiteSpace(s))
-                throw new ArgumentNullException("s", "String is null or whitespace");
+                return error ?? new ArgumentNullException("s", "String is null or whitespace");
 
             // Get the index of the first non-digit character
             s = s.TrimStart(); // Protect against leading spaces
@@ -327,7 +361,7 @@ namespace ByteSizeLib
                 }
 
             if (found == false)
-                throw new FormatException($"No byte indicator found in value '{ s }'.");
+                return error ?? new FormatException($"No byte indicator found in value '{ s }'.");
 
             int lastNumber = num;
 
@@ -338,14 +372,14 @@ namespace ByteSizeLib
             // Get the numeric part
             double number;
             if (!double.TryParse(numberPart, NumberStyles.Float | NumberStyles.AllowThousands, NumberFormatInfo.CurrentInfo, out number))
-                throw new FormatException($"No number found in value '{ s }'.");
+                return error ?? new FormatException($"No number found in value '{ s }'.");
 
             // Get the magnitude part
             switch (sizePart)
             {
                 case "b":
                     if (number % 1 != 0) // Can't have partial bits
-                        throw new FormatException($"Can't have partial bits for value '{ s }'.");
+                        return error ?? new FormatException($"Can't have partial bits for value '{ s }'.");
 
                     return FromBits((long)number);
 
@@ -378,21 +412,7 @@ namespace ByteSizeLib
                     return FromPetaBytes(number);
                 
                 default:
-                    throw new FormatException($"Bytes of magnitude '{ sizePart }' is not supported.");
-            }
-        }
-
-        public static bool TryParse(string s, out ByteSize result)
-        {
-            try 
-            {
-                result = Parse(s);
-                return true;
-            }
-            catch
-            {
-                result = new ByteSize();
-                return false;
+                    return error ?? new FormatException($"Bytes of magnitude '{ sizePart }' is not supported.");
             }
         }
     }
