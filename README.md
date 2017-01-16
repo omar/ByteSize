@@ -17,7 +17,7 @@
 
 ## Usage 
 
-`ByteSize` assumes `1 kilobyte` = `1024 bytes`.
+`ByteSize` assumes `1 kilobyte` = `1024 bytes`. See [why here](http://omar.io/2017/01/16/when-technically-right-is-wrong-kilobytes.html).
 
 Without `ByteSize`:
 
