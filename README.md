@@ -14,6 +14,9 @@
    * Install [Mono](http://www.mono-project.com/download/).
      * NOTE: using `brew install mono` will not install the PCL libraries required to build the PCL compatible project (`ByteSize.Dotnet.csproj`). The PCL libraries can be installed by running the installer downloaded from http://www.mono-project.com/download/. 
    * Run `make build` in terminal.
+* Linux
+   * Install [Mono](http://www.mono-project.com/docs/getting-started/install/linux/) and the reference assemblies (`sudo apt-get referenceassemblies-pcl`).
+   * Run `make build` in terminal.
 
 ## Usage 
 
