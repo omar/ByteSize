@@ -21,6 +21,4 @@ before_install:
 
 script:
  - make test
-
- - dotnet restore
- - dotnet test src/ByteSizeLib.Tests/
+ 
