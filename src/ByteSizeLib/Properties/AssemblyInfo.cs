@@ -1,7 +1,5 @@
 ﻿using System.Resources;
 using System.Reflection;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
@@ -11,10 +9,10 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("ByteSize")]
-[assembly: AssemblyCopyright("Copyright © Omar Khudeira 2013-2016")]
+[assembly: AssemblyCopyright("Copyright © Omar Khudeira 2013-2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: NeutralResourcesLanguage("en")]
 
-[assembly: AssemblyVersion("1.2.4")]
-[assembly: AssemblyInformationalVersion("1.2.4")]
+[assembly: AssemblyVersion("1.2.5")]
+[assembly: AssemblyInformationalVersion("1.2.5")]

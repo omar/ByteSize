@@ -206,7 +206,11 @@ namespace ByteSizeLib.Tests
         [Fact]
         public void ParseCultureNumberSeparator()
         {
+#if NETCOREAPP1_1
+            CultureInfo.CurrentCulture = new CultureInfo("de-DE");
+#else
             Thread.CurrentThread.CurrentCulture = new CultureInfo("de-DE");
+#endif
 
             string val = "1.500,5 MB";
             var expected = ByteSize.FromMegaBytes(1500.5);
@@ -215,7 +219,11 @@ namespace ByteSizeLib.Tests
 
             Assert.Equal(expected, result);
 
+# if NETCOREAPP1_1
+            CultureInfo.CurrentCulture = new CultureInfo("en-US");
+#else
             Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
+#endif
         }
     }
 }
