@@ -15,7 +15,7 @@ before_install:
  - mkdir -p /usr/local/lib
  - ln -s /usr/local/opt/openssl/lib/libcrypto.1.0.0.dylib /usr/local/lib/
  - ln -s /usr/local/opt/openssl/lib/libssl.1.0.0.dylib /usr/local/lib/
- - wget "https://download.microsoft.com/download/1/4/1/141760B3-805B-4583-B17C-8C5BC5A876AB/Installers/dotnet-dev-osx-x64.1.0.0-preview2-1-003177.pkg"
+ - wget "https://go.microsoft.com/fwlink/?LinkID=835011" -O dotnet-dev-osx-x64.1.0.0-preview2-1-003177.pkg
  - sudo installer -pkg "dotnet-dev-osx-x64.1.0.0-preview2-1-003177.pkg" -target /
 
 script:
