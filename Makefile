@@ -3,8 +3,8 @@ build:
 	dotnet build src/ByteSizeLib
 
 test:
-	dotnet build src/ByteSizeLib
 	dotnet restore
+	dotnet build src/ByteSizeLib
 	dotnet test src/ByteSizeLib.Tests
 
 package:
