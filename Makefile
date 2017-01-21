@@ -13,5 +13,5 @@ test:
 
 package:
 	xbuild src/ByteSizeLib/ByteSizeLib.csproj /p:Configuration=Release
-	xbuild src/ByteSizeLib/ByteSizeLib.Dotnet.csproj /p:Configuration=Release
+	dotnet build src/ByteSizeLib/project.json --configuration Release
 	mono tools/NuGet.exe Pack ByteSize.nuspec

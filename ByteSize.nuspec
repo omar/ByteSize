@@ -40,6 +40,6 @@ View all release notes at https://github.com/omar/ByteSize/releases.</releaseNot
         <file src="src/ByteSizeLib/bin/portable/Release/ByteSizeLib.dll" target="lib/portable-net45+win8+wpa81+wp8" />
         <!-- Profile328 -->
         <file src="src/ByteSizeLib/bin/portable/Release/ByteSizeLib.dll" target="lib/portable-net40+sl5+win8+wpa81+wp8" />
-        <file src="src/ByteSizeLib/bin/dotnet/Release/ByteSizeLib.dll" target="lib/netstandard1.0" />
+        <file src="src/ByteSizeLib/bin/Release/netstandard1.0/ByteSizeLib.dll" target="lib/netstandard1.0" />
     </files>
 </package>
