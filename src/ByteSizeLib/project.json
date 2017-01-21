@@ -1,21 +1,41 @@
 {
-  "version": "1.2.5",
+  "name": "ByteSize",
+  "version": "1.2.5-*",
+  "description": "ByteSize is a utility class that makes byte size representation in code easier by removing ambiguity of the value being represented. ByteSize is to bytes what System.TimeSpan is to time.",
+  "copyright": "Copyright © Omar Khudeira 2013-2017",
+  "title": "ByteSize",
+  "authors": [
+    "Omar Khudeira"
+  ],
+  "packOptions": {
+    "tags": [
+      "bytes"
+    ],
+    "owners": [
+      "Omar Khudeira "
+    ],
+    "releaseNotes": "Fix TryParse to not throw exceptions.\n\nView all release notes at https://github.com/omar/ByteSize/releases.",
+    "licenseUrl": "https://raw.githubusercontent.com/omar/ByteSize/master/LICENSE",
+    "requireLicenseAcceptance": false,
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/omar/ByteSize"
+    },
+    "projectUrl": "https://github.com/omar/ByteSize"
+  },
   "buildOptions": {
     "warningsAsErrors": true,
     "debugType": "portable"
   },
   "frameworks": {
     "net35": {
-      "frameworkAssemblies": {
-      }
+      "frameworkAssemblies": {}
     },
     "net40": {
-      "frameworkAssemblies": {
-      }
+      "frameworkAssemblies": {}
     },
     "net45": {
-      "frameworkAssemblies": {
-      }
+      "frameworkAssemblies": {}
     },
     ".NETPortable,Version=v4.0,Profile=Profile136": {
       "buildOptions": {
