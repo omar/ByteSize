@@ -14,7 +14,7 @@
     "owners": [
       "Omar Khudeira "
     ],
-    "releaseNotes": "Fix TryParse to not throw exceptions.\n\nView all release notes at https://github.com/omar/ByteSize/releases.",
+    "releaseNotes": "Support .NET Standard 1.0 and .NET Framework 3.5.\n\nView all release notes at https://github.com/omar/ByteSize/releases.",
     "licenseUrl": "https://raw.githubusercontent.com/omar/ByteSize/master/LICENSE",
     "requireLicenseAcceptance": false,
     "repository": {
@@ -49,7 +49,10 @@
     },
     "netstandard10": {
       "dependencies": {
-        "NETStandard.Library": "1.6.0"
+        "System.Runtime": "4.1.0",
+        "System.Runtime.Extensions": "4.1.0",
+        "System.Globalization": "4.0.11",
+        "System.Resources.ResourceManager": "4.0.1"
       }
     }
   }
