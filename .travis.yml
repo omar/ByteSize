@@ -6,9 +6,9 @@ env:
   - DOTNET_CLI_TELEMETRY_OPTOUT=1
 
 before_install:
-# - wget "https://download.mono-project.com/archive/4.6.1/macos-10-universal/MonoFramework-MDK-4.6.1.5.macos10.xamarin.universal.pkg"
-# - sudo installer -pkg "MonoFramework-MDK-4.6.1.5.macos10.xamarin.universal.pkg" -target /
-# - export PATH=/Library/Frameworks/Mono.framework/Versions/Current/bin/:$PATH
+ - wget "https://download.mono-project.com/archive/4.6.1/macos-10-universal/MonoFramework-MDK-4.6.1.5.macos10.xamarin.universal.pkg"
+ - sudo installer -pkg "MonoFramework-MDK-4.6.1.5.macos10.xamarin.universal.pkg" -target /
+ - export PATH=/Library/Frameworks/Mono.framework/Versions/Current/bin/:$PATH
 
  - brew update
  - brew install openssl
@@ -20,7 +20,7 @@ before_install:
  - export PATH=/usr/local/share/dotnet/:$PATH
 
 script:
-# - make test
+ - make test
 
  - dotnet restore
  - dotnet test src/ByteSizeLib.Tests/
