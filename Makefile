@@ -1,9 +1,9 @@
 build:
-	mono tools/nuget.exe restore src/ByteSize.sln
+	mono tools/nuget.exe restore src/ByteSizeLib.Tests/package.config
 	xbuild src/ByteSize.sln
 
 test:
-	mono tools/nuget.exe restore src/ByteSize.sln
+	mono tools/nuget.exe restore src/ByteSizeLib.Tests/package.config
 	xbuild src/ByteSizeLib.Tests/ByteSizeLib.Tests.csproj
 	mono tools/xunit/xunit.console.x86.exe src/ByteSizeLib.Tests/bin/Debug/ByteSizeLib.Tests.dll
 
