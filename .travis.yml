@@ -16,6 +16,7 @@ before_install:
  - ln -s /usr/local/opt/openssl/lib/libssl.1.0.0.dylib /usr/local/lib/
  - wget "https://go.microsoft.com/fwlink/?LinkID=835011" -O dotnet-dev-osx-x64.1.0.0-preview2-1-003177.pkg
  - sudo installer -pkg "dotnet-dev-osx-x64.1.0.0-preview2-1-003177.pkg" -target /
+ - export PATH=/usr/local/bin/:$PATH
 
 script:
  - make test
