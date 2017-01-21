@@ -9,7 +9,6 @@ before_install:
  - sudo installer -pkg "MonoFramework-MDK-4.6.1.5.macos10.xamarin.universal.pkg" -target /
  - export PATH=/Library/Frameworks/Mono.framework/Versions/Current/bin/:$PATH
 
- - /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
  - brew update
  - brew install openssl
  - mkdir -p /usr/local/lib
