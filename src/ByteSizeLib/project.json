@@ -1,0 +1,19 @@
+{
+  "version": "1.2.5",
+
+  "buildOptions": {
+    "warningsAsErrors": true,
+    "debugType": "portable"
+  },
+
+  "frameworks": {
+    "netstandard1.0": {
+      "dependencies": {
+        "System.Runtime": "4.1.0",
+	      "System.Runtime.Extensions": "4.1.0",
+        "System.Globalization": "4.0.11",
+        "System.Resources.ResourceManager": "4.0.1"
+      }
+    }
+  }
+}
