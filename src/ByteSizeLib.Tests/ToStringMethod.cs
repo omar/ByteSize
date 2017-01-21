@@ -178,13 +178,8 @@ namespace ByteSizeLib.Tests
         [Fact]
         public void ReturnsLargestMetricSuffixUsingCurrentCulture()
         {
-#if NETCOREAPP1_1
             var originalCulture = CultureInfo.CurrentCulture;
             CultureInfo.CurrentCulture = new CultureInfo("fr-FR");
-#else
-            var originalCulture = Thread.CurrentThread.CurrentCulture;
-            Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture("fr-FR");
-#endif
 
             // Arrange
             var b = ByteSize.FromKiloBytes(10000);
@@ -195,11 +190,7 @@ namespace ByteSizeLib.Tests
             // Assert
             Assert.Equal("9,77 MB", result);
 
-#if NETCOREAPP1_1
             CultureInfo.CurrentCulture = originalCulture;
-#else
-            Thread.CurrentThread.CurrentCulture = originalCulture;
-#endif
         }
 
         [Fact]
@@ -209,11 +200,7 @@ namespace ByteSizeLib.Tests
             var b = ByteSize.FromKiloBytes(10000);
 
             // Act
-#if NETCOREAPP1_1
             var result = b.ToString("#.#", new CultureInfo("fr-FR"));
-#else
-            var result = b.ToString("#.#", CultureInfo.CreateSpecificCulture("fr-FR"));
-#endif
 
             // Assert
             Assert.Equal("9,8 MB", result);

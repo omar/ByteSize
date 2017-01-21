@@ -306,8 +306,13 @@ namespace ByteSizeLib
         public static ByteSize Parse(string s)
         {
             // Arg checking
+#if NET35
+            if (string.IsNullOrEmpty(s) || s.Trim() == "")
+                throw new ArgumentNullException("s", "String is null or whitespace");
+#else
             if (string.IsNullOrWhiteSpace(s))
                 throw new ArgumentNullException("s", "String is null or whitespace");
+#endif
 
             // Get the index of the first non-digit character
             s = s.TrimStart(); // Protect against leading spaces
