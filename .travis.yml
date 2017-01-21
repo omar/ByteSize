@@ -1,4 +1,6 @@
 language: objective-c
+sudo: required
+dist: trusty
 
 addons:
   apt:
