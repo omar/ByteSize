@@ -3,7 +3,7 @@
     <metadata>
         <id>ByteSize</id>
         <title>ByteSize</title>
-        <version>1.2.4</version>
+        <version>1.2.5</version>
         <authors>Omar Khudeira</authors>
         <owners>Omar Khudeira</owners>
         <licenseUrl>https://raw.githubusercontent.com/omar/ByteSize/master/LICENSE</licenseUrl>
@@ -24,10 +24,10 @@ View all release notes at https://github.com/omar/ByteSize/releases.</releaseNot
             <group targetFramework=".NETPortable4.5-Profile259" />
 
             <group targetFramework=".NETStandard1.0">
-                <dependency id="System.Globalization" version="4.0.0" />
-                <dependency id="System.Resources.ResourceManager" version="4.0.0" />
-                <dependency id="System.Runtime" version="4.0.0" />
-                <dependency id="System.Runtime.Extensions" version="4.0.0" />
+                <dependency id="System.Globalization" version="4.0.11" />
+                <dependency id="System.Resources.ResourceManager" version="4.0.1" />
+                <dependency id="System.Runtime" version="4.1.0" />
+                <dependency id="System.Runtime.Extensions" version="4.1.0" />
             </group>
         </dependencies>
     </metadata>
@@ -40,6 +40,6 @@ View all release notes at https://github.com/omar/ByteSize/releases.</releaseNot
         <file src="src/ByteSizeLib/bin/portable/Release/ByteSizeLib.dll" target="lib/portable-net45+win8+wpa81+wp8" />
         <!-- Profile328 -->
         <file src="src/ByteSizeLib/bin/portable/Release/ByteSizeLib.dll" target="lib/portable-net40+sl5+win8+wpa81+wp8" />
-        <file src="src/ByteSizeLib/bin/dotnet/Release/ByteSizeLib.dll" target="lib/netstandard1.0" />
+        <file src="src/ByteSizeLib/bin/Release/netstandard1.0/ByteSizeLib.dll" target="lib/netstandard1.0" />
     </files>
 </package>

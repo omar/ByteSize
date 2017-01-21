@@ -2,13 +2,23 @@ language: objective-c
 
 env:
  global:
-  - EnableNuGetPackageRestore=true 
+  - EnableNuGetPackageRestore=true
+  - DOTNET_CLI_TELEMETRY_OPTOUT=1
 
 before_install:
  - wget "https://download.mono-project.com/archive/4.6.1/macos-10-universal/MonoFramework-MDK-4.6.1.5.macos10.xamarin.universal.pkg"
  - sudo installer -pkg "MonoFramework-MDK-4.6.1.5.macos10.xamarin.universal.pkg" -target /
  - export PATH=/Library/Frameworks/Mono.framework/Versions/Current/bin/:$PATH
 
+ - brew update
+ - brew install openssl
+ - mkdir -p /usr/local/lib
+ - ln -s /usr/local/opt/openssl/lib/libcrypto.1.0.0.dylib /usr/local/lib/
+ - ln -s /usr/local/opt/openssl/lib/libssl.1.0.0.dylib /usr/local/lib/
+ - wget "https://go.microsoft.com/fwlink/?LinkID=835011" -O dotnet-dev-osx-x64.1.0.0-preview2-1-003177.pkg
+ - sudo installer -pkg "dotnet-dev-osx-x64.1.0.0-preview2-1-003177.pkg" -target /
+ - export PATH=/usr/local/share/dotnet/:$PATH
+
 script:
  - make test
-
+ 

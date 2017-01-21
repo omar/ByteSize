@@ -1,0 +1,27 @@
+{
+  "version": "1.2.5",
+
+  "buildOptions": {
+    "warningsAsErrors": true,
+    "debugType": "portable"
+  },
+
+  "frameworks": {
+    "netcoreapp1.1": {
+      "dependencies": {
+        "ByteSizeLib": {
+          "version": "*",
+          "target": "project"
+        },
+        "Microsoft.NETCore.App": {
+          "version": "1.1.0",
+          "type": "platform"
+        },
+        "xunit": "2.2.0-beta2-build3300",
+        "dotnet-test-xunit": "2.2.0-preview2-build1029"
+      }
+    }
+  },
+
+  "testRunner": "xunit"
+}
