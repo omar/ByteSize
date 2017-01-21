@@ -11,6 +11,8 @@ before_install:
  - sudo apt-get update
  - sudo apt-get install dotnet-dev-1.0.0-preview2.1-003177
  - export PATH=/usr/local/share/dotnet/:$PATH
+ - dotnet --help
+ - echo "Before Install Done"
 
 script:
  - make test
