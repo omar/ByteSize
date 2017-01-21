@@ -26,4 +26,3 @@ script:
 
  - dotnet restore
  - dotnet test src/ByteSizeLib.Tests/
- 
