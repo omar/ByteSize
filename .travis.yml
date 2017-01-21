@@ -1,18 +1,15 @@
-language: objective-c
+dist: trusty
+sudo: required
 
 env:
  global:
-  - EnableNuGetPackageRestore=true
   - DOTNET_CLI_TELEMETRY_OPTOUT=1
 
 before_install:
- - brew update
- - brew install openssl
- - mkdir -p /usr/local/lib
- - ln -s /usr/local/opt/openssl/lib/libcrypto.1.0.0.dylib /usr/local/lib/
- - ln -s /usr/local/opt/openssl/lib/libssl.1.0.0.dylib /usr/local/lib/
- - wget "https://go.microsoft.com/fwlink/?LinkID=835011" -O dotnet-dev-osx-x64.1.0.0-preview2-1-003177.pkg
- - sudo installer -pkg "dotnet-dev-osx-x64.1.0.0-preview2-1-003177.pkg" -target /
+ - sudo sh -c 'echo "deb [arch=amd64] https://apt-mo.trafficmanager.net/repos/dotnet-release/ trusty main" > /etc/apt/sources.list.d/dotnetdev.list'
+ - sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 417A0893
+ - sudo apt-get update
+ - sudo apt-get install dotnet-dev-1.0.0-preview2.1-003177
  - export PATH=/usr/local/share/dotnet/:$PATH
 
 script:
