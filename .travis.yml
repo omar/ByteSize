@@ -8,6 +8,7 @@ env:
 
 before_install:
  - sudo apt-get install mono-complete
+ - sudo apt-get install referenceassemblies-pcl
  - mono --version
  - sudo sh -c 'echo "deb [arch=amd64] https://apt-mo.trafficmanager.net/repos/dotnet-release/ trusty main" > /etc/apt/sources.list.d/dotnetdev.list'
  - sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 417A0893
@@ -15,7 +16,6 @@ before_install:
  - sudo apt-get install dotnet-dev-1.0.0-preview2.1-003177
  - export PATH=/usr/local/share/dotnet/:$PATH
  - dotnet --version
- - echo "Before Install Done"
 
 script:
  - make test
