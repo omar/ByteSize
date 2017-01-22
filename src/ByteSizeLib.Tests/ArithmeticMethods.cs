@@ -101,7 +101,6 @@ namespace ByteSizeLib.Tests
             Assert.Equal(2, size.Bytes);
         }
 
-
         [Fact]
         public void IncrementOperator()
         {
@@ -114,7 +113,7 @@ namespace ByteSizeLib.Tests
 
 
         [Fact]
-        public void MinusOperator()
+        public void MinusOperatorUnary()
         {
             var size = ByteSize.FromBytes(2);
 
@@ -122,6 +121,15 @@ namespace ByteSizeLib.Tests
 
             Assert.Equal(-16, size.Bits);
             Assert.Equal(-2, size.Bytes);
+        }
+
+        [Fact]
+        public void MinusOperatorBinary()
+        {
+            var size = ByteSize.FromBytes(4) - ByteSize.FromBytes(2);
+
+            Assert.Equal(16, size.Bits);
+            Assert.Equal(2, size.Bytes);
         }
 
         [Fact]
