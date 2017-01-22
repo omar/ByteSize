@@ -1,6 +1,6 @@
 {
   "name": "ByteSize",
-  "version": "1.2.5-*",
+  "version": "1.3.0-*",
   "description": "ByteSize is a utility class that makes byte size representation in code easier by removing ambiguity of the value being represented. ByteSize is to bytes what System.TimeSpan is to time.",
   "copyright": "Copyright © Omar Khudeira 2013-2017",
   "title": "ByteSize",
@@ -14,7 +14,7 @@
     "owners": [
       "Omar Khudeira "
     ],
-    "releaseNotes": "Support .NET Standard 1.0 and .NET Framework 3.5.\n\nView all release notes at https://github.com/omar/ByteSize/releases.",
+    "releaseNotes": "Add support for subtracting two ByteSize objects.\n\nView all release notes at https://github.com/omar/ByteSize/releases.",
     "licenseUrl": "https://raw.githubusercontent.com/omar/ByteSize/master/LICENSE",
     "requireLicenseAcceptance": false,
     "repository": {
