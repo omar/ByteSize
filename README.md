@@ -24,7 +24,7 @@
 
 Without `ByteSize`:
 
-```
+```c#
 static double MaxFileSizeMBs = 1.5;
 
 // I need it in KBs!
@@ -33,7 +33,7 @@ var kilobytes = MaxFileSizeMBs * 1024; // 1536
 
 With `ByteSize`:
 
-```
+```c#
 static MaxFileSize = ByteSize.FromMegaBytes(1.5);
 
 // I have it in KBs!
@@ -42,7 +42,7 @@ MaxFileSize.KiloBytes;  // 1536
 
 `ByeSize` behaves like any other struct backed by a numerical value.
 
-```
+```c#
 // Add
 var monthlyUsage = ByteSize.FromGigaBytes(10);
 var currentUsage = ByteSize.FromMegaBytes(512);
@@ -61,7 +61,7 @@ delta = delta.AddMegaBytes(-100);
 
 You can create a `ByteSize` object from `bits`, `bytes`, `kilobytes`, `megabytes`, `gigabytes`, and `terabytes`.
 
-```
+```c#
 new ByteSize(1.5);           // Constructor takes in bytes
 
 // Static Constructors
@@ -77,7 +77,7 @@ ByteSize.FromTeraBytes(1.5);
 
 A `ByteSize` object contains representations in `bits`, `bytes`, `kilobytes`, `megabytes`, `gigabytes`, and `terabytes`.
 
-```
+```c#
 var maxFileSize = ByteSize.FromKiloBytes(10);
 
 maxFileSize.Bits;      // 81920
@@ -90,7 +90,7 @@ maxFileSize.TeraBytes; // 9.31322575e-9
 
 A `ByteSize` object also contains two properties that represent the largest metric prefix symbol and value.
 
-```
+```c#
 var maxFileSize = ByteSize.FromKiloBytes(10);
 
 maxFileSize.LargestWholeNumberSymbol;  // "KB"
@@ -105,7 +105,7 @@ All string operations are localized to use the number decimal separator of the c
 
 `ByteSize` comes with a handy `ToString` method that uses the largest metric prefix whose value is greater than or equal to 1.
 
-```
+```c#
 ByteSize.FromBits(7).ToString();         // 7 b
 ByteSize.FromBits(8).ToString();         // 1 B
 ByteSize.FromKiloBytes(.5).ToString();   // 512 B
@@ -123,7 +123,7 @@ The default number format is `0.##` which rounds the number to two decimal place
 
 You can include symbol and number formats.
 
-```
+```c#
 var b = ByteSize.FromKiloBytes(10.505);
 
 // Default number format is 0.##
@@ -156,7 +156,7 @@ zeroBytes.ToString("0.## mb");  // 0 mb
 
 Like other `TryParse` methods, `ByteSize.TryParse` returns `boolean` value indicating whether or not the parsing was successful. If the value is parsed it is output to the `out` parameter supplied.
 
-```
+```c#
 ByteSize output;
 ByteSize.TryParse("1.5mb", out output);
 
