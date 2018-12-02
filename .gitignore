@@ -39,4 +39,4 @@ src/packages/**
 *.ncrunch*
 *.ndproj
 *.nupkg
-**/project.lock.json
+src/ByteSizeLib/pack
