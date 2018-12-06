@@ -88,13 +88,13 @@ namespace ByteSizeLib
             }
         }
 
-        public ByteSize(double byteSize)
+        public ByteSize(double bytes)
             : this()
         {
             // Get ceiling because bits are whole units
-            Bits = (long)Math.Ceiling(byteSize * BitsInByte);
+            Bits = (long)Math.Ceiling(bytes * BitsInByte);
 
-            Bytes = byteSize;
+            Bytes = bytes;
         }
 
         public static ByteSize FromBits(long value)
