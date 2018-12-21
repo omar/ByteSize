@@ -2,6 +2,7 @@ language: csharp
 mono: none
 dotnet: 2.1.500
 install:
+  - cd src
   - dotnet restore
 script:
   - make test
