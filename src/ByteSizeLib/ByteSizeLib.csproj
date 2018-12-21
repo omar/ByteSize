@@ -8,7 +8,7 @@
     <VersionPrefix>1.3.0</VersionPrefix>
     <AssemblyVersion>1.3.0</AssemblyVersion>
     <Authors>Omar Khudeira</Authors>
-    <TargetFrameworks>netstandard2.0;net461</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0</TargetFrameworks>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <DebugType>portable</DebugType>
     <AssemblyName>ByteSize</AssemblyName>
