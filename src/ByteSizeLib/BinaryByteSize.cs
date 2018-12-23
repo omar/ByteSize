@@ -5,20 +5,21 @@ namespace ByteSizeLib
 {
     /// <summary>
     /// Represents a binary byte size value (1 KiB = 1024 B).
+    /// Uses 3 letter abbreviations (KiB, MiB, GiB, TiB, PiB).
     /// </summary>
     public struct BinaryByteSize : IComparable<BinaryByteSize>, IEquatable<BinaryByteSize>
     {         
         public static readonly BinaryByteSize MaxValue = BinaryByteSize.FromBits(long.MaxValue);
 
         public const long BitsInByte = 8;
-        public const long BytesInKibiByte = 1024;
-        public const long BytesInMebiByte = 1048576;
-        public const long BytesInGibiByte = 1073741824;
-        public const long BytesInTebiByte = 1099511627776;
-        public const long BytesInPebiByte = 1125899906842624;
+        public const long BytesInKibiByte = 1_024;
+        public const long BytesInMebiByte = 1_048_576;
+        public const long BytesInGibiByte = 1_073_741_824;
+        public const long BytesInTebiByte = 1_099_511_627_776;
+        public const long BytesInPebiByte = 1_125_899_906_842_624;
 
-        public const string BitSymbol = ByteSizeLib.ByteSize.BitSymbol;
-        public const string ByteSymbol = ByteSizeLib.ByteSize.ByteSymbol;
+        public const string BitSymbol = "b";
+        public const string ByteSymbol = "B";
         public const string KibiByteSymbol = "KiB";
         public const string MebiByteSymbol = "MiB";
         public const string GibiByteSymbol = "GiB";
@@ -350,7 +351,7 @@ namespace ByteSizeLib
                 throw new FormatException($"No number found in value '{ s }'.");
 
             // Get the magnitude part
-            switch (sizePart)
+            switch (sizePart.ToLowerInvariant())
             {
                 case "b":
                     if (number % 1 != 0) // Can't have partial bits
