@@ -39,4 +39,4 @@ src/packages/**
 *.ncrunch*
 *.ndproj
 *.nupkg
-src/ByteSizeLib/pack
+src/ByteSize/pack

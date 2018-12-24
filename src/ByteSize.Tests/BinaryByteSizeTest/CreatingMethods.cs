@@ -1,6 +1,6 @@
 ﻿using Xunit;
 
-namespace ByteSizeLib.Tests.BinaryByteSizeTests
+namespace ByteSize.Tests.BinaryByteSizeTests
 {
     public class CreatingMethods
     {

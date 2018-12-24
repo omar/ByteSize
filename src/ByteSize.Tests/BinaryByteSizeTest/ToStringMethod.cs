@@ -2,7 +2,7 @@
 using System.Threading;
 using Xunit;
 
-namespace ByteSizeLib.Tests
+namespace ByteSize.Tests.BinaryByteSizeTests
 {
     public class ToStringMethod
     {
@@ -10,46 +10,46 @@ namespace ByteSizeLib.Tests
         public void ReturnsLargestMetricSuffix()
         {
             // Arrange
-            var b = ByteSize.FromKiloBytes(10.5);
+            var b = BinaryByteSize.FromKibiBytes(10.5);
 
             // Act
             var result = b.ToString();
 
             // Assert
-            Assert.Equal(10.5.ToString("0.0 KB"), result);
+            Assert.Equal(10.5.ToString("0.0 KiB"), result);
         }
 
         [Fact]
         public void ReturnsDefaultNumberFormat()
         {
             // Arrange
-            var b = ByteSize.FromKiloBytes(10.5);
+            var b = BinaryByteSize.FromKibiBytes(10.5);
 
             // Act
-            var result = b.ToString("KB");
+            var result = b.ToString("KiB");
 
             // Assert
-            Assert.Equal(10.5.ToString("0.0 KB"), result);
+            Assert.Equal(10.5.ToString("0.0 KiB"), result);
         }
 
         [Fact]
         public void ReturnsProvidedNumberFormat()
         {
             // Arrange
-            var b = ByteSize.FromKiloBytes(10.1234);
+            var b = BinaryByteSize.FromKibiBytes(10.1234);
 
             // Act
-            var result = b.ToString("#.#### KB");
+            var result = b.ToString("#.#### KiB");
 
             // Assert
-            Assert.Equal(10.1234.ToString("0.0000 KB"), result);
+            Assert.Equal(10.1234.ToString("0.0000 KiB"), result);
         }
 
         [Fact]
         public void ReturnsBits()
         {
             // Arrange
-            var b = ByteSize.FromBits(10);
+            var b = BinaryByteSize.FromBits(10);
 
             // Act
             var result = b.ToString("##.#### b");
@@ -62,7 +62,7 @@ namespace ByteSizeLib.Tests
         public void ReturnsBytes()
         {
             // Arrange
-            var b = ByteSize.FromBytes(10);
+            var b = BinaryByteSize.FromBytes(10);
 
             // Act
             var result = b.ToString("##.#### B");
@@ -72,107 +72,107 @@ namespace ByteSizeLib.Tests
         }
 
         [Fact]
-        public void ReturnsKiloBytes()
+        public void ReturnsKibiBytes()
         {
             // Arrange
-            var b = ByteSize.FromKiloBytes(10);
+            var b = BinaryByteSize.FromKibiBytes(10);
 
             // Act
-            var result = b.ToString("##.#### KB");
+            var result = b.ToString("##.#### KiB");
 
             // Assert
-            Assert.Equal("10 KB", result);
+            Assert.Equal("10 KiB", result);
         }
 
         [Fact]
-        public void ReturnsMegaBytes()
+        public void ReturnsMebiBytes()
         {
             // Arrange
-            var b = ByteSize.FromMegaBytes(10);
+            var b = BinaryByteSize.FromMebiBytes(10);
 
             // Act
-            var result = b.ToString("##.#### MB");
+            var result = b.ToString("##.#### MiB");
 
             // Assert
-            Assert.Equal("10 MB", result);
+            Assert.Equal("10 MiB", result);
         }
 
         [Fact]
-        public void ReturnsGigaBytes()
+        public void ReturnsGibiBytes()
         {
             // Arrange
-            var b = ByteSize.FromGigaBytes(10);
+            var b = BinaryByteSize.FromGibiBytes(10);
 
             // Act
-            var result = b.ToString("##.#### GB");
+            var result = b.ToString("##.#### GiB");
 
             // Assert
-            Assert.Equal("10 GB", result);
+            Assert.Equal("10 GiB", result);
         }
 
         [Fact]
-        public void ReturnsTeraBytes()
+        public void ReturnsTebiBytes()
         {
             // Arrange
-            var b = ByteSize.FromTeraBytes(10);
+            var b = BinaryByteSize.FromTebiBytes(10);
 
             // Act
-            var result = b.ToString("##.#### TB");
+            var result = b.ToString("##.#### TiB");
 
             // Assert
-            Assert.Equal("10 TB", result);
+            Assert.Equal("10 TiB", result);
         }
 
         [Fact]
-        public void ReturnsPetaBytes()
+        public void ReturnsPebiBytes()
         {
             // Arrange
-            var b = ByteSize.FromPetaBytes(10);
+            var b = BinaryByteSize.FromPebiBytes(10);
 
             // Act
-            var result = b.ToString("##.#### PB");
+            var result = b.ToString("##.#### PiB");
 
             // Assert
-            Assert.Equal("10 PB", result);
+            Assert.Equal("10 PiB", result);
         }
 
         [Fact]
         public void ReturnsSelectedFormat()
         {
             // Arrange
-            var b = ByteSize.FromTeraBytes(10);
+            var b = BinaryByteSize.FromTebiBytes(10);
 
             // Act
-            var result = b.ToString("0.0 TB");
+            var result = b.ToString("0.0 TiB");
 
             // Assert
-            Assert.Equal(10.ToString("0.0 TB"), result);
+            Assert.Equal(10.ToString("0.0 TiB"), result);
         }
 
         [Fact]
         public void ReturnsLargestMetricPrefixLargerThanZero()
         {
             // Arrange
-            var b = ByteSize.FromMegaBytes(.5);
+            var b = BinaryByteSize.FromMebiBytes(.5);
 
             // Act
             var result = b.ToString("#.#");
 
             // Assert
-            Assert.Equal("512 KB", result);
+            Assert.Equal("512 KiB", result);
         }
 
         [Fact]
         public void ReturnsLargestMetricPrefixLargerThanZeroForNegativeValues()
         {
             // Arrange
-            var b = ByteSize.FromMegaBytes(-.5);
+            var b = BinaryByteSize.FromMebiBytes(-.5);
 
             // Act
             var result = b.ToString("#.#");
 
             // Assert
-            Assert.Equal("-512 KB", result);
+            Assert.Equal("-512 KiB", result);
         }
 
         [Fact]
@@ -182,13 +182,13 @@ namespace ByteSizeLib.Tests
             CultureInfo.CurrentCulture = new CultureInfo("fr-FR");
 
             // Arrange
-            var b = ByteSize.FromKiloBytes(10000);
+            var b = BinaryByteSize.FromKibiBytes(10000);
 
             // Act
             var result = b.ToString();
 
             // Assert
-            Assert.Equal("9,77 MB", result);
+            Assert.Equal("9,77 MiB", result);
 
             CultureInfo.CurrentCulture = originalCulture;
         }
@@ -197,34 +197,34 @@ namespace ByteSizeLib.Tests
         public void ReturnsLargestMetricSuffixUsingSpecifiedCulture()
         {
             // Arrange
-            var b = ByteSize.FromKiloBytes(10000);
+            var b = BinaryByteSize.FromKibiBytes(10000);
 
             // Act
             var result = b.ToString("#.#", new CultureInfo("fr-FR"));
 
             // Assert
-            Assert.Equal("9,8 MB", result);
+            Assert.Equal("9,8 MiB", result);
 		}
 
 		[Fact]
 		public void ReturnsCultureSpecificFormat()
 		{
 			// Arrange
-			var b = ByteSize.FromKiloBytes(10.5);
+			var b = BinaryByteSize.FromKibiBytes(10.5);
 
 			// Act
 			var deCulture = new CultureInfo("de-DE");
-			var result = b.ToString("0.0 KB", deCulture);
+			var result = b.ToString("0.0 KiB", deCulture);
 
 			// Assert
-			Assert.Equal(10.5.ToString("0.0 KB", deCulture), result);
+			Assert.Equal(10.5.ToString("0.0 KiB", deCulture), result);
 		}
 
         [Fact]
 		public void ReturnsZeroBits()
 		{
 			// Arrange
-			var b = ByteSize.FromBits(0);
+			var b = BinaryByteSize.FromBits(0);
 
 			// Act
 			var result = b.ToString();

@@ -1,8 +1,8 @@
 build:
-	dotnet build src/ByteSizeLib
+	dotnet build src
 
 test:
-	dotnet test src/ByteSizeLib.Tests
+	dotnet test src/ByteSize.Tests
 
 pack:
-	dotnet pack src/ByteSizeLib -c Release  -o pack
+	dotnet pack src/ByteSize -c Release  -o pack

@@ -1,6 +1,6 @@
 ﻿using Xunit;
 
-namespace ByteSizeLib.Tests
+namespace ByteSize.Tests.DecimalByteSizeTest
 {
     public class CreatingMethods
     {
@@ -8,18 +8,18 @@ namespace ByteSizeLib.Tests
         public void Constructor()
         {
             // Arrange
-            double bytes = 1125899906842624;
+            double bytes = 1000000000000000;
 
             // Act
-            var result = new ByteSize(bytes);
+            var result = new DecimalByteSize(bytes);
 
             // Assert
             Assert.Equal(bytes * 8, result.Bits);
             Assert.Equal(bytes, result.Bytes);
-            Assert.Equal(bytes / 1024, result.KiloBytes);
-            Assert.Equal(bytes / 1024 / 1024, result.MegaBytes);
-            Assert.Equal(bytes / 1024 / 1024 / 1024, result.GigaBytes);
-            Assert.Equal(bytes / 1024 / 1024 / 1024 / 1024, result.TeraBytes);
+            Assert.Equal(bytes / 1000, result.KiloBytes);
+            Assert.Equal(bytes / 1000 / 1000, result.MegaBytes);
+            Assert.Equal(bytes / 1000 / 1000 / 1000, result.GigaBytes);
+            Assert.Equal(bytes / 1000 / 1000 / 1000 / 1000, result.TeraBytes);
             Assert.Equal(1, result.PetaBytes);
         }
 
@@ -30,7 +30,7 @@ namespace ByteSizeLib.Tests
             long value = 8;
 
             // Act
-            var result = ByteSize.FromBits(value);
+            var result = DecimalByteSize.FromBits(value);
 
             // Assert
             Assert.Equal(8, result.Bits);
@@ -44,7 +44,7 @@ namespace ByteSizeLib.Tests
             double value = 1.5;
 
             // Act
-            var result = ByteSize.FromBytes(value);
+            var result = DecimalByteSize.FromBytes(value);
 
             // Assert
             Assert.Equal(12, result.Bits);
@@ -58,10 +58,10 @@ namespace ByteSizeLib.Tests
             double value = 1.5;
 
             // Act
-            var result = ByteSize.FromKiloBytes(value);
+            var result = DecimalByteSize.FromKiloBytes(value);
 
             // Assert
-            Assert.Equal(1536, result.Bytes);
+            Assert.Equal(1500, result.Bytes);
             Assert.Equal(1.5, result.KiloBytes);
         }
 
@@ -72,10 +72,10 @@ namespace ByteSizeLib.Tests
             double value = 1.5;
 
             // Act
-            var result = ByteSize.FromMegaBytes(value);
+            var result = DecimalByteSize.FromMegaBytes(value);
 
             // Assert
-            Assert.Equal(1572864, result.Bytes);
+            Assert.Equal(1500000, result.Bytes);
             Assert.Equal(1.5, result.MegaBytes);
         }
 
@@ -86,10 +86,10 @@ namespace ByteSizeLib.Tests
             double value = 1.5;
 
             // Act
-            var result = ByteSize.FromGigaBytes(value);
+            var result = DecimalByteSize.FromGigaBytes(value);
 
             // Assert
-            Assert.Equal(1610612736, result.Bytes);
+            Assert.Equal(1500000000, result.Bytes);
             Assert.Equal(1.5, result.GigaBytes);
         }
 
@@ -100,10 +100,10 @@ namespace ByteSizeLib.Tests
             double value = 1.5;
 
             // Act
-            var result = ByteSize.FromTeraBytes(value);
+            var result = DecimalByteSize.FromTeraBytes(value);
 
             // Assert
-            Assert.Equal(1649267441664, result.Bytes);
+            Assert.Equal(1500000000000, result.Bytes);
             Assert.Equal(1.5, result.TeraBytes);
         }
 
@@ -114,10 +114,10 @@ namespace ByteSizeLib.Tests
             double value = 1.5;
 
             // Act
-            var result = ByteSize.FromPetaBytes(value);
+            var result = DecimalByteSize.FromPetaBytes(value);
 
             // Assert
-            Assert.Equal(1688849860263936, result.Bytes);
+            Assert.Equal(1500000000000000, result.Bytes);
             Assert.Equal(1.5, result.PetaBytes);
         }
     }

@@ -1,11 +1,12 @@
 using System;
 using System.Globalization;
 
-namespace ByteSizeLib
+namespace ByteSize
 {
     /// <summary>
     /// Represents a binary byte size value (1 KiB = 1024 B).
     /// Uses 3 letter abbreviations (KiB, MiB, GiB, TiB, PiB).
+    /// Follows the IEC standard.
     /// </summary>
     public struct BinaryByteSize : IComparable<BinaryByteSize>, IEquatable<BinaryByteSize>
     {         
@@ -133,10 +134,10 @@ namespace ByteSizeLib
         }
 
         /// <summary>
-        /// Converts the value of the current BinaryByteSize object to a string.
-        /// The metric prefix symbol (bit, byte, kilo, Mebi, Gibi, Tebi) used is
-        /// the largest metric prefix such that the corresponding value is greater
-        //  than or equal to one.
+        /// Converts the value of the current object to a string.
+        /// The prefix symbol (bit, byte, kilo, mebi, gibi, tebi) used is the
+        /// largest prefix such that the corresponding value is greater than or
+        /// equal to one.
         /// </summary>
         public override string ToString()
         {
@@ -311,13 +312,8 @@ namespace ByteSizeLib
         public static BinaryByteSize Parse(string s)
         {
             // Arg checking
-#if NET35
-            if (string.IsNullOrEmpty(s) || s.Trim() == "")
-                throw new ArgumentNullException("s", "String is null or whitespace");
-#else
             if (string.IsNullOrWhiteSpace(s))
                 throw new ArgumentNullException("s", "String is null or whitespace");
-#endif
 
             // Get the index of the first non-digit character
             s = s.TrimStart(); // Protect against leading spaces
@@ -351,7 +347,7 @@ namespace ByteSizeLib
                 throw new FormatException($"No number found in value '{ s }'.");
 
             // Get the magnitude part
-            switch (sizePart.ToLowerInvariant())
+            switch (sizePart)
             {
                 case "b":
                     if (number % 1 != 0) // Can't have partial bits
@@ -361,29 +357,22 @@ namespace ByteSizeLib
 
                 case "B":
                     return FromBytes(number);
+            }
 
-                case "KiB":
-                case "kiB":
+            switch (sizePart.ToLowerInvariant())
+            {
                 case "kib":
                     return FromKibiBytes(number);
 
-                case "MiB":
-                case "miB":
                 case "mib":
                     return FromMebiBytes(number);
 
-                case "GiB":
-                case "giB":
                 case "gib":
                     return FromGibiBytes(number);
 
-                case "TiB":
-                case "tiB":
                 case "tib":
                     return FromTebiBytes(number);
 
-                case "PiB":
-                case "piB":
                 case "pib":
                     return FromPebiBytes(number);
                 

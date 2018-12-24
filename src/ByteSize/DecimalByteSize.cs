@@ -1,11 +1,12 @@
 using System;
 using System.Globalization;
 
-namespace ByteSizeLib
+namespace ByteSize
 {
     /// <summary>
     /// Represents a decimal byte size value (1 KB = 1000 B).
     /// Uses 2 letter abbreviations (KB, MB, GB, TB, PB).
+    /// Follows the IEC standard.
     /// </summary>
     public struct DecimalByteSize : IComparable<DecimalByteSize>, IEquatable<DecimalByteSize>
     {
@@ -133,10 +134,10 @@ namespace ByteSizeLib
         }
 
         /// <summary>
-        /// Converts the value of the current DecimalByteSize object to a string.
-        /// The metric prefix symbol (bit, byte, kilo, mega, giga, tera) used is
-        /// the largest metric prefix such that the corresponding value is greater
-        //  than or equal to one.
+        /// Converts the value of the current object to a string.
+        /// The prefix symbol (bit, byte, kilo, mega, giga, tera) used is the
+        /// largest prefix such that the corresponding value is greater than or
+        /// equal to one.
         /// </summary>
         public override string ToString()
         {
@@ -311,13 +312,8 @@ namespace ByteSizeLib
         public static DecimalByteSize Parse(string s)
         {
             // Arg checking
-#if NET35
-            if (string.IsNullOrEmpty(s) || s.Trim() == "")
-                throw new ArgumentNullException("s", "String is null or whitespace");
-#else
             if (string.IsNullOrWhiteSpace(s))
                 throw new ArgumentNullException("s", "String is null or whitespace");
-#endif
 
             // Get the index of the first non-digit character
             s = s.TrimStart(); // Protect against leading spaces
@@ -361,29 +357,22 @@ namespace ByteSizeLib
 
                 case "B":
                     return FromBytes(number);
+            }
 
-                case "KB":
-                case "kB":
+            switch (sizePart.ToLowerInvariant())
+            {
                 case "kb":
                     return FromKiloBytes(number);
 
-                case "MB":
-                case "mB":
                 case "mb":
                     return FromMegaBytes(number);
 
-                case "GB":
-                case "gB":
                 case "gb":
                     return FromGigaBytes(number);
 
-                case "TB":
-                case "tB":
                 case "tb":
                     return FromTeraBytes(number);
 
-                case "PB":
-                case "pB":
                 case "pb":
                     return FromPetaBytes(number);
                 

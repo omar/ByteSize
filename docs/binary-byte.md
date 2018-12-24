@@ -38,7 +38,7 @@ In summary, developers are _attempting_ to adhere to the IEC standard by either:
    values (`BinaryByteSize`).
     - Pros
         - Clear separation of what's being represented by the object.
-        - Solve the namespace collision that forced the `ByteSizeLib` namespace.
+        - Solve the namespace collision that forced the `ByteSize` namespace.
     - Cons
         - Swapping between binary and decimal representation requires two 
           objects. Maybe can provide a simple way to go from one to the other:

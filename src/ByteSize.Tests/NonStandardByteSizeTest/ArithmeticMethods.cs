@@ -1,13 +1,13 @@
 ﻿using Xunit;
 
-namespace ByteSizeLib.Tests.BinaryByteSizeTests
+namespace ByteSize.Tests.NonStandardByteSizeTest
 {
     public class ArithmeticMethods
     {
         [Fact]
         public void AddMethod()
         {
-            var size1 = BinaryByteSize.FromBytes(1);
+            var size1 = NonStandardByteSize.FromBytes(1);
             var result = size1.Add(size1);
 
             Assert.Equal(2, result.Bytes);
@@ -17,7 +17,7 @@ namespace ByteSizeLib.Tests.BinaryByteSizeTests
         [Fact]
         public void AddBitsMethod()
         {
-            var size = BinaryByteSize.FromBytes(1).AddBits(8);
+            var size = NonStandardByteSize.FromBytes(1).AddBits(8);
 
             Assert.Equal(2, size.Bytes);
             Assert.Equal(16, size.Bits);
@@ -26,76 +26,76 @@ namespace ByteSizeLib.Tests.BinaryByteSizeTests
         [Fact]
         public void AddBytesMethod()
         {
-            var size = BinaryByteSize.FromBytes(1).AddBytes(1);
+            var size = NonStandardByteSize.FromBytes(1).AddBytes(1);
 
             Assert.Equal(2, size.Bytes);
             Assert.Equal(16, size.Bits);
         }
 
         [Fact]
-        public void AddKibiBytesMethod()
+        public void AddKiloBytesMethod()
         {
-            var size = BinaryByteSize.FromKibiBytes(2).AddKibiBytes(2);
+            var size = NonStandardByteSize.FromKiloBytes(2).AddKiloBytes(2);
 
             Assert.Equal(4 * 1024 * 8, size.Bits);
             Assert.Equal(4 * 1024, size.Bytes);
-            Assert.Equal(4, size.KibiBytes);
+            Assert.Equal(4, size.KiloBytes);
         }
 
         [Fact]
-        public void AddMebiBytesMethod()
+        public void AddMegaBytesMethod()
         {
-            var size = BinaryByteSize.FromMebiBytes(2).AddMebiBytes(2);
+            var size = NonStandardByteSize.FromMegaBytes(2).AddMegaBytes(2);
 
             Assert.Equal(4 * 1024 * 1024 * 8, size.Bits);
             Assert.Equal(4 * 1024 * 1024, size.Bytes);
-            Assert.Equal(4 * 1024, size.KibiBytes);
-            Assert.Equal(4, size.MebiBytes);
+            Assert.Equal(4 * 1024, size.KiloBytes);
+            Assert.Equal(4, size.MegaBytes);
         }
 
         [Fact]
-        public void AddGibiBytesMethod()
+        public void AddGigaBytesMethod()
         {
-            var size = BinaryByteSize.FromGibiBytes(2).AddGibiBytes(2);
+            var size = NonStandardByteSize.FromGigaBytes(2).AddGigaBytes(2);
 
             Assert.Equal(4d * 1024 * 1024 * 1024 * 8, size.Bits);
             Assert.Equal(4d * 1024 * 1024 * 1024, size.Bytes);
-            Assert.Equal(4d * 1024 * 1024, size.KibiBytes);
-            Assert.Equal(4d * 1024, size.MebiBytes);
-            Assert.Equal(4d, size.GibiBytes);
+            Assert.Equal(4d * 1024 * 1024, size.KiloBytes);
+            Assert.Equal(4d * 1024, size.MegaBytes);
+            Assert.Equal(4d, size.GigaBytes);
         }
 
         [Fact]
-        public void AddTebiBytesMethod()
+        public void AddTeraBytesMethod()
         {
-            var size = BinaryByteSize.FromTebiBytes(2).AddTebiBytes(2);
+            var size = NonStandardByteSize.FromTeraBytes(2).AddTeraBytes(2);
 
             Assert.Equal(4d * 1024 * 1024 * 1024 * 1024 * 8, size.Bits);
             Assert.Equal(4d * 1024 * 1024 * 1024 * 1024, size.Bytes);
-            Assert.Equal(4d * 1024 * 1024 * 1024, size.KibiBytes);
-            Assert.Equal(4d * 1024 * 1024, size.MebiBytes);
-            Assert.Equal(4d * 1024, size.GibiBytes);
-            Assert.Equal(4d, size.TebiBytes);
+            Assert.Equal(4d * 1024 * 1024 * 1024, size.KiloBytes);
+            Assert.Equal(4d * 1024 * 1024, size.MegaBytes);
+            Assert.Equal(4d * 1024, size.GigaBytes);
+            Assert.Equal(4d, size.TeraBytes);
         }
 
         [Fact]
-        public void AddPebiBytesMethod()
+        public void AddPetaBytesMethod()
         {
-            var size = BinaryByteSize.FromPebiBytes(2).AddPebiBytes(2);
+            var size = NonStandardByteSize.FromPetaBytes(2).AddPetaBytes(2);
 
             Assert.Equal(4d * 1024 * 1024 * 1024 * 1024 * 1024 * 8, size.Bits);
             Assert.Equal(4d * 1024 * 1024 * 1024 * 1024 * 1024, size.Bytes);
-            Assert.Equal(4d * 1024 * 1024 * 1024 * 1024, size.KibiBytes);
-            Assert.Equal(4d * 1024 * 1024 * 1024, size.MebiBytes);
-            Assert.Equal(4d * 1024 * 1024, size.GibiBytes);
-            Assert.Equal(4d * 1024, size.TebiBytes);
-            Assert.Equal(4d, size.PebiBytes);
+            Assert.Equal(4d * 1024 * 1024 * 1024 * 1024, size.KiloBytes);
+            Assert.Equal(4d * 1024 * 1024 * 1024, size.MegaBytes);
+            Assert.Equal(4d * 1024 * 1024, size.GigaBytes);
+            Assert.Equal(4d * 1024, size.TeraBytes);
+            Assert.Equal(4d, size.PetaBytes);
         }
 
         [Fact]
         public void SubtractMethod()
         {
-            var size = BinaryByteSize.FromBytes(4).Subtract(BinaryByteSize.FromBytes(2));
+            var size = NonStandardByteSize.FromBytes(4).Subtract(NonStandardByteSize.FromBytes(2));
 
             Assert.Equal(16, size.Bits);
             Assert.Equal(2, size.Bytes);
@@ -104,7 +104,7 @@ namespace ByteSizeLib.Tests.BinaryByteSizeTests
         [Fact]
         public void IncrementOperator()
         {
-            var size = BinaryByteSize.FromBytes(2);
+            var size = NonStandardByteSize.FromBytes(2);
             size++;
 
             Assert.Equal(24, size.Bits);
@@ -115,7 +115,7 @@ namespace ByteSizeLib.Tests.BinaryByteSizeTests
         [Fact]
         public void MinusOperatorUnary()
         {
-            var size = BinaryByteSize.FromBytes(2);
+            var size = NonStandardByteSize.FromBytes(2);
 
             size = -size;
 
@@ -126,7 +126,7 @@ namespace ByteSizeLib.Tests.BinaryByteSizeTests
         [Fact]
         public void MinusOperatorBinary()
         {
-            var size = BinaryByteSize.FromBytes(4) - BinaryByteSize.FromBytes(2);
+            var size = NonStandardByteSize.FromBytes(4) - NonStandardByteSize.FromBytes(2);
 
             Assert.Equal(16, size.Bits);
             Assert.Equal(2, size.Bytes);
@@ -135,7 +135,7 @@ namespace ByteSizeLib.Tests.BinaryByteSizeTests
         [Fact]
         public void DecrementOperator()
         {
-            var size = BinaryByteSize.FromBytes(2);
+            var size = NonStandardByteSize.FromBytes(2);
             size--;
 
             Assert.Equal(8, size.Bits);

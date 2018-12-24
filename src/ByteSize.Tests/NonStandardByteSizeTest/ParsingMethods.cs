@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Threading;
 using Xunit;
 
-namespace ByteSizeLib.Tests
+namespace ByteSize.Tests.NonStandardByteSizeTest
 {
     public class ParsingMethods
     {
@@ -12,9 +12,9 @@ namespace ByteSizeLib.Tests
         public void Parse()
         {
             string val = "1020KB";
-            var expected = ByteSize.FromKiloBytes(1020);
+            var expected = NonStandardByteSize.FromKiloBytes(1020);
 
-            var result = ByteSize.Parse(val);
+            var result = NonStandardByteSize.Parse(val);
 
             Assert.Equal(expected, result);
         }
@@ -23,10 +23,10 @@ namespace ByteSizeLib.Tests
         public void TryParse()
         {
             string val = "1020KB";
-            var expected = ByteSize.FromKiloBytes(1020);
+            var expected = NonStandardByteSize.FromKiloBytes(1020);
 
-            ByteSize resultByteSize;
-            var resultBool = ByteSize.TryParse(val, out resultByteSize);
+            NonStandardByteSize resultByteSize;
+            var resultBool = NonStandardByteSize.TryParse(val, out resultByteSize);
 
             Assert.True(resultBool);
             Assert.Equal(expected, resultByteSize);
@@ -36,9 +36,9 @@ namespace ByteSizeLib.Tests
         public void ParseDecimalMB()
         {
             string val = "100.5MB";
-            var expected = ByteSize.FromMegaBytes(100.5);
+            var expected = NonStandardByteSize.FromMegaBytes(100.5);
 
-            var result = ByteSize.Parse(val);
+            var result = NonStandardByteSize.Parse(val);
 
             Assert.Equal(expected, result);
         }
@@ -49,11 +49,11 @@ namespace ByteSizeLib.Tests
         {
             string val = "Unexpected Value";
 
-            ByteSize resultByteSize;
-            var resultBool = ByteSize.TryParse(val, out resultByteSize);
+            NonStandardByteSize resultByteSize;
+            var resultBool = NonStandardByteSize.TryParse(val, out resultByteSize);
 
             Assert.False(resultBool);
-            Assert.Equal(new ByteSize(), resultByteSize);
+            Assert.Equal(new NonStandardByteSize(), resultByteSize);
         }
 
         [Fact]
@@ -61,11 +61,11 @@ namespace ByteSizeLib.Tests
         {
             string val = "1000";
 
-            ByteSize resultByteSize;
-            var resultBool = ByteSize.TryParse(val, out resultByteSize);
+            NonStandardByteSize resultByteSize;
+            var resultBool = NonStandardByteSize.TryParse(val, out resultByteSize);
 
             Assert.False(resultBool);
-            Assert.Equal(new ByteSize(), resultByteSize);
+            Assert.Equal(new NonStandardByteSize(), resultByteSize);
         }
 
         [Fact]
@@ -73,20 +73,20 @@ namespace ByteSizeLib.Tests
         {
             string val = "KB";
 
-            ByteSize resultByteSize;
-            var resultBool = ByteSize.TryParse(val, out resultByteSize);
+            NonStandardByteSize resultByteSize;
+            var resultBool = NonStandardByteSize.TryParse(val, out resultByteSize);
 
             Assert.False(resultBool);
-            Assert.Equal(new ByteSize(), resultByteSize);
+            Assert.Equal(new NonStandardByteSize(), resultByteSize);
         }
 
         [Fact]
         public void TryParseWorksWithLotsOfSpaces()
         {
             string val = " 100 KB ";
-            var expected = ByteSize.FromKiloBytes(100);
+            var expected = NonStandardByteSize.FromKiloBytes(100);
 
-            var result = ByteSize.Parse(val);
+            var result = NonStandardByteSize.Parse(val);
 
             Assert.Equal(expected, result);
         }
@@ -98,7 +98,7 @@ namespace ByteSizeLib.Tests
 
             Assert.Throws<FormatException>(() =>
                 {
-                    ByteSize.Parse(val);
+                    NonStandardByteSize.Parse(val);
                 });
         }
 
@@ -111,7 +111,7 @@ namespace ByteSizeLib.Tests
 
             Assert.Throws<FormatException>(() =>
                 {
-                    ByteSize.Parse(badValue);
+                    NonStandardByteSize.Parse(badValue);
                 });
         }
 
@@ -120,7 +120,7 @@ namespace ByteSizeLib.Tests
         {
             Assert.Throws<ArgumentNullException>(() =>
                 {
-                    ByteSize.Parse(null);
+                    NonStandardByteSize.Parse(null);
                 });
         }
 
@@ -130,9 +130,9 @@ namespace ByteSizeLib.Tests
         public void ParseBits()
         {
             string val = "1b";
-            var expected = ByteSize.FromBits(1);
+            var expected = NonStandardByteSize.FromBits(1);
             
-            var result = ByteSize.Parse(val);
+            var result = NonStandardByteSize.Parse(val);
 
             Assert.Equal(expected, result);
         }
@@ -141,9 +141,9 @@ namespace ByteSizeLib.Tests
         public void ParseBytes()
         {
             string val = "1B";
-            var expected = ByteSize.FromBytes(1);
+            var expected = NonStandardByteSize.FromBytes(1);
 
-            var result = ByteSize.Parse(val);
+            var result = NonStandardByteSize.Parse(val);
 
             Assert.Equal(expected, result);
         }
@@ -152,9 +152,9 @@ namespace ByteSizeLib.Tests
         public void ParseKB()
         {
             string val = "1020KB";
-            var expected = ByteSize.FromKiloBytes(1020);
+            var expected = NonStandardByteSize.FromKiloBytes(1020);
 
-            var result = ByteSize.Parse(val);
+            var result = NonStandardByteSize.Parse(val);
 
             Assert.Equal(expected, result);
         }
@@ -163,9 +163,9 @@ namespace ByteSizeLib.Tests
         public void ParseMB()
         {
             string val = "1000MB";
-            var expected = ByteSize.FromMegaBytes(1000);
+            var expected = NonStandardByteSize.FromMegaBytes(1000);
 
-            var result = ByteSize.Parse(val);
+            var result = NonStandardByteSize.Parse(val);
 
             Assert.Equal(expected, result);
         }
@@ -174,9 +174,9 @@ namespace ByteSizeLib.Tests
         public void ParseGB()
         {
             string val = "805GB";
-            var expected = ByteSize.FromGigaBytes(805);
+            var expected = NonStandardByteSize.FromGigaBytes(805);
 
-            var result = ByteSize.Parse(val);
+            var result = NonStandardByteSize.Parse(val);
 
             Assert.Equal(expected, result);
         }
@@ -185,9 +185,9 @@ namespace ByteSizeLib.Tests
         public void ParseTB()
         {
             string val = "100TB";
-            var expected = ByteSize.FromTeraBytes(100);
+            var expected = NonStandardByteSize.FromTeraBytes(100);
 
-            var result = ByteSize.Parse(val);
+            var result = NonStandardByteSize.Parse(val);
 
             Assert.Equal(expected, result);
         }
@@ -196,9 +196,9 @@ namespace ByteSizeLib.Tests
         public void ParsePB()
         {
             string val = "100PB";
-            var expected = ByteSize.FromPetaBytes(100);
+            var expected = NonStandardByteSize.FromPetaBytes(100);
 
-            var result = ByteSize.Parse(val);
+            var result = NonStandardByteSize.Parse(val);
 
             Assert.Equal(expected, result);
         }
@@ -208,9 +208,9 @@ namespace ByteSizeLib.Tests
         {
             CultureInfo.CurrentCulture = new CultureInfo("de-DE");
             string val = "1.500,5 MB";
-            var expected = ByteSize.FromMegaBytes(1500.5);
+            var expected = NonStandardByteSize.FromMegaBytes(1500.5);
 
-            var result = ByteSize.Parse(val);
+            var result = NonStandardByteSize.Parse(val);
 
             Assert.Equal(expected, result);
             

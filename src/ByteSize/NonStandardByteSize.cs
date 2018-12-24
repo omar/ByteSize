@@ -1,22 +1,24 @@
 using System;
 using System.Globalization;
 
-namespace ByteSizeLib
+namespace ByteSize
 {
     /// <summary>
-    /// Represents a decimal byte size value (1 KB = 1000 B).
+    /// Represents a non-standard byte size value (1 KB = 1024 B).
+    /// Uses 2 letter abbreviations (KB, MB, GB, TB, PB).
+    /// Does NOT follow the IEC standard.
+    /// See <see cref="BinaryByteSize"/> and <see cref="DecimalByteSize"/>
     /// </summary>
-    public struct ByteSize : IComparable<ByteSize>, IEquatable<ByteSize>
+    public struct NonStandardByteSize : IComparable<NonStandardByteSize>, IEquatable<NonStandardByteSize>
     {
-        public static readonly ByteSize MinValue = ByteSize.FromBits(0);
-        public static readonly ByteSize MaxValue = ByteSize.FromBits(long.MaxValue);
+        public static readonly NonStandardByteSize MaxValue = NonStandardByteSize.FromBits(long.MaxValue);
 
         public const long BitsInByte = 8;
-        public const long BytesInKiloByte = 1024;
-        public const long BytesInMegaByte = 1048576;
-        public const long BytesInGigaByte = 1073741824;
-        public const long BytesInTeraByte = 1099511627776;
-        public const long BytesInPetaByte = 1125899906842624;
+        public const long BytesInKiloByte = 1_024;
+        public const long BytesInMegaByte = 1_048_576;
+        public const long BytesInGigaByte = 1_073_741_824;
+        public const long BytesInTeraByte = 1_099_511_627_776;
+        public const long BytesInPetaByte = 1_125_899_906_842_624;
 
         public const string BitSymbol = "b";
         public const string ByteSymbol = "B";
@@ -40,24 +42,24 @@ namespace ByteSizeLib
             {
                 // Absolute value is used to deal with negative values
                 if (Math.Abs(this.PetaBytes) >= 1)
-                    return ByteSize.PetaByteSymbol;
+                    return NonStandardByteSize.PetaByteSymbol;
 
                 if (Math.Abs(this.TeraBytes) >= 1)
-                    return ByteSize.TeraByteSymbol;
+                    return NonStandardByteSize.TeraByteSymbol;
 
                 if (Math.Abs(this.GigaBytes) >= 1)
-                    return ByteSize.GigaByteSymbol;
+                    return NonStandardByteSize.GigaByteSymbol;
 
                 if (Math.Abs(this.MegaBytes) >= 1)
-                    return ByteSize.MegaByteSymbol;
+                    return NonStandardByteSize.MegaByteSymbol;
 
                 if (Math.Abs(this.KiloBytes) >= 1)
-                    return ByteSize.KiloByteSymbol;
+                    return NonStandardByteSize.KiloByteSymbol;
 
                 if (Math.Abs(this.Bytes) >= 1)
-                    return ByteSize.ByteSymbol;
+                    return NonStandardByteSize.ByteSymbol;
 
-                return ByteSize.BitSymbol;
+                return NonStandardByteSize.BitSymbol;
             }
         }
 
@@ -88,7 +90,7 @@ namespace ByteSizeLib
             }
         }
 
-        public ByteSize(double bytes)
+        public NonStandardByteSize(double bytes)
             : this()
         {
             // Get ceiling because bits are whole units
@@ -97,46 +99,46 @@ namespace ByteSizeLib
             Bytes = bytes;
         }
 
-        public static ByteSize FromBits(long value)
+        public static NonStandardByteSize FromBits(long value)
         {
-            return new ByteSize(value / (double)BitsInByte);
+            return new NonStandardByteSize(value / (double)BitsInByte);
         }
 
-        public static ByteSize FromBytes(double value)
+        public static NonStandardByteSize FromBytes(double value)
         {
-            return new ByteSize(value);
+            return new NonStandardByteSize(value);
         }
 
-        public static ByteSize FromKiloBytes(double value)
+        public static NonStandardByteSize FromKiloBytes(double value)
         {
-            return new ByteSize(value * BytesInKiloByte);
+            return new NonStandardByteSize(value * BytesInKiloByte);
         }
 
-        public static ByteSize FromMegaBytes(double value)
+        public static NonStandardByteSize FromMegaBytes(double value)
         {
-            return new ByteSize(value * BytesInMegaByte);
+            return new NonStandardByteSize(value * BytesInMegaByte);
         }
 
-        public static ByteSize FromGigaBytes(double value)
+        public static NonStandardByteSize FromGigaBytes(double value)
         {
-            return new ByteSize(value * BytesInGigaByte);
+            return new NonStandardByteSize(value * BytesInGigaByte);
         }
 
-        public static ByteSize FromTeraBytes(double value)
+        public static NonStandardByteSize FromTeraBytes(double value)
         {
-            return new ByteSize(value * BytesInTeraByte);
+            return new NonStandardByteSize(value * BytesInTeraByte);
         }
 
-        public static ByteSize FromPetaBytes(double value)
+        public static NonStandardByteSize FromPetaBytes(double value)
         {
-            return new ByteSize(value * BytesInPetaByte);
+            return new NonStandardByteSize(value * BytesInPetaByte);
         }
 
         /// <summary>
-        /// Converts the value of the current ByteSize object to a string.
-        /// The metric prefix symbol (bit, byte, kilo, mega, giga, tera) used is
-        /// the largest metric prefix such that the corresponding value is greater
-        //  than or equal to one.
+        /// Converts the value of the current object to a string.
+        /// The prefix symbol (bit, byte, kilo, mega, giga, tera) used is the
+        /// largest prefix such that the corresponding value is greater than or
+        /// equal to one.
         /// </summary>
         public override string ToString()
         {
@@ -170,10 +172,10 @@ namespace ByteSizeLib
                 return output(this.KiloBytes);
 
             // Byte and Bit symbol must be case-sensitive
-            if (format.IndexOf(ByteSize.ByteSymbol) != -1)
+            if (format.IndexOf(NonStandardByteSize.ByteSymbol) != -1)
                 return output(this.Bytes);
 
-            if (format.IndexOf(ByteSize.BitSymbol) != -1)
+            if (format.IndexOf(NonStandardByteSize.BitSymbol) != -1)
                 return output(this.Bits);
 
             return string.Format("{0} {1}", this.LargestWholeNumberValue.ToString(format, provider), this.LargestWholeNumberSymbol);
@@ -184,16 +186,16 @@ namespace ByteSizeLib
             if (value == null)
                 return false;
 
-            ByteSize other;
-            if (value is ByteSize)
-                other = (ByteSize)value;
+            NonStandardByteSize other;
+            if (value is NonStandardByteSize)
+                other = (NonStandardByteSize)value;
             else
                 return false;
 
             return Equals(other);
         }
 
-        public bool Equals(ByteSize value)
+        public bool Equals(NonStandardByteSize value)
         {
             return this.Bits == value.Bits;
         }
@@ -203,121 +205,116 @@ namespace ByteSizeLib
             return this.Bits.GetHashCode();
         }
 
-        public int CompareTo(ByteSize other)
+        public int CompareTo(NonStandardByteSize other)
         {
             return this.Bits.CompareTo(other.Bits);
         }
 
-        public ByteSize Add(ByteSize bs)
+        public NonStandardByteSize Add(NonStandardByteSize bs)
         {
-            return new ByteSize(this.Bytes + bs.Bytes);
+            return new NonStandardByteSize(this.Bytes + bs.Bytes);
         }
 
-        public ByteSize AddBits(long value)
+        public NonStandardByteSize AddBits(long value)
         {
             return this + FromBits(value);
         }
 
-        public ByteSize AddBytes(double value)
+        public NonStandardByteSize AddBytes(double value)
         {
-            return this + ByteSize.FromBytes(value);
+            return this + NonStandardByteSize.FromBytes(value);
         }
 
-        public ByteSize AddKiloBytes(double value)
+        public NonStandardByteSize AddKiloBytes(double value)
         {
-            return this + ByteSize.FromKiloBytes(value);
+            return this + NonStandardByteSize.FromKiloBytes(value);
         }
 
-        public ByteSize AddMegaBytes(double value)
+        public NonStandardByteSize AddMegaBytes(double value)
         {
-            return this + ByteSize.FromMegaBytes(value);
+            return this + NonStandardByteSize.FromMegaBytes(value);
         }
 
-        public ByteSize AddGigaBytes(double value)
+        public NonStandardByteSize AddGigaBytes(double value)
         {
-            return this + ByteSize.FromGigaBytes(value);
+            return this + NonStandardByteSize.FromGigaBytes(value);
         }
 
-        public ByteSize AddTeraBytes(double value)
+        public NonStandardByteSize AddTeraBytes(double value)
         {
-            return this + ByteSize.FromTeraBytes(value);
+            return this + NonStandardByteSize.FromTeraBytes(value);
         }
 
-        public ByteSize AddPetaBytes(double value)
+        public NonStandardByteSize AddPetaBytes(double value)
         {
-            return this + ByteSize.FromPetaBytes(value);
+            return this + NonStandardByteSize.FromPetaBytes(value);
         }
 
-        public ByteSize Subtract(ByteSize bs)
+        public NonStandardByteSize Subtract(NonStandardByteSize bs)
         {
-            return new ByteSize(this.Bytes - bs.Bytes);
+            return new NonStandardByteSize(this.Bytes - bs.Bytes);
         }
 
-        public static ByteSize operator +(ByteSize b1, ByteSize b2)
+        public static NonStandardByteSize operator +(NonStandardByteSize b1, NonStandardByteSize b2)
         {
-            return new ByteSize(b1.Bytes + b2.Bytes);
+            return new NonStandardByteSize(b1.Bytes + b2.Bytes);
         }
 
-        public static ByteSize operator ++(ByteSize b)
+        public static NonStandardByteSize operator ++(NonStandardByteSize b)
         {
-            return new ByteSize(b.Bytes + 1);
+            return new NonStandardByteSize(b.Bytes + 1);
         }
 
-        public static ByteSize operator -(ByteSize b)
+        public static NonStandardByteSize operator -(NonStandardByteSize b)
         {
-            return new ByteSize(-b.Bytes);
+            return new NonStandardByteSize(-b.Bytes);
         }
 
-        public static ByteSize operator -(ByteSize b1, ByteSize b2)
+        public static NonStandardByteSize operator -(NonStandardByteSize b1, NonStandardByteSize b2)
         {
-            return new ByteSize(b1.Bytes - b2.Bytes);
+            return new NonStandardByteSize(b1.Bytes - b2.Bytes);
         }
 
-        public static ByteSize operator --(ByteSize b)
+        public static NonStandardByteSize operator --(NonStandardByteSize b)
         {
-            return new ByteSize(b.Bytes - 1);
+            return new NonStandardByteSize(b.Bytes - 1);
         }
 
-        public static bool operator ==(ByteSize b1, ByteSize b2)
+        public static bool operator ==(NonStandardByteSize b1, NonStandardByteSize b2)
         {
             return b1.Bits == b2.Bits;
         }
 
-        public static bool operator !=(ByteSize b1, ByteSize b2)
+        public static bool operator !=(NonStandardByteSize b1, NonStandardByteSize b2)
         {
             return b1.Bits != b2.Bits;
         }
 
-        public static bool operator <(ByteSize b1, ByteSize b2)
+        public static bool operator <(NonStandardByteSize b1, NonStandardByteSize b2)
         {
             return b1.Bits < b2.Bits;
         }
 
-        public static bool operator <=(ByteSize b1, ByteSize b2)
+        public static bool operator <=(NonStandardByteSize b1, NonStandardByteSize b2)
         {
             return b1.Bits <= b2.Bits;
         }
 
-        public static bool operator >(ByteSize b1, ByteSize b2)
+        public static bool operator >(NonStandardByteSize b1, NonStandardByteSize b2)
         {
             return b1.Bits > b2.Bits;
         }
 
-        public static bool operator >=(ByteSize b1, ByteSize b2)
+        public static bool operator >=(NonStandardByteSize b1, NonStandardByteSize b2)
         {
             return b1.Bits >= b2.Bits;
         }
 
-        public static ByteSize Parse(string s)
+        public static NonStandardByteSize Parse(string s)
         {
             // Arg checking
-#if NET35
-            if (string.IsNullOrEmpty(s) || s.Trim() == "")
-                throw new ArgumentNullException("s", "String is null or whitespace");
-#else
             if (string.IsNullOrWhiteSpace(s))
                 throw new ArgumentNullException("s", "String is null or whitespace");
-#endif
 
             // Get the index of the first non-digit character
             s = s.TrimStart(); // Protect against leading spaces
@@ -361,29 +358,22 @@ namespace ByteSizeLib
 
                 case "B":
                     return FromBytes(number);
+            }
 
-                case "KB":
-                case "kB":
+            switch (sizePart.ToLowerInvariant())
+            {
                 case "kb":
                     return FromKiloBytes(number);
 
-                case "MB":
-                case "mB":
                 case "mb":
                     return FromMegaBytes(number);
 
-                case "GB":
-                case "gB":
                 case "gb":
                     return FromGigaBytes(number);
 
-                case "TB":
-                case "tB":
                 case "tb":
                     return FromTeraBytes(number);
 
-                case "PB":
-                case "pB":
                 case "pb":
                     return FromPetaBytes(number);
                 
@@ -392,7 +382,7 @@ namespace ByteSizeLib
             }
         }
 
-        public static bool TryParse(string s, out ByteSize result)
+        public static bool TryParse(string s, out NonStandardByteSize result)
         {
             try 
             {
@@ -401,7 +391,7 @@ namespace ByteSizeLib
             }
             catch
             {
-                result = new ByteSize();
+                result = new NonStandardByteSize();
                 return false;
             }
         }
