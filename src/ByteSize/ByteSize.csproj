@@ -1,6 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <Title>ByteSize</Title>
     <Description>ByteSize is a utility class that makes byte size representation in code easier by removing ambiguity of the value being represented. ByteSize is to bytes what System.TimeSpan is to time.</Description>
     <Copyright>Copyright © Omar Khudeira 2013-2018</Copyright>
     <AssemblyTitle>ByteSize</AssemblyTitle>
@@ -26,7 +27,7 @@ New Features:
 
 View all release notes at https://github.com/omar/ByteSize/releases.</PackageReleaseNotes>
     <PackageProjectUrl>https://github.com/omar/ByteSize</PackageProjectUrl>
-    <License>https://raw.githubusercontent.com/omar/ByteSize/master/LICENSE</License>
+    <LicenseUrl>https://raw.githubusercontent.com/omar/ByteSize/master/LICENSE</LicenseUrl>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/omar/ByteSize</RepositoryUrl>
     <NeutralLanguage>en</NeutralLanguage>
