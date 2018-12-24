@@ -11,6 +11,7 @@ namespace ByteSize
     /// </summary>
     public struct NonStandardByteSize : IComparable<NonStandardByteSize>, IEquatable<NonStandardByteSize>
     {
+        public static readonly NonStandardByteSize MinValue = NonStandardByteSize.FromBits(long.MinValue);
         public static readonly NonStandardByteSize MaxValue = NonStandardByteSize.FromBits(long.MaxValue);
 
         public const long BitsInByte = 8;

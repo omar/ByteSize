@@ -10,6 +10,7 @@ namespace ByteSize
     /// </summary>
     public struct DecimalByteSize : IComparable<DecimalByteSize>, IEquatable<DecimalByteSize>
     {
+        public static readonly DecimalByteSize MinValue = DecimalByteSize.FromBits(long.MinValue);
         public static readonly DecimalByteSize MaxValue = DecimalByteSize.FromBits(long.MaxValue);
 
         public const long BitsInByte = 8;
