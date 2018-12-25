@@ -22,8 +22,8 @@
 
 New Features:
 
-- `DecimalByteSize` object: `1 KB = 1000 B` with abbreivations `KB`, `MB`, etc.
-- `BinaryByteSize` object: `1 KiB = 1024 B` with abbreivations `KiB`, `MiB`, etc.
+- `DecimalByteSize` object: `1 KB = 1000 B` with abbreviations `KB`, `MB`, etc.
+- `BinaryByteSize` object: `1 KiB = 1024 B` with abbreviations `KiB`, `MiB`, etc.
 
 View all release notes at https://github.com/omar/ByteSize/releases.</PackageReleaseNotes>
     <PackageProjectUrl>https://github.com/omar/ByteSize</PackageProjectUrl>
