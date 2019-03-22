@@ -1,12 +1,12 @@
 build:
 	dotnet restore
-	dotnet build src/ByteSizeLib
+	dotnet build src
 
 test:
 	dotnet restore
-	dotnet build src/ByteSizeLib
-	dotnet test src/ByteSizeLib.Tests
+	dotnet build src
+	dotnet test src
 
 package:
 	dotnet restore
-	dotnet pack src/ByteSizeLib -c Release  -o pack
+	dotnet pack src/ByteSizeLib -c Release -o pack
