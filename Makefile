@@ -4,5 +4,5 @@ build:
 test:
 	dotnet test src
 
-package:
+pack:
 	dotnet pack src/ByteSizeLib -c Release -o pack
