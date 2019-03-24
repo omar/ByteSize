@@ -1,6 +1,7 @@
 language: csharp
 mono: 5.18.0
 dotnet: 2.1.500
-script:
+solution: src/ByteSizeLib.sln
+script: 
   - make test
   - make pack
