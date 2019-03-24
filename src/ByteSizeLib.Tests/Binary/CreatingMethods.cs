@@ -1,6 +1,6 @@
 ﻿using Xunit;
 
-namespace ByteSize.Tests.BinaryByteSizeTests
+namespace ByteSizeLib.Tests.BinaryByteSizeTests
 {
     public class CreatingMethods
     {
@@ -11,7 +11,7 @@ namespace ByteSize.Tests.BinaryByteSizeTests
             double bytes = 1125899906842624;
 
             // Act
-            var result = new BinaryByteSize(bytes);
+            var result = new ByteSize(bytes);
 
             // Assert
             Assert.Equal(bytes * 8, result.Bits);
@@ -24,41 +24,13 @@ namespace ByteSize.Tests.BinaryByteSizeTests
         }
 
         [Fact]
-        public void FromBitsMethod()
-        {
-            // Arrange
-            long value = 8;
-
-            // Act
-            var result = BinaryByteSize.FromBits(value);
-
-            // Assert
-            Assert.Equal(8, result.Bits);
-            Assert.Equal(1, result.Bytes);
-        }
-
-        [Fact]
-        public void FromBytesMethod()
-        {
-            // Arrange
-            double value = 1.5;
-
-            // Act
-            var result = BinaryByteSize.FromBytes(value);
-
-            // Assert
-            Assert.Equal(12, result.Bits);
-            Assert.Equal(1.5, result.Bytes);
-        }
-
-        [Fact]
         public void FromKibiBytesMethod()
         {
             // Arrange
             double value = 1.5;
 
             // Act
-            var result = BinaryByteSize.FromKibiBytes(value);
+            var result = ByteSize.FromKibiBytes(value);
 
             // Assert
             Assert.Equal(1536, result.Bytes);
@@ -72,7 +44,7 @@ namespace ByteSize.Tests.BinaryByteSizeTests
             double value = 1.5;
 
             // Act
-            var result = BinaryByteSize.FromMebiBytes(value);
+            var result = ByteSize.FromMebiBytes(value);
 
             // Assert
             Assert.Equal(1572864, result.Bytes);
@@ -86,7 +58,7 @@ namespace ByteSize.Tests.BinaryByteSizeTests
             double value = 1.5;
 
             // Act
-            var result = BinaryByteSize.FromGibiBytes(value);
+            var result = ByteSize.FromGibiBytes(value);
 
             // Assert
             Assert.Equal(1610612736, result.Bytes);
@@ -100,7 +72,7 @@ namespace ByteSize.Tests.BinaryByteSizeTests
             double value = 1.5;
 
             // Act
-            var result = BinaryByteSize.FromTebiBytes(value);
+            var result = ByteSize.FromTebiBytes(value);
 
             // Assert
             Assert.Equal(1649267441664, result.Bytes);
@@ -114,7 +86,7 @@ namespace ByteSize.Tests.BinaryByteSizeTests
             double value = 1.5;
 
             // Act
-            var result = BinaryByteSize.FromPebiBytes(value);
+            var result = ByteSize.FromPebiBytes(value);
 
             // Assert
             Assert.Equal(1688849860263936, result.Bytes);

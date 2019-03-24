@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("FAE04EC0-301F-11D3-BF4B-00C04F79EFBC") = "ByteSizeLib", "ByteSizeLib\ByteSizeLib.csproj", "{7B49A533-D1CE-4826-926B-10187E7C45F6}"
 EndProject
-Project("FAE04EC0-301F-11D3-BF4B-00C04F79EFBC") = "ByteSize.Tests", "ByteSize.Tests\ByteSize.Tests.csproj", "{C676A686-F1B5-48CB-90B3-B1F78FA42691}"
+Project("FAE04EC0-301F-11D3-BF4B-00C04F79EFBC") = "ByteSizeLib.Tests", "ByteSizeLib.Tests\ByteSizeLib.Tests.csproj", "{C676A686-F1B5-48CB-90B3-B1F78FA42691}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

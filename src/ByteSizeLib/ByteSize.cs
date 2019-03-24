@@ -17,34 +17,61 @@ namespace ByteSizeLib
         public long Bits { get; private set; }
         public double Bytes { get; private set; }
 
-        public string LargestWholeNumberSymbol
+        public string LargestWholeNumberBinarySymbol
         {
             get
             {
                 // Absolute value is used to deal with negative values
                 if (Math.Abs(this.PebiBytes) >= 1)
-                    return ByteSize.PebiByteSymbol;
+                    return PebiByteSymbol;
 
                 if (Math.Abs(this.TebiBytes) >= 1)
-                    return ByteSize.TebiByteSymbol;
+                    return TebiByteSymbol;
 
                 if (Math.Abs(this.GibiBytes) >= 1)
-                    return ByteSize.GibiByteSymbol;
+                    return GibiByteSymbol;
 
                 if (Math.Abs(this.MebiBytes) >= 1)
-                    return ByteSize.MebiByteSymbol;
+                    return MebiByteSymbol;
 
                 if (Math.Abs(this.KibiBytes) >= 1)
-                    return ByteSize.KibiByteSymbol;
+                    return KibiByteSymbol;
 
                 if (Math.Abs(this.Bytes) >= 1)
-                    return ByteSize.ByteSymbol;
+                    return ByteSymbol;
 
-                return ByteSize.BitSymbol;
+                return BitSymbol;
             }
         }
 
-        public double LargestWholeNumberValue
+        public string LargestWholeNumberSymbol
+        {
+            get
+            {
+                // Absolute value is used to deal with negative values
+                if (Math.Abs(this.PetaBytes) >= 1)
+                    return PetaByteSymbol;
+
+                if (Math.Abs(this.TeraBytes) >= 1)
+                    return TeraByteSymbol;
+
+                if (Math.Abs(this.GigaBytes) >= 1)
+                    return GigaByteSymbol;
+
+                if (Math.Abs(this.MegaBytes) >= 1)
+                    return MegaByteSymbol;
+
+                if (Math.Abs(this.KiloBytes) >= 1)
+                    return KiloByteSymbol;
+
+                if (Math.Abs(this.Bytes) >= 1)
+                    return ByteSymbol;
+
+                return BitSymbol;
+            }
+        }
+
+        public double LargestWholeNumberBinaryValue
         {
             get
             {
@@ -63,6 +90,33 @@ namespace ByteSizeLib
 
                 if (Math.Abs(this.KibiBytes) >= 1)
                     return this.KibiBytes;
+
+                if (Math.Abs(this.Bytes) >= 1)
+                    return this.Bytes;
+
+                return this.Bits;
+            }
+        }
+
+        public double LargestWholeNumberValue
+        {
+            get
+            {
+                // Absolute value is used to deal with negative values
+                if (Math.Abs(this.PetaBytes) >= 1)
+                    return this.PetaBytes;
+
+                if (Math.Abs(this.TeraBytes) >= 1)
+                    return this.TeraBytes;
+
+                if (Math.Abs(this.GigaBytes) >= 1)
+                    return this.GigaBytes;
+
+                if (Math.Abs(this.MegaBytes) >= 1)
+                    return this.MegaBytes;
+
+                if (Math.Abs(this.KiloBytes) >= 1)
+                    return this.KiloBytes;
 
                 if (Math.Abs(this.Bytes) >= 1)
                     return this.Bytes;
@@ -106,7 +160,7 @@ namespace ByteSizeLib
             return this.ToString(format, CultureInfo.CurrentCulture);
         }
 
-        public string ToString(string format, IFormatProvider provider)
+        public string ToString(string format, IFormatProvider provider, bool useBinaryByte = false)
         {
             if (!format.Contains("#") && !format.Contains("0"))
                 format = "0.## " + format;
@@ -116,6 +170,7 @@ namespace ByteSizeLib
             Func<string, bool> has = s => format.IndexOf(s, StringComparison.CurrentCultureIgnoreCase) != -1;
             Func<double, string> output = n => n.ToString(format, provider);
 
+            // Binary
             if (has("PiB"))
                 return output(this.PebiBytes);
             if (has("TiB"))
@@ -127,14 +182,33 @@ namespace ByteSizeLib
             if (has("KiB"))
                 return output(this.KibiBytes);
 
+            // Decimal
+            if (has("PB"))
+                return output(this.PetaBytes);
+            if (has("TB"))
+                return output(this.TeraBytes);
+            if (has("GB"))
+                return output(this.GigaBytes);
+            if (has("MB"))
+                return output(this.MegaBytes);
+            if (has("KB"))
+                return output(this.KiloBytes);
+
             // Byte and Bit symbol must be case-sensitive
             if (format.IndexOf(ByteSize.ByteSymbol) != -1)
                 return output(this.Bytes);
 
             if (format.IndexOf(ByteSize.BitSymbol) != -1)
                 return output(this.Bits);
-
-            return string.Format("{0} {1}", this.LargestWholeNumberValue.ToString(format, provider), this.LargestWholeNumberSymbol);
+            
+            if (useBinaryByte)
+            {
+                return string.Format("{0} {1}", this.LargestWholeNumberBinaryValue.ToString(format, provider), this.LargestWholeNumberBinarySymbol);
+            }
+            else
+            {
+                return string.Format("{0} {1}", this.LargestWholeNumberValue.ToString(format, provider), this.LargestWholeNumberSymbol);
+            }
         }
 
         public override bool Equals(object value)
@@ -293,6 +367,7 @@ namespace ByteSizeLib
 
             switch (sizePart.ToLowerInvariant())
             {
+                // Binary
                 case "kib":
                     return FromKibiBytes(number);
 
@@ -307,6 +382,22 @@ namespace ByteSizeLib
 
                 case "pib":
                     return FromPebiBytes(number);
+
+                // Decimal
+                case "kb":
+                    return FromKiloBytes(number);
+
+                case "mb":
+                    return FromMegaBytes(number);
+
+                case "gb":
+                    return FromGigaBytes(number);
+
+                case "tb":
+                    return FromTeraBytes(number);
+
+                case "pb":
+                    return FromPetaBytes(number);
                 
                 default:
                     throw new FormatException($"Bytes of magnitude '{ sizePart }' is not supported.");

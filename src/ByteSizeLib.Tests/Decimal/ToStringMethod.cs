@@ -2,15 +2,15 @@
 using System.Threading;
 using Xunit;
 
-namespace ByteSize.Tests.NonStandardByteSizeTest
+namespace ByteSizeLib.Tests.Decimal
 {
     public class ToStringMethod
     {
         [Fact]
-        public void ReturnsLargestMetricSuffix()
+        public void ReturnsLargestSuffix()
         {
             // Arrange
-            var b = NonStandardByteSize.FromKiloBytes(10.5);
+            var b = ByteSize.FromKiloBytes(10.5);
 
             // Act
             var result = b.ToString();
@@ -23,7 +23,7 @@ namespace ByteSize.Tests.NonStandardByteSizeTest
         public void ReturnsDefaultNumberFormat()
         {
             // Arrange
-            var b = NonStandardByteSize.FromKiloBytes(10.5);
+            var b = ByteSize.FromKiloBytes(10.5);
 
             // Act
             var result = b.ToString("KB");
@@ -36,7 +36,7 @@ namespace ByteSize.Tests.NonStandardByteSizeTest
         public void ReturnsProvidedNumberFormat()
         {
             // Arrange
-            var b = NonStandardByteSize.FromKiloBytes(10.1234);
+            var b = ByteSize.FromKiloBytes(10.1234);
 
             // Act
             var result = b.ToString("#.#### KB");
@@ -49,7 +49,7 @@ namespace ByteSize.Tests.NonStandardByteSizeTest
         public void ReturnsBits()
         {
             // Arrange
-            var b = NonStandardByteSize.FromBits(10);
+            var b = ByteSize.FromBits(10);
 
             // Act
             var result = b.ToString("##.#### b");
@@ -62,7 +62,7 @@ namespace ByteSize.Tests.NonStandardByteSizeTest
         public void ReturnsBytes()
         {
             // Arrange
-            var b = NonStandardByteSize.FromBytes(10);
+            var b = ByteSize.FromBytes(10);
 
             // Act
             var result = b.ToString("##.#### B");
@@ -75,7 +75,7 @@ namespace ByteSize.Tests.NonStandardByteSizeTest
         public void ReturnsKiloBytes()
         {
             // Arrange
-            var b = NonStandardByteSize.FromKiloBytes(10);
+            var b = ByteSize.FromKiloBytes(10);
 
             // Act
             var result = b.ToString("##.#### KB");
@@ -88,7 +88,7 @@ namespace ByteSize.Tests.NonStandardByteSizeTest
         public void ReturnsMegaBytes()
         {
             // Arrange
-            var b = NonStandardByteSize.FromMegaBytes(10);
+            var b = ByteSize.FromMegaBytes(10);
 
             // Act
             var result = b.ToString("##.#### MB");
@@ -101,7 +101,7 @@ namespace ByteSize.Tests.NonStandardByteSizeTest
         public void ReturnsGigaBytes()
         {
             // Arrange
-            var b = NonStandardByteSize.FromGigaBytes(10);
+            var b = ByteSize.FromGigaBytes(10);
 
             // Act
             var result = b.ToString("##.#### GB");
@@ -114,7 +114,7 @@ namespace ByteSize.Tests.NonStandardByteSizeTest
         public void ReturnsTeraBytes()
         {
             // Arrange
-            var b = NonStandardByteSize.FromTeraBytes(10);
+            var b = ByteSize.FromTeraBytes(10);
 
             // Act
             var result = b.ToString("##.#### TB");
@@ -127,7 +127,7 @@ namespace ByteSize.Tests.NonStandardByteSizeTest
         public void ReturnsPetaBytes()
         {
             // Arrange
-            var b = NonStandardByteSize.FromPetaBytes(10);
+            var b = ByteSize.FromPetaBytes(10);
 
             // Act
             var result = b.ToString("##.#### PB");
@@ -140,7 +140,7 @@ namespace ByteSize.Tests.NonStandardByteSizeTest
         public void ReturnsSelectedFormat()
         {
             // Arrange
-            var b = NonStandardByteSize.FromTeraBytes(10);
+            var b = ByteSize.FromTeraBytes(10);
 
             // Act
             var result = b.ToString("0.0 TB");
@@ -150,39 +150,39 @@ namespace ByteSize.Tests.NonStandardByteSizeTest
         }
 
         [Fact]
-        public void ReturnsLargestMetricPrefixLargerThanZero()
+        public void ReturnsLargestPrefixLargerThanZero()
         {
             // Arrange
-            var b = NonStandardByteSize.FromMegaBytes(.5);
+            var b = ByteSize.FromMegaBytes(.5);
 
             // Act
             var result = b.ToString("#.#");
 
             // Assert
-            Assert.Equal("512 KB", result);
+            Assert.Equal("500 KB", result);
         }
 
         [Fact]
-        public void ReturnsLargestMetricPrefixLargerThanZeroForNegativeValues()
+        public void ReturnsLargestPrefixLargerThanZeroForNegativeValues()
         {
             // Arrange
-            var b = NonStandardByteSize.FromMegaBytes(-.5);
+            var b = ByteSize.FromMegaBytes(-.5);
 
             // Act
             var result = b.ToString("#.#");
 
             // Assert
-            Assert.Equal("-512 KB", result);
+            Assert.Equal("-500 KB", result);
         }
 
         [Fact]
-        public void ReturnsLargestMetricSuffixUsingCurrentCulture()
+        public void ReturnsLargestSuffixUsingCurrentCulture()
         {
             var originalCulture = CultureInfo.CurrentCulture;
             CultureInfo.CurrentCulture = new CultureInfo("fr-FR");
 
             // Arrange
-            var b = NonStandardByteSize.FromKiloBytes(10000);
+            var b = ByteSize.FromKiloBytes(9770);
 
             // Act
             var result = b.ToString();
@@ -194,10 +194,10 @@ namespace ByteSize.Tests.NonStandardByteSizeTest
         }
 
         [Fact]
-        public void ReturnsLargestMetricSuffixUsingSpecifiedCulture()
+        public void ReturnsLargestSuffixUsingSpecifiedCulture()
         {
             // Arrange
-            var b = NonStandardByteSize.FromKiloBytes(10000);
+            var b = ByteSize.FromKiloBytes(9800);
 
             // Act
             var result = b.ToString("#.#", new CultureInfo("fr-FR"));
@@ -210,7 +210,7 @@ namespace ByteSize.Tests.NonStandardByteSizeTest
 		public void ReturnsCultureSpecificFormat()
 		{
 			// Arrange
-			var b = NonStandardByteSize.FromKiloBytes(10.5);
+			var b = ByteSize.FromKiloBytes(10.5);
 
 			// Act
 			var deCulture = new CultureInfo("de-DE");
@@ -224,7 +224,7 @@ namespace ByteSize.Tests.NonStandardByteSizeTest
 		public void ReturnsZeroBits()
 		{
 			// Arrange
-			var b = NonStandardByteSize.FromBits(0);
+			var b = ByteSize.FromBits(0);
 
 			// Act
 			var result = b.ToString();

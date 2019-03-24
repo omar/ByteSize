@@ -2,15 +2,15 @@
 using System.Threading;
 using Xunit;
 
-namespace ByteSize.Tests.DecimalByteSizeTest
+namespace ByteSizeLib.Tests
 {
     public class ToStringMethod
     {
         [Fact]
-        public void ReturnsLargestMetricSuffix()
+        public void ReturnsLargestSuffix()
         {
             // Arrange
-            var b = DecimalByteSize.FromKiloBytes(10.5);
+            var b = ByteSize.FromKiloBytes(10.5);
 
             // Act
             var result = b.ToString();
@@ -23,7 +23,7 @@ namespace ByteSize.Tests.DecimalByteSizeTest
         public void ReturnsDefaultNumberFormat()
         {
             // Arrange
-            var b = DecimalByteSize.FromKiloBytes(10.5);
+            var b = ByteSize.FromKiloBytes(10.5);
 
             // Act
             var result = b.ToString("KB");
@@ -36,7 +36,7 @@ namespace ByteSize.Tests.DecimalByteSizeTest
         public void ReturnsProvidedNumberFormat()
         {
             // Arrange
-            var b = DecimalByteSize.FromKiloBytes(10.1234);
+            var b = ByteSize.FromKiloBytes(10.1234);
 
             // Act
             var result = b.ToString("#.#### KB");
@@ -49,7 +49,7 @@ namespace ByteSize.Tests.DecimalByteSizeTest
         public void ReturnsBits()
         {
             // Arrange
-            var b = DecimalByteSize.FromBits(10);
+            var b = ByteSize.FromBits(10);
 
             // Act
             var result = b.ToString("##.#### b");
@@ -62,7 +62,7 @@ namespace ByteSize.Tests.DecimalByteSizeTest
         public void ReturnsBytes()
         {
             // Arrange
-            var b = DecimalByteSize.FromBytes(10);
+            var b = ByteSize.FromBytes(10);
 
             // Act
             var result = b.ToString("##.#### B");
@@ -72,75 +72,10 @@ namespace ByteSize.Tests.DecimalByteSizeTest
         }
 
         [Fact]
-        public void ReturnsKiloBytes()
-        {
-            // Arrange
-            var b = DecimalByteSize.FromKiloBytes(10);
-
-            // Act
-            var result = b.ToString("##.#### KB");
-
-            // Assert
-            Assert.Equal("10 KB", result);
-        }
-
-        [Fact]
-        public void ReturnsMegaBytes()
-        {
-            // Arrange
-            var b = DecimalByteSize.FromMegaBytes(10);
-
-            // Act
-            var result = b.ToString("##.#### MB");
-
-            // Assert
-            Assert.Equal("10 MB", result);
-        }
-
-        [Fact]
-        public void ReturnsGigaBytes()
-        {
-            // Arrange
-            var b = DecimalByteSize.FromGigaBytes(10);
-
-            // Act
-            var result = b.ToString("##.#### GB");
-
-            // Assert
-            Assert.Equal("10 GB", result);
-        }
-
-        [Fact]
-        public void ReturnsTeraBytes()
-        {
-            // Arrange
-            var b = DecimalByteSize.FromTeraBytes(10);
-
-            // Act
-            var result = b.ToString("##.#### TB");
-
-            // Assert
-            Assert.Equal("10 TB", result);
-        }
-
-        [Fact]
-        public void ReturnsPetaBytes()
-        {
-            // Arrange
-            var b = DecimalByteSize.FromPetaBytes(10);
-
-            // Act
-            var result = b.ToString("##.#### PB");
-
-            // Assert
-            Assert.Equal("10 PB", result);
-        }
-
-        [Fact]
         public void ReturnsSelectedFormat()
         {
             // Arrange
-            var b = DecimalByteSize.FromTeraBytes(10);
+            var b = ByteSize.FromTeraBytes(10);
 
             // Act
             var result = b.ToString("0.0 TB");
@@ -150,10 +85,10 @@ namespace ByteSize.Tests.DecimalByteSizeTest
         }
 
         [Fact]
-        public void ReturnsLargestMetricPrefixLargerThanZero()
+        public void ReturnsLargestPrefixLargerThanZero()
         {
             // Arrange
-            var b = DecimalByteSize.FromMegaBytes(.5);
+            var b = ByteSize.FromMegaBytes(.5);
 
             // Act
             var result = b.ToString("#.#");
@@ -163,10 +98,10 @@ namespace ByteSize.Tests.DecimalByteSizeTest
         }
 
         [Fact]
-        public void ReturnsLargestMetricPrefixLargerThanZeroForNegativeValues()
+        public void ReturnsLargestPrefixLargerThanZeroForNegativeValues()
         {
             // Arrange
-            var b = DecimalByteSize.FromMegaBytes(-.5);
+            var b = ByteSize.FromMegaBytes(-.5);
 
             // Act
             var result = b.ToString("#.#");
@@ -176,13 +111,13 @@ namespace ByteSize.Tests.DecimalByteSizeTest
         }
 
         [Fact]
-        public void ReturnsLargestMetricSuffixUsingCurrentCulture()
+        public void ReturnsLargestSuffixUsingCurrentCulture()
         {
             var originalCulture = CultureInfo.CurrentCulture;
             CultureInfo.CurrentCulture = new CultureInfo("fr-FR");
 
             // Arrange
-            var b = DecimalByteSize.FromKiloBytes(9770);
+            var b = ByteSize.FromKiloBytes(9770);
 
             // Act
             var result = b.ToString();
@@ -194,10 +129,10 @@ namespace ByteSize.Tests.DecimalByteSizeTest
         }
 
         [Fact]
-        public void ReturnsLargestMetricSuffixUsingSpecifiedCulture()
+        public void ReturnsLargestSuffixUsingSpecifiedCulture()
         {
             // Arrange
-            var b = DecimalByteSize.FromKiloBytes(9800);
+            var b = ByteSize.FromKiloBytes(9800);
 
             // Act
             var result = b.ToString("#.#", new CultureInfo("fr-FR"));
@@ -210,7 +145,7 @@ namespace ByteSize.Tests.DecimalByteSizeTest
 		public void ReturnsCultureSpecificFormat()
 		{
 			// Arrange
-			var b = DecimalByteSize.FromKiloBytes(10.5);
+			var b = ByteSize.FromKiloBytes(10.5);
 
 			// Act
 			var deCulture = new CultureInfo("de-DE");
@@ -224,7 +159,7 @@ namespace ByteSize.Tests.DecimalByteSizeTest
 		public void ReturnsZeroBits()
 		{
 			// Arrange
-			var b = DecimalByteSize.FromBits(0);
+			var b = ByteSize.FromBits(0);
 
 			// Act
 			var result = b.ToString();

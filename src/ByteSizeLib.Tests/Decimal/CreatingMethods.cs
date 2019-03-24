@@ -1,6 +1,6 @@
 ﻿using Xunit;
 
-namespace ByteSize.Tests.DecimalByteSizeTest
+namespace ByteSizeLib.Tests.Decimal
 {
     public class CreatingMethods
     {
@@ -11,7 +11,7 @@ namespace ByteSize.Tests.DecimalByteSizeTest
             double bytes = 1000000000000000;
 
             // Act
-            var result = new DecimalByteSize(bytes);
+            var result = new ByteSize(bytes);
 
             // Assert
             Assert.Equal(bytes * 8, result.Bits);
@@ -24,41 +24,13 @@ namespace ByteSize.Tests.DecimalByteSizeTest
         }
 
         [Fact]
-        public void FromBitsMethod()
-        {
-            // Arrange
-            long value = 8;
-
-            // Act
-            var result = DecimalByteSize.FromBits(value);
-
-            // Assert
-            Assert.Equal(8, result.Bits);
-            Assert.Equal(1, result.Bytes);
-        }
-
-        [Fact]
-        public void FromBytesMethod()
-        {
-            // Arrange
-            double value = 1.5;
-
-            // Act
-            var result = DecimalByteSize.FromBytes(value);
-
-            // Assert
-            Assert.Equal(12, result.Bits);
-            Assert.Equal(1.5, result.Bytes);
-        }
-
-        [Fact]
         public void FromKiloBytesMethod()
         {
             // Arrange
             double value = 1.5;
 
             // Act
-            var result = DecimalByteSize.FromKiloBytes(value);
+            var result = ByteSize.FromKiloBytes(value);
 
             // Assert
             Assert.Equal(1500, result.Bytes);
@@ -72,7 +44,7 @@ namespace ByteSize.Tests.DecimalByteSizeTest
             double value = 1.5;
 
             // Act
-            var result = DecimalByteSize.FromMegaBytes(value);
+            var result = ByteSize.FromMegaBytes(value);
 
             // Assert
             Assert.Equal(1500000, result.Bytes);
@@ -86,7 +58,7 @@ namespace ByteSize.Tests.DecimalByteSizeTest
             double value = 1.5;
 
             // Act
-            var result = DecimalByteSize.FromGigaBytes(value);
+            var result = ByteSize.FromGigaBytes(value);
 
             // Assert
             Assert.Equal(1500000000, result.Bytes);
@@ -100,7 +72,7 @@ namespace ByteSize.Tests.DecimalByteSizeTest
             double value = 1.5;
 
             // Act
-            var result = DecimalByteSize.FromTeraBytes(value);
+            var result = ByteSize.FromTeraBytes(value);
 
             // Assert
             Assert.Equal(1500000000000, result.Bytes);
@@ -114,7 +86,7 @@ namespace ByteSize.Tests.DecimalByteSizeTest
             double value = 1.5;
 
             // Act
-            var result = DecimalByteSize.FromPetaBytes(value);
+            var result = ByteSize.FromPetaBytes(value);
 
             // Assert
             Assert.Equal(1500000000000000, result.Bytes);
