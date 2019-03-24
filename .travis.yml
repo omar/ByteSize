@@ -1,5 +1,5 @@
 language: csharp
-mono: none
+mono: 5.18.0
 dotnet: 2.1.500
 script:
   - make test
