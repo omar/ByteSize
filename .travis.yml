@@ -1,7 +1,10 @@
 language: csharp
 mono: 5.18.0
 dotnet: 2.1.500
-solution: src/ByteSizeLib.sln
+matrix:
+  allow_failures:
+    # travis failure to install mono (ref https://github.com/travis-ci/travis-ci/issues/9171)
+    - mono: latest
 script: 
   - make test
   - make pack
