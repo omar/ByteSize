@@ -1,10 +1,17 @@
+# Adapted from https://github.com/fsprojects/Paket/blob/master/.travis.yml
 language: csharp
+dist: trusty
+
+sudo: false
+
 mono: 5.18.0
 dotnet: 2.1.500
+
 matrix:
   allow_failures:
     # travis failure to install mono (ref https://github.com/travis-ci/travis-ci/issues/9171)
-    - mono: latest
+    - mono: 5.18.0
+
 script: 
   - make test
   - make pack
