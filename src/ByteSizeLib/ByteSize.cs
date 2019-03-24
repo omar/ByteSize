@@ -1,40 +1,21 @@
 using System;
 using System.Globalization;
 
-namespace ByteSize
+namespace ByteSizeLib
 {
     /// <summary>
-    /// Represents a binary byte size value (1 KiB = 1024 B).
-    /// Uses 3 letter abbreviations (KiB, MiB, GiB, TiB, PiB).
-    /// Follows the IEC standard.
+    /// Represents a byte size value with support for decimal (KiloByte) and
+    /// binary values (KibiByte).
     /// </summary>
-    public struct BinaryByteSize : IComparable<BinaryByteSize>, IEquatable<BinaryByteSize>
+    public partial struct ByteSize : IComparable<ByteSize>, IEquatable<ByteSize>
     {         
-        public static readonly BinaryByteSize MinValue = BinaryByteSize.FromBits(long.MinValue);
-        public static readonly BinaryByteSize MaxValue = BinaryByteSize.FromBits(long.MaxValue);
-
+        public static readonly ByteSize MinValue = ByteSize.FromBits(long.MinValue);
+        public static readonly ByteSize MaxValue = ByteSize.FromBits(long.MaxValue);
         public const long BitsInByte = 8;
-        public const long BytesInKibiByte = 1_024;
-        public const long BytesInMebiByte = 1_048_576;
-        public const long BytesInGibiByte = 1_073_741_824;
-        public const long BytesInTebiByte = 1_099_511_627_776;
-        public const long BytesInPebiByte = 1_125_899_906_842_624;
-
         public const string BitSymbol = "b";
         public const string ByteSymbol = "B";
-        public const string KibiByteSymbol = "KiB";
-        public const string MebiByteSymbol = "MiB";
-        public const string GibiByteSymbol = "GiB";
-        public const string TebiByteSymbol = "TiB";
-        public const string PebiByteSymbol = "PiB";
-
         public long Bits { get; private set; }
         public double Bytes { get; private set; }
-        public double KibiBytes => Bytes / BytesInKibiByte;
-        public double MebiBytes => Bytes / BytesInMebiByte;
-        public double GibiBytes => Bytes / BytesInGibiByte;
-        public double TebiBytes => Bytes / BytesInTebiByte;
-        public double PebiBytes => Bytes / BytesInPebiByte;
 
         public string LargestWholeNumberSymbol
         {
@@ -42,24 +23,24 @@ namespace ByteSize
             {
                 // Absolute value is used to deal with negative values
                 if (Math.Abs(this.PebiBytes) >= 1)
-                    return BinaryByteSize.PebiByteSymbol;
+                    return ByteSize.PebiByteSymbol;
 
                 if (Math.Abs(this.TebiBytes) >= 1)
-                    return BinaryByteSize.TebiByteSymbol;
+                    return ByteSize.TebiByteSymbol;
 
                 if (Math.Abs(this.GibiBytes) >= 1)
-                    return BinaryByteSize.GibiByteSymbol;
+                    return ByteSize.GibiByteSymbol;
 
                 if (Math.Abs(this.MebiBytes) >= 1)
-                    return BinaryByteSize.MebiByteSymbol;
+                    return ByteSize.MebiByteSymbol;
 
                 if (Math.Abs(this.KibiBytes) >= 1)
-                    return BinaryByteSize.KibiByteSymbol;
+                    return ByteSize.KibiByteSymbol;
 
                 if (Math.Abs(this.Bytes) >= 1)
-                    return BinaryByteSize.ByteSymbol;
+                    return ByteSize.ByteSymbol;
 
-                return BinaryByteSize.BitSymbol;
+                return ByteSize.BitSymbol;
             }
         }
 
@@ -90,48 +71,23 @@ namespace ByteSize
             }
         }
 
-        public BinaryByteSize(double BinaryByteSize)
+        public ByteSize(double ByteSize)
             : this()
         {
             // Get ceiling because bits are whole units
-            Bits = (long)Math.Ceiling(BinaryByteSize * BitsInByte);
+            Bits = (long)Math.Ceiling(ByteSize * BitsInByte);
 
-            Bytes = BinaryByteSize;
+            Bytes = ByteSize;
         }
 
-        public static BinaryByteSize FromBits(long value)
+        public static ByteSize FromBits(long value)
         {
-            return new BinaryByteSize(value / (double)BitsInByte);
+            return new ByteSize(value / (double)BitsInByte);
         }
 
-        public static BinaryByteSize FromBytes(double value)
+        public static ByteSize FromBytes(double value)
         {
-            return new BinaryByteSize(value);
-        }
-
-        public static BinaryByteSize FromKibiBytes(double value)
-        {
-            return new BinaryByteSize(value * BytesInKibiByte);
-        }
-
-        public static BinaryByteSize FromMebiBytes(double value)
-        {
-            return new BinaryByteSize(value * BytesInMebiByte);
-        }
-
-        public static BinaryByteSize FromGibiBytes(double value)
-        {
-            return new BinaryByteSize(value * BytesInGibiByte);
-        }
-
-        public static BinaryByteSize FromTebiBytes(double value)
-        {
-            return new BinaryByteSize(value * BytesInTebiByte);
-        }
-
-        public static BinaryByteSize FromPebiBytes(double value)
-        {
-            return new BinaryByteSize(value * BytesInPebiByte);
+            return new ByteSize(value);
         }
 
         /// <summary>
@@ -172,10 +128,10 @@ namespace ByteSize
                 return output(this.KibiBytes);
 
             // Byte and Bit symbol must be case-sensitive
-            if (format.IndexOf(BinaryByteSize.ByteSymbol) != -1)
+            if (format.IndexOf(ByteSize.ByteSymbol) != -1)
                 return output(this.Bytes);
 
-            if (format.IndexOf(BinaryByteSize.BitSymbol) != -1)
+            if (format.IndexOf(ByteSize.BitSymbol) != -1)
                 return output(this.Bits);
 
             return string.Format("{0} {1}", this.LargestWholeNumberValue.ToString(format, provider), this.LargestWholeNumberSymbol);
@@ -186,16 +142,16 @@ namespace ByteSize
             if (value == null)
                 return false;
 
-            BinaryByteSize other;
-            if (value is BinaryByteSize)
-                other = (BinaryByteSize)value;
+            ByteSize other;
+            if (value is ByteSize)
+                other = (ByteSize)value;
             else
                 return false;
 
             return Equals(other);
         }
 
-        public bool Equals(BinaryByteSize value)
+        public bool Equals(ByteSize value)
         {
             return this.Bits == value.Bits;
         }
@@ -205,112 +161,87 @@ namespace ByteSize
             return this.Bits.GetHashCode();
         }
 
-        public int CompareTo(BinaryByteSize other)
+        public int CompareTo(ByteSize other)
         {
             return this.Bits.CompareTo(other.Bits);
         }
 
-        public BinaryByteSize Add(BinaryByteSize bs)
+        public ByteSize Add(ByteSize bs)
         {
-            return new BinaryByteSize(this.Bytes + bs.Bytes);
+            return new ByteSize(this.Bytes + bs.Bytes);
         }
 
-        public BinaryByteSize AddBits(long value)
+        public ByteSize AddBits(long value)
         {
             return this + FromBits(value);
         }
 
-        public BinaryByteSize AddBytes(double value)
+        public ByteSize AddBytes(double value)
         {
-            return this + BinaryByteSize.FromBytes(value);
+            return this + ByteSize.FromBytes(value);
         }
 
-        public BinaryByteSize AddKibiBytes(double value)
+        public ByteSize Subtract(ByteSize bs)
         {
-            return this + BinaryByteSize.FromKibiBytes(value);
+            return new ByteSize(this.Bytes - bs.Bytes);
         }
 
-        public BinaryByteSize AddMebiBytes(double value)
+        public static ByteSize operator +(ByteSize b1, ByteSize b2)
         {
-            return this + BinaryByteSize.FromMebiBytes(value);
+            return new ByteSize(b1.Bytes + b2.Bytes);
         }
 
-        public BinaryByteSize AddGibiBytes(double value)
+        public static ByteSize operator ++(ByteSize b)
         {
-            return this + BinaryByteSize.FromGibiBytes(value);
+            return new ByteSize(b.Bytes + 1);
         }
 
-        public BinaryByteSize AddTebiBytes(double value)
+        public static ByteSize operator -(ByteSize b)
         {
-            return this + BinaryByteSize.FromTebiBytes(value);
+            return new ByteSize(-b.Bytes);
         }
 
-        public BinaryByteSize AddPebiBytes(double value)
+        public static ByteSize operator -(ByteSize b1, ByteSize b2)
         {
-            return this + BinaryByteSize.FromPebiBytes(value);
+            return new ByteSize(b1.Bytes - b2.Bytes);
         }
 
-        public BinaryByteSize Subtract(BinaryByteSize bs)
+        public static ByteSize operator --(ByteSize b)
         {
-            return new BinaryByteSize(this.Bytes - bs.Bytes);
+            return new ByteSize(b.Bytes - 1);
         }
 
-        public static BinaryByteSize operator +(BinaryByteSize b1, BinaryByteSize b2)
-        {
-            return new BinaryByteSize(b1.Bytes + b2.Bytes);
-        }
-
-        public static BinaryByteSize operator ++(BinaryByteSize b)
-        {
-            return new BinaryByteSize(b.Bytes + 1);
-        }
-
-        public static BinaryByteSize operator -(BinaryByteSize b)
-        {
-            return new BinaryByteSize(-b.Bytes);
-        }
-
-        public static BinaryByteSize operator -(BinaryByteSize b1, BinaryByteSize b2)
-        {
-            return new BinaryByteSize(b1.Bytes - b2.Bytes);
-        }
-
-        public static BinaryByteSize operator --(BinaryByteSize b)
-        {
-            return new BinaryByteSize(b.Bytes - 1);
-        }
-
-        public static bool operator ==(BinaryByteSize b1, BinaryByteSize b2)
+        public static bool operator ==(ByteSize b1, ByteSize b2)
         {
             return b1.Bits == b2.Bits;
         }
 
-        public static bool operator !=(BinaryByteSize b1, BinaryByteSize b2)
+        public static bool operator !=(ByteSize b1, ByteSize b2)
         {
             return b1.Bits != b2.Bits;
         }
 
-        public static bool operator <(BinaryByteSize b1, BinaryByteSize b2)
+        public static bool operator <(ByteSize b1, ByteSize b2)
         {
             return b1.Bits < b2.Bits;
         }
 
-        public static bool operator <=(BinaryByteSize b1, BinaryByteSize b2)
+        public static bool operator <=(ByteSize b1, ByteSize b2)
         {
             return b1.Bits <= b2.Bits;
         }
 
-        public static bool operator >(BinaryByteSize b1, BinaryByteSize b2)
+        public static bool operator >(ByteSize b1, ByteSize b2)
         {
             return b1.Bits > b2.Bits;
         }
 
-        public static bool operator >=(BinaryByteSize b1, BinaryByteSize b2)
+        public static bool operator >=(ByteSize b1, ByteSize b2)
         {
             return b1.Bits >= b2.Bits;
         }
 
-        public static BinaryByteSize Parse(string s)
+        public static ByteSize Parse(string s)
         {
             // Arg checking
             if (string.IsNullOrWhiteSpace(s))
@@ -382,7 +313,7 @@ namespace ByteSize
             }
         }
 
-        public static bool TryParse(string s, out BinaryByteSize result)
+        public static bool TryParse(string s, out ByteSize result)
         {
             try 
             {
@@ -391,7 +322,7 @@ namespace ByteSize
             }
             catch
             {
-                result = new BinaryByteSize();
+                result = new ByteSize();
                 return false;
             }
         }
