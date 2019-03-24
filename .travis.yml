@@ -1,6 +1,7 @@
-language: csharp
-mono: none
-dotnet: 2.1.500
-script:
-  - make test
-  - make pack
+langauge: generic
+
+services:
+  - docker
+
+script: 
+  - make build-in-docker
