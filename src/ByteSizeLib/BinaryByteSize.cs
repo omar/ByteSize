@@ -4,7 +4,7 @@ using System.Globalization;
 namespace ByteSizeLib
 {
     public partial struct ByteSize
-    {       
+    {
         public const long BytesInKibiByte = 1_024;
         public const long BytesInMebiByte = 1_048_576;
         public const long BytesInGibiByte = 1_073_741_824;

@@ -8,7 +8,8 @@ pack:
 	dotnet pack src/ByteSizeLib -c Release -o pack
 
 build-in-docker:
-	# Use an image with both Mono and .NET Core SDK installed
+	# Use an image with both Mono and .NET Core SDK installed so we can build
+	# against .NET Framework 4.5
 	docker run -td --name bytesize -v $(CURDIR):/bytesize andrewlock/dotnet-mono
 	docker exec bytesize bash -c "cd /bytesize/src && msbuild -t:restore ByteSizeLib.sln"
 	docker exec bytesize bash -c "cd /bytesize/src && dotnet test ByteSizeLib.Tests"

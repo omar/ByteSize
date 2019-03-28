@@ -5,7 +5,7 @@
     <Description>ByteSize is a utility class that makes byte size representation in code easier by removing ambiguity of the value being represented. ByteSize is to bytes what System.TimeSpan is to time.</Description>
     <Copyright>Copyright © Omar Khudeira 2013-2018</Copyright>
     <AssemblyTitle>ByteSize</AssemblyTitle>
-    <Version>2.0.0-alpha1</Version>
+    <Version>2.0.0-alpha2</Version>
     <AssemblyVersion>2.0.0</AssemblyVersion>
     <Authors>Omar Khudeira</Authors>
     <TargetFrameworks>net45;netstandard2.0</TargetFrameworks>
@@ -14,16 +14,17 @@
     <AssemblyName>ByteSize</AssemblyName>
     <PackageId>ByteSize</PackageId>
     <PackageTags>bytes</PackageTags>
-    <PackageReleaseNotes>Breaking Changes:
+    <PackageReleaseNotes>Breaking Changes from Alpha 1:
 
-- Drop support for all platforms except `netstandard2.0`.
-- Namespace changed to `ByteSize` from `ByteSizeLib`.
-- `ByteSize` renamed to `NonStandardByteSize` but keeps same functionality.
+- Namespace changed to back to `ByteSizeLib` from `ByteSize`.
+- Removed `BinaryByteSize`, `DecimalByteSize`, `NonStandardByteSize` structs.
 
 New Features:
 
-- `DecimalByteSize` object: `1 KB = 1000 B` with abbreviations `KB`, `MB`, etc.
-- `BinaryByteSize` object: `1 KiB = 1024 B` with abbreviations `KiB`, `MiB`, etc.
+- `ByteSize` struct now contains all the methods to handle binary and decimal values.
+- Added support for `net45`.
+
+For feedback, please comment here https://github.com/omar/ByteSize/pull/24
 
 View all release notes at https://github.com/omar/ByteSize/releases.</PackageReleaseNotes>
     <PackageProjectUrl>https://github.com/omar/ByteSize</PackageProjectUrl>
