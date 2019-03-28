@@ -199,7 +199,7 @@ DecimalByteSize.Parse("1,55 kb"); // de-DE culture
 
 Omar Khudeira ([http://omar.io](http://omar.io))
 
-Copyright (c) 2013-2018 Omar Khudeira. All rights reserved.
+Copyright (c) 2013-2019 Omar Khudeira. All rights reserved.
 
 Released under MIT License (see LICENSE file).
 

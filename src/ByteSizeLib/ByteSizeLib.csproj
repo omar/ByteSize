@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Title>ByteSize</Title>
     <Description>ByteSize is a utility class that makes byte size representation in code easier by removing ambiguity of the value being represented. ByteSize is to bytes what System.TimeSpan is to time.</Description>
-    <Copyright>Copyright © Omar Khudeira 2013-2018</Copyright>
+    <Copyright>Copyright © Omar Khudeira 2013-2019</Copyright>
     <AssemblyTitle>ByteSize</AssemblyTitle>
     <Version>2.0.0-alpha2</Version>
     <AssemblyVersion>2.0.0</AssemblyVersion>
