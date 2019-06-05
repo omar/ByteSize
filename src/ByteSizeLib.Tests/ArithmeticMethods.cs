@@ -81,5 +81,13 @@ namespace ByteSizeLib.Tests
             Assert.Equal(8, size.Bits);
             Assert.Equal(1, size.Bytes);
         }
+
+        [Fact]
+        public void MaxValueBits()
+        {
+            var size = ByteSize.FromBits(long.MaxValue);
+
+            Assert.Equal(long.MaxValue, size.Bits);
+        }
     }
 }
