@@ -44,7 +44,7 @@ namespace ByteSizeLib
             }
         }
 
-        public string LargestWholeNumberSymbol
+        public string LargestWholeNumberDecimalSymbol
         {
             get
             {
@@ -98,7 +98,7 @@ namespace ByteSizeLib
             }
         }
 
-        public double LargestWholeNumberValue
+        public double LargestWholeNumberDecimalValue
         {
             get
             {
@@ -215,7 +215,7 @@ namespace ByteSizeLib
             }
             else
             {
-                return string.Format("{0} {1}", this.LargestWholeNumberValue.ToString(format, provider), this.LargestWholeNumberSymbol);
+                return string.Format("{0} {1}", this.LargestWholeNumberDecimalValue.ToString(format, provider), this.LargestWholeNumberDecimalSymbol);
             }
         }
 
