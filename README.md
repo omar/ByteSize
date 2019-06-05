@@ -5,8 +5,8 @@ by removing ambiguity of the value being represented.
 
 `ByteSize` is to bytes what `System.TimeSpan` is to time.
 
-[![](https://travis-ci.org/omar/DecimalByteSize.svg?branch=master)](https://travis-ci.org/omar/ByteSize)
-[![Stable nuget](https://img.shields.io/nuget/v/DecimalByteSize.svg)](https://www.nuget.org/packages/ByteSize/)
+[![](https://travis-ci.org/omar/ByteSize.svg?branch=master)](https://travis-ci.org/omar/ByteSize)
+[![Stable nuget](https://img.shields.io/nuget/v/ByteSize.svg)](https://www.nuget.org/packages/ByteSize/)
 
 #### Development
 
@@ -16,13 +16,15 @@ by removing ambiguity of the value being represented.
 
 ## Usage
 
-`ByteSize` comes with 3 different ways to represent bytes:
+`ByteSize` adheres to the IEC standard, see this [Wikipedia article](https://en.wikipedia.org/wiki/Kilobyte#Definitions_and_usage).
+That means `ByteSize` assumes:
 
-- `DecimalByteSize` which assumes `1 kilobyte` = `1000 bytes` with 2 letter abbrevations `b`, `B`,`KB`, `MB`, `GB`, `TB`, `PB`.
-- `BinaryByteSize` which assumes `1 kibibyte` = `1024 bytes` with 3 letter abbrevations `b`, `B`,`KiB`, `MiB`, `GiB`, `TiB`, `PiB`.
-- `NonStandardByteSize` which assumes `1 kilobyte` = `1024 bytes` with 2 letter abbrevations `b`, `B`,`KB`, `MiB`, `GB`, `TB`, `PB`.
+- `1 kilobyte` = `1000 bytes` with 2 letter abbrevations `b`, `B`,`KB`, `MB`, `GB`, `TB`, `PB`.
+- `1 kibibyte` = `1024 bytes` with 3 letter abbrevations `b`, `B`,`KiB`, `MiB`, `GiB`, `TiB`, `PiB`.
 
-The first two adhere to the IEC standard, see this [Wikipedia article](https://en.wikipedia.org/wiki/Kilobyte#Definitions_and_usage).
+`ByteSize` manages conversion of the values internally and provides methods to create and retrieve the values as needed. See the examples below.
+
+## Migrating from v1
 
 
 ### Example 
@@ -30,35 +32,37 @@ The first two adhere to the IEC standard, see this [Wikipedia article](https://e
 Without `ByteSize`:
 
 ```c#
-static double MaxFileSizeMBs = 1.5;
+double maxFileSizeMBs = 1.5;
 
-// I need it in KBs!
-var kilobytes = MaxFileSizeMBs * 1000; // 1500
+// I need it in KBs and KiBs!
+var kilobytes = maxFileSizeMBs * 1000; // 1500
+var kibibytes = maxFileSizeMBs * 1024; // 1536
 ```
 
 With `ByteSize`:
 
 ```c#
-static MaxFileSize = DecimalByteSize.FromMegaBytes(1.5);
+var maxFileSize = ByteSize.FromMegaBytes(1.5);
 
-// I have it in KBs!
-MaxFileSize.KiloBytes;  // 1500
+// I have it in KBs and KiBs!!
+maxFileSize.KiloBytes;  // 1500
+maxFileSize.KibiBytes;  // 1464.84376
 ```
 
-`ByeSize` behaves like any other struct backed by a numerical value.
+`ByeSize` behaves like any other struct backed by a numerical value allowing arithmetic operations between two objects.
 
 ```c#
 // Add
-var monthlyUsage = DecimalByteSize.FromGigaBytes(10);
-var currentUsage = DecimalByteSize.FromMegaBytes(512);
+var monthlyUsage = ByteSize.FromGigaBytes(10);
+var currentUsage = ByteSize.FromMegaBytes(512);
 ByteSize total = monthlyUsage + currentUsage;
 
-total.Add(DecimalByteSize.FromKiloBytes(10));
+total.Add(ByteSize.FromKiloBytes(10));
 total.AddGigaBytes(10);
 
 // Subtract
-var delta = total.Subtract(DecimalByteSize.FromKiloBytes(10));
-delta = delta - DecimalByteSize.FromGigaBytes(100);
+var delta = total.Subtract(ByteSize.FromKiloBytes(10));
+delta = delta - ByteSize.FromGigaBytes(100);
 delta = delta.AddMegaBytes(-100);
 ```
 
@@ -67,42 +71,67 @@ delta = delta.AddMegaBytes(-100);
 You can create a `ByteSize` object from `bits`, `bytes`, `kilobytes`, `megabytes`, `gigabytes`, and `terabytes`.
 
 ```c#
-new DecimalByteSize(1.5);           // Constructor takes in bytes
+new ByteSize(15);            // Constructor takes in bits (long)
+new ByteSize(1.5);           // ... or bytes (double)
 
 // Static Constructors
-DecimalByteSize.FromBits(10);       // Bits are whole numbers only
-DecimalByteSize.FromBytes(1.5);     // Same as constructor
-DecimalByteSize.FromKiloBytes(1.5);
-DecimalByteSize.FromMegaBytes(1.5);
-DecimalByteSize.FromGigaBytes(1.5);
-DecimalByteSize.FromTeraBytes(1.5);
+ByteSize.FromBits(10);       // Same as constructor
+ByteSize.FromBytes(1.5);     // Same as constructor
+
+// Decimal: 1 KB = 1000 B
+ByteSize.FromKiloBytes(1.5);
+ByteSize.FromMegaBytes(1.5);
+ByteSize.FromGigaBytes(1.5);
+ByteSize.FromTeraBytes(1.5);
+
+// Binary: 1 KiB = 1024 B
+ByteSize.FromKibiBytes(1.5);
+ByteSize.FromMebiBytes(1.5);
+ByteSize.FromGibiBytes(1.5);
+ByteSize.FromTebiBytes(1.5);
 ```
 
 ### Properties
 
-A `ByteSize` object contains representations in `bits`, `bytes`, `kilobytes`, `megabytes`, `gigabytes`, and `terabytes`.
+A `ByteSize` object contains representations in:
+
+- `bits`, `bytes`
+- `kilobytes`, `megabytes`, `gigabytes`, and `terabytes`
+- `kibibytes`, `mebibytes`, `gibibytes`, and `tebibytes`
 
 ```c#
-var maxFileSize = DecimalByteSize.FromKiloBytes(10);
+var maxFileSize = ByteSize.FromKiloBytes(10);
 
 maxFileSize.Bits;      // 80000
 maxFileSize.Bytes;     // 10000
+
+// Decimal
 maxFileSize.KiloBytes; // 10
 maxFileSize.MegaBytes; // 0.01
 maxFileSize.GigaBytes; // 1E-05
 maxFileSize.TeraBytes; // 1E-08
+
+// Binary
+maxFileSize.KibiBytes; // 9.765625
+maxFileSize.MebiBytes; // 0.0095367431640625
+maxFileSize.GibiBytes; // 9.31322574615479E-06
+maxFileSize.TebiBytes; // 9.09494701772928E-09
 ```
 
-A `ByteSize` object also contains two properties that represent the largest metric prefix symbol and value.
+A `ByteSize` object also contains four properties that represent the largest whole number symbol and value.
 
 ```c#
-var maxFileSize = DecimalByteSize.FromKiloBytes(10);
+var maxFileSize = ByteSize.FromKiloBytes(10);
 
-maxFileSize.LargestWholeNumberSymbol; // "KB"
-maxFileSize.LargestWholeNumberValue;  // 10
+maxFileSize.LargestWholeNumberDecimalSymbol; // "KB"
+maxFileSize.LargestWholeNumberDecimalValue;  // 10
+maxFileSize.LargestWholeNumberBinarySymbol;  // "KiB"
+maxFileSize.LargestWholeNumberBinaryValue;   // 9.765625
 ```
 
 ### String Representation
+
+By default a `ByteSize` object uses the decimal value for string representation.
 
 All string operations are localized to use the number decimal separator of the culture set in `Thread.CurrentThread.CurrentCulture`.
 
@@ -111,22 +140,27 @@ All string operations are localized to use the number decimal separator of the c
 `ByteSize` comes with a handy `ToString` method that uses the largest metric prefix whose value is greater than or equal to 1.
 
 ```c#
-DecimalByteSize.FromBits(7).ToString();         // 7 b
-DecimalByteSize.FromBits(8).ToString();         // 1 B
-DecimalByteSize.FromKiloBytes(.5).ToString();   // 500 B
-DecimalByteSize.FromKiloBytes(999).ToString();  // 999 KB
-DecimalByteSize.FromKiloBytes(1000).ToString(); // 1 MB
-DecimalByteSize.FromGigabytes(.5).ToString();   // 500 MB
-DecimalByteSize.FromGigabytes(1000).ToString(); // 1 TB
+// By default the decimal values are used
+ByteSize.FromBits(7).ToString();         // 7 b
+ByteSize.FromBits(8).ToString();         // 1 B
+ByteSize.FromKiloBytes(.5).ToString();   // 500 B
+ByteSize.FromKiloBytes(999).ToString();  // 999 KB
+ByteSize.FromKiloBytes(1000).ToString(); // 1 MB
+ByteSize.FromGigabytes(.5).ToString();   // 500 MB
+ByteSize.FromGigabytes(1000).ToString(); // 1 TB
+
+// Binary
+ByteSize.Parse("1.55 kb").ToString("kib"); // 1.51 kib
 ```
 
 #### Formatting
 
 The `ToString` method accepts a single `string` parameter to format the output.
-The formatter can contain the symbol of the value to display depending on the object:
+The formatter can contain the symbol of the value to display.
 
-- `NonStandardByteSize` and `DecimalByteSize`: `b`, `B`, `KB`, `MB`, `GB`, `TB`.
-- `BinaryByteSize`: `b`, `B`,`KiB`, `MiB`, `GiB`, `TiB`
+- Base: `b`, `B`
+- Decimal: `KB`, `MB`, `GB`, `TB`
+- Binary: `KiB`, `MiB`, `GiB`, `TiB`
 
 The formatter uses the built in [`double.ToString` method](http://msdn.microsoft.com/en-us/library/kfsatb94\(v=vs.110\).aspx). 
 
@@ -136,7 +170,7 @@ places and outputs only `0` if the value is `0`.
 You can include symbol and number formats.
 
 ```c#
-var b = DecimalByteSize.FromKiloBytes(10.505);
+var b = ByteSize.FromKiloBytes(10.505);
 
 // Default number format is 0.##
 b.ToString("KB");         // 10.52 KB
@@ -156,7 +190,7 @@ b.ToString("0.00 GB");    // 0 GB
 b.ToString("#.## B");     // 10757.12 B
 
 // ByteSize object of value 0
-var zeroBytes = DecimalByteSize.FromKiloBytes(0); 
+var zeroBytes = ByteSize.FromKiloBytes(0); 
 zeroBytes.ToString();           // 0 b
 zeroBytes.ToString("0 kb");     // 0 kb
 zeroBytes.ToString("0.## mb");  // 0 mb
@@ -166,33 +200,34 @@ zeroBytes.ToString("0.## mb");  // 0 mb
 
 `ByteSize` has a `Parse` and `TryParse` method similar to other base classes.
 
-Like other `TryParse` methods, `DecimalByteSize.TryParse` returns `boolean` 
+Like other `TryParse` methods, `ByteSize.TryParse` returns `boolean` 
 value indicating whether or not the parsing was successful. If the value is 
 parsed it is output to the `out` parameter supplied.
 
 ```c#
 ByteSize output;
-DecimalByteSize.TryParse("1.5mb", out output);
+ByteSize.TryParse("1.5mb", out output);
+ByteSize.TryParse("1.5mib", out output);
 
 // Invalid
-DecimalByteSize.Parse("1.5 b");   // Can't have partial bits
+ByteSize.Parse("1.5 b");   // Can't have partial bits
 
 // Valid
-DecimalByteSize.Parse("5b");
-DecimalByteSize.Parse("1.55B");
-DecimalByteSize.Parse("1.55KB");
-DecimalByteSize.Parse("1.55 kB "); // Spaces are trimmed
-DecimalByteSize.Parse("1.55 kb");
-DecimalByteSize.Parse("1.55 MB");
-DecimalByteSize.Parse("1.55 mB");
-DecimalByteSize.Parse("1.55 mb");
-DecimalByteSize.Parse("1.55 GB");
-DecimalByteSize.Parse("1.55 gB");
-DecimalByteSize.Parse("1.55 gb");
-DecimalByteSize.Parse("1.55 TB");
-DecimalByteSize.Parse("1.55 tB");
-DecimalByteSize.Parse("1.55 tb");
-DecimalByteSize.Parse("1,55 kb"); // de-DE culture
+ByteSize.Parse("5b");
+ByteSize.Parse("1.55B");
+ByteSize.Parse("1.55KB");
+ByteSize.Parse("1.55 kB "); // Spaces are trimmed
+ByteSize.Parse("1.55 kb");
+ByteSize.Parse("1.55 MB");
+ByteSize.Parse("1.55 mB");
+ByteSize.Parse("1.55 mb");
+ByteSize.Parse("1.55 GB");
+ByteSize.Parse("1.55 gB");
+ByteSize.Parse("1.55 gib");
+ByteSize.Parse("1.55 TiB");
+ByteSize.Parse("1.55 tiB");
+ByteSize.Parse("1.55 tib");
+ByteSize.Parse("1,55 kib"); // de-DE culture
 ```
 
 #### Author and License
@@ -202,4 +237,3 @@ Omar Khudeira ([http://omar.io](http://omar.io))
 Copyright (c) 2013-2019 Omar Khudeira. All rights reserved.
 
 Released under MIT License (see LICENSE file).
-
