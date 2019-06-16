@@ -1,3 +1,13 @@
+.PHONY: build test pack
+
+# Check to see if Mono exists. If it does, use that path to build against .NET 4.5
+ifneq ("$(wildcard /usr/local/lib/mono/)","")
+	# MONO_REFERENCE_ASSEMBLIES is automatically pulled in ByteSizeLib.csproj
+	# to allow building against .NET Framework on a Mac where I do most of my
+	# development.
+    export MONO_REFERENCE_ASSEMBLIES=/usr/local/lib/mono
+endif
+
 build:
 	dotnet build src
 
@@ -7,7 +17,7 @@ test:
 pack:
 	dotnet pack src/ByteSizeLib -c Release -o pack
 
-build-in-docker:
+test-in-docker:
 	# Stop and delete conatiner if already exists
 	docker stop bytesize || true && docker rm bytesize || true
 	# Use an image with both Mono and .NET Core SDK installed so we can build
