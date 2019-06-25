@@ -40,7 +40,7 @@ static MaxFileSize = ByteSize.FromMegaBytes(1.5);
 MaxFileSize.KiloBytes;  // 1536
 ```
 
-`ByeSize` behaves like any other struct backed by a numerical value.
+`ByteSize` behaves like any other struct backed by a numerical value.
 
 ```c#
 // Add
