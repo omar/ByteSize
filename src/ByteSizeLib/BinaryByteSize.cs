@@ -72,5 +72,10 @@ namespace ByteSizeLib
         {
             return this + ByteSize.FromPebiBytes(value);
         }
+
+        public string ToBinaryString()
+        {
+            return this.ToString("0.##", CultureInfo.CurrentCulture, useBinaryByte: true);
+        }
     }
 }
