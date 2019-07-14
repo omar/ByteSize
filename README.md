@@ -14,6 +14,32 @@ by removing ambiguity of the value being represented.
 - Build: `make build`
 - Test: `make test`
 
+## v2 Breaking Changes
+
+### Ratio Changes (HUGE BREAKING CHANGE)
+
+By default `ByteSize` now assumes `1 KB == 1000 B` and `1 KiB == 1024 B` to 
+adhere to the IEC and NIST standards (https://en.wikipedia.org/wiki/Binary_prefix). 
+In version 1 `ByteSize` assumed `1 KB == 1024 B`, that means if you're upgrading
+from v1, you'll see differences in values.
+
+When you upgrade an existing application to v2 your existing code will be using
+the decimal representation of bytes (i.e. `1 KB == 1000 B`). If the difference
+in calculation is not material to your application, you don't need to change anything.
+
+However, if you want to use `1 KiB == 1024 B`, then you'll need to change all
+`ByteSize` calls to the respective method. For example, calls to
+`ByteSize.FromKiloByte` need to be changed to `ByteSize.FromKibiByte`.
+
+Lastly, `ByteSize` no longer supports the ratio of `1 KB == 1024 B`. Note this 
+is ***kilo***_bytes_ to _bytes_. The only ratio of `1 == 1024` is ***kibi***_bytes_ 
+to _bytes_.
+
+### Other Breaking Changes
+
+- Renamed property `LargestWholeNumberSymbol` and `LargestWholeNumberValue` to `LargestWholeNumberDecimalSymbol` and `LargestWholeNumberDecimalValue` respectively.
+- Drop support for all platforms _except_ `netstandard1.0` and `net45`.
+
 ## Usage
 
 `ByteSize` adheres to the IEC standard, see this [Wikipedia article](https://en.wikipedia.org/wiki/Kilobyte#Definitions_and_usage).
@@ -23,9 +49,6 @@ That means `ByteSize` assumes:
 - `1 kibibyte` = `1024 bytes` with 3 letter abbrevations `b`, `B`,`KiB`, `MiB`, `GiB`, `TiB`, `PiB`.
 
 `ByteSize` manages conversion of the values internally and provides methods to create and retrieve the values as needed. See the examples below.
-
-## Migrating from v1
-
 
 ### Example 
 
