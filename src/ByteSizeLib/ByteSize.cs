@@ -310,6 +310,16 @@ namespace ByteSizeLib
 
         public static ByteSize Parse(string s)
         {
+            return Parse(s, NumberFormatInfo.CurrentInfo);
+        }
+        public static ByteSize Parse(string s, IFormatProvider formatProvider)
+        {
+            return Parse(s, NumberStyles.Float | NumberStyles.AllowThousands, formatProvider);
+        }
+
+        public static ByteSize Parse(string s, NumberStyles numberStyles, IFormatProvider formatProvider)
+        {
+           
             // Arg checking
 #if NET35
             if (string.IsNullOrEmpty(s) || s.Trim() == "")
@@ -325,8 +335,9 @@ namespace ByteSizeLib
             var num = 0;
             var found = false;
 
-            var decimalSeparator = Convert.ToChar(NumberFormatInfo.CurrentInfo.NumberDecimalSeparator);
-            var groupSeparator = Convert.ToChar(NumberFormatInfo.CurrentInfo.NumberGroupSeparator);
+            var numberFormatInfo = NumberFormatInfo.GetInstance(formatProvider);
+            var decimalSeparator = Convert.ToChar(numberFormatInfo.NumberDecimalSeparator);
+            var groupSeparator = Convert.ToChar(numberFormatInfo.NumberGroupSeparator);
 
             // Pick first non-digit number
             for (num = 0; num < s.Length; num++)
@@ -337,7 +348,7 @@ namespace ByteSizeLib
                 }
 
             if (found == false)
-                throw new FormatException($"No byte indicator found in value '{ s }'.");
+                throw new FormatException($"No byte indicator found in value '{s}'.");
 
             int lastNumber = num;
 
@@ -347,17 +358,17 @@ namespace ByteSizeLib
 
             // Get the numeric part
             double number;
-            if (!double.TryParse(numberPart, NumberStyles.Float | NumberStyles.AllowThousands, NumberFormatInfo.CurrentInfo, out number))
-                throw new FormatException($"No number found in value '{ s }'.");
+            if (!double.TryParse(numberPart, numberStyles, formatProvider, out number))
+                throw new FormatException($"No number found in value '{s}'.");
 
             // Get the magnitude part
             switch (sizePart)
             {
                 case "b":
                     if (number % 1 != 0) // Can't have partial bits
-                        throw new FormatException($"Can't have partial bits for value '{ s }'.");
+                        throw new FormatException($"Can't have partial bits for value '{s}'.");
 
-                    return FromBits((long)number);
+                    return FromBits((long) number);
 
                 case "B":
                     return FromBytes(number);
@@ -388,7 +399,7 @@ namespace ByteSizeLib
                     return FromPetaBytes(number);
                 
                 default:
-                    throw new FormatException($"Bytes of magnitude '{ sizePart }' is not supported.");
+                    throw new FormatException($"Bytes of magnitude '{sizePart}' is not supported.");
             }
         }
 
@@ -397,6 +408,20 @@ namespace ByteSizeLib
             try 
             {
                 result = Parse(s);
+                return true;
+            }
+            catch
+            {
+                result = new ByteSize();
+                return false;
+            }
+        }
+
+        public static bool TryParse(string s, NumberStyles numberStyles, IFormatProvider formatProvider, out ByteSize result)
+        {
+            try
+            {
+                result = Parse(s, numberStyles, formatProvider);
                 return true;
             }
             catch
