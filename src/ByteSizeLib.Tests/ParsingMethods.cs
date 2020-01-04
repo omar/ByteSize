@@ -11,8 +11,8 @@ namespace ByteSizeLib.Tests
         [Fact]
         public void Parse()
         {
-            string val = "1020KB";
-            var expected = ByteSize.FromKiloBytes(1020);
+            string val = "1020KiB";
+            var expected = ByteSize.FromKibiBytes(1020);
 
             var result = ByteSize.Parse(val);
 
@@ -22,14 +22,14 @@ namespace ByteSizeLib.Tests
         [Fact]
         public void TryParse()
         {
-            string val = "1020KB";
-            var expected = ByteSize.FromKiloBytes(1020);
+            string val = "1020KiB";
+            var expected = ByteSize.FromKibiBytes(1020);
 
-            ByteSize resultByteSize;
-            var resultBool = ByteSize.TryParse(val, out resultByteSize);
+            ByteSize resultBinaryByteSize;
+            var resultBool = ByteSize.TryParse(val, out resultBinaryByteSize);
 
             Assert.True(resultBool);
-            Assert.Equal(expected, resultByteSize);
+            Assert.Equal(expected, resultBinaryByteSize);
         }
 
         [Fact]
@@ -49,11 +49,11 @@ namespace ByteSizeLib.Tests
         {
             string val = "Unexpected Value";
 
-            ByteSize resultByteSize;
-            var resultBool = ByteSize.TryParse(val, out resultByteSize);
+            ByteSize resultBinaryByteSize;
+            var resultBool = ByteSize.TryParse(val, out resultBinaryByteSize);
 
             Assert.False(resultBool);
-            Assert.Equal(new ByteSize(), resultByteSize);
+            Assert.Equal(new ByteSize(), resultBinaryByteSize);
         }
 
         [Fact]
@@ -61,30 +61,30 @@ namespace ByteSizeLib.Tests
         {
             string val = "1000";
 
-            ByteSize resultByteSize;
-            var resultBool = ByteSize.TryParse(val, out resultByteSize);
+            ByteSize resultBinaryByteSize;
+            var resultBool = ByteSize.TryParse(val, out resultBinaryByteSize);
 
             Assert.False(resultBool);
-            Assert.Equal(new ByteSize(), resultByteSize);
+            Assert.Equal(new ByteSize(), resultBinaryByteSize);
         }
 
         [Fact]
         public void TryParseReturnsFalseOnMissingValue()
         {
-            string val = "KB";
+            string val = "KiB";
 
-            ByteSize resultByteSize;
-            var resultBool = ByteSize.TryParse(val, out resultByteSize);
+            ByteSize resultBinaryByteSize;
+            var resultBool = ByteSize.TryParse(val, out resultBinaryByteSize);
 
             Assert.False(resultBool);
-            Assert.Equal(new ByteSize(), resultByteSize);
+            Assert.Equal(new ByteSize(), resultBinaryByteSize);
         }
 
         [Fact]
         public void TryParseWorksWithLotsOfSpaces()
         {
-            string val = " 100 KB ";
-            var expected = ByteSize.FromKiloBytes(100);
+            string val = " 100 KiB ";
+            var expected = ByteSize.FromKibiBytes(100);
 
             var result = ByteSize.Parse(val);
 
@@ -101,7 +101,6 @@ namespace ByteSizeLib.Tests
                     ByteSize.Parse(val);
                 });
         }
-
 
         // Parse method throws exceptions
         [Fact]
@@ -149,66 +148,11 @@ namespace ByteSizeLib.Tests
         }
 
         [Fact]
-        public void ParseKB()
-        {
-            string val = "1020KB";
-            var expected = ByteSize.FromKiloBytes(1020);
-
-            var result = ByteSize.Parse(val);
-
-            Assert.Equal(expected, result);
-        }
-
-        [Fact]
-        public void ParseMB()
-        {
-            string val = "1000MB";
-            var expected = ByteSize.FromMegaBytes(1000);
-
-            var result = ByteSize.Parse(val);
-
-            Assert.Equal(expected, result);
-        }
-
-        [Fact]
-        public void ParseGB()
-        {
-            string val = "805GB";
-            var expected = ByteSize.FromGigaBytes(805);
-
-            var result = ByteSize.Parse(val);
-
-            Assert.Equal(expected, result);
-        }
-
-        [Fact]
-        public void ParseTB()
-        {
-            string val = "100TB";
-            var expected = ByteSize.FromTeraBytes(100);
-
-            var result = ByteSize.Parse(val);
-
-            Assert.Equal(expected, result);
-        }
-
-        [Fact]
-        public void ParsePB()
-        {
-            string val = "100PB";
-            var expected = ByteSize.FromPetaBytes(100);
-
-            var result = ByteSize.Parse(val);
-
-            Assert.Equal(expected, result);
-        }
-
-        [Fact]
         public void ParseCultureNumberSeparator()
         {
             CultureInfo.CurrentCulture = new CultureInfo("de-DE");
-            string val = "1.500,5 MB";
-            var expected = ByteSize.FromMegaBytes(1500.5);
+            string val = "1.500,5 MiB";
+            var expected = ByteSize.FromMebiBytes(1500.5);
 
             var result = ByteSize.Parse(val);
 

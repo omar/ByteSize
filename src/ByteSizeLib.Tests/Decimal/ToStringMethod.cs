@@ -2,7 +2,7 @@
 using System.Threading;
 using Xunit;
 
-namespace ByteSizeLib.Tests
+namespace ByteSizeLib.Tests.Decimal
 {
     public class ToStringMethod
     {
@@ -69,6 +69,71 @@ namespace ByteSizeLib.Tests
 
             // Assert
             Assert.Equal("10 B", result);
+        }
+
+        [Fact]
+        public void ReturnsKiloBytes()
+        {
+            // Arrange
+            var b = ByteSize.FromKiloBytes(10);
+
+            // Act
+            var result = b.ToString("##.#### KB");
+
+            // Assert
+            Assert.Equal("10 KB", result);
+        }
+
+        [Fact]
+        public void ReturnsMegaBytes()
+        {
+            // Arrange
+            var b = ByteSize.FromMegaBytes(10);
+
+            // Act
+            var result = b.ToString("##.#### MB");
+
+            // Assert
+            Assert.Equal("10 MB", result);
+        }
+
+        [Fact]
+        public void ReturnsGigaBytes()
+        {
+            // Arrange
+            var b = ByteSize.FromGigaBytes(10);
+
+            // Act
+            var result = b.ToString("##.#### GB");
+
+            // Assert
+            Assert.Equal("10 GB", result);
+        }
+
+        [Fact]
+        public void ReturnsTeraBytes()
+        {
+            // Arrange
+            var b = ByteSize.FromTeraBytes(10);
+
+            // Act
+            var result = b.ToString("##.#### TB");
+
+            // Assert
+            Assert.Equal("10 TB", result);
+        }
+
+        [Fact]
+        public void ReturnsPetaBytes()
+        {
+            // Arrange
+            var b = ByteSize.FromPetaBytes(10);
+
+            // Act
+            var result = b.ToString("##.#### PB");
+
+            // Assert
+            Assert.Equal("10 PB", result);
         }
 
         [Fact]

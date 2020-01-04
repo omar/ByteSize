@@ -1,22 +1,46 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <Title>ByteSize</Title>
     <Description>ByteSize is a utility class that makes byte size representation in code easier by removing ambiguity of the value being represented. ByteSize is to bytes what System.TimeSpan is to time.</Description>
-    <Copyright>Copyright © Omar Khudeira 2013-2018</Copyright>
+    <Copyright>Copyright © Omar Khudeira 2013-2019</Copyright>
     <AssemblyTitle>ByteSize</AssemblyTitle>
-    <Version>1.3.0</Version>
-    <AssemblyVersion>1.3.0</AssemblyVersion>
+    <Version>2.0.0-beta1</Version>
+    <AssemblyVersion>2.0.0</AssemblyVersion>
     <Authors>Omar Khudeira</Authors>
-    <TargetFrameworks>net45;netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>netstandard1.0;net45</TargetFrameworks>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <DebugType>portable</DebugType>
+    <AssemblyName>ByteSize</AssemblyName>
+    <PackageId>ByteSize</PackageId>
     <PackageTags>bytes</PackageTags>
+    <PackageReleaseNotes>
+**HUGE BREAKING CHANGE**:
+
+By default `ByteSize` now assumes `1 KB == 1000 B` and `1 KiB == 1024 B` to 
+adhere to the IEC and NIST standards (https://en.wikipedia.org/wiki/Binary_prefix). 
+In the past `ByteSize` assumed `1 KB == 1024 B`, that means if you're upgrading
+from v1, you'll see differences in values.
+
+Other Breaking Changes:
+- Renamed property `LargestWholeNumberSymbol` and `LargestWholeNumberValue` to `LargestWholeNumberDecimalSymbol` and `LargestWholeNumberDecimalValue` respectively.
+- Drop support for all platforms _except_ `netstandard1.0` and `net45`.
+
+New Features:
+
+- Support for binary and decimal values (e.g. `ByteSize.FromKibiByte` and `ByteSize.FromKiloByte`).
+- New constructor that takes a `long` value as the number of bits.
+
+View all release notes at https://github.com/omar/ByteSize/releases.</PackageReleaseNotes>
     <PackageProjectUrl>https://github.com/omar/ByteSize</PackageProjectUrl>
     <LicenseUrl>https://raw.githubusercontent.com/omar/ByteSize/master/LICENSE</LicenseUrl>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/omar/ByteSize</RepositoryUrl>
     <NeutralLanguage>en</NeutralLanguage>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(MONO_REFERENCE_ASSEMBLIES)' != ''">
+    <FrameworkPathOverride Condition="'$(TargetFramework)' == 'net45'">$(MONO_REFERENCE_ASSEMBLIES)/4.5-api</FrameworkPathOverride>
   </PropertyGroup>
 
 </Project>

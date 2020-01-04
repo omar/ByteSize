@@ -4,4 +4,4 @@ services:
   - docker
 
 script: 
-  - make build-in-docker
+  - make test-in-docker
