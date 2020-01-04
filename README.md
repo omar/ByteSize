@@ -72,7 +72,7 @@ maxFileSize.KiloBytes;  // 1500
 maxFileSize.KibiBytes;  // 1464.84376
 ```
 
-`ByeSize` behaves like any other struct backed by a numerical value allowing arithmetic operations between two objects.
+`ByteSize` behaves like any other struct backed by a numerical value allowing arithmetic operations between two objects.
 
 ```c#
 // Add

@@ -32,6 +32,17 @@ namespace ByteSizeLib.Tests
             Assert.Equal(expected, resultBinaryByteSize);
         }
 
+        [Fact]
+        public void ParseDecimalMB()
+        {
+            string val = "100.5MB";
+            var expected = ByteSize.FromMegaBytes(100.5);
+
+            var result = ByteSize.Parse(val, CultureInfo.InvariantCulture);
+
+            Assert.Equal(expected, result);
+        }
+
         // Failure modes
         [Fact]
         public void TryParseReturnsFalseOnBadValue()
@@ -148,6 +159,18 @@ namespace ByteSizeLib.Tests
             Assert.Equal(expected, result);
             
             CultureInfo.CurrentCulture = new CultureInfo("en-US");
+        }
+
+        [Fact]
+        public void ParseWithCulture()
+        {
+            var cultureInfo = new CultureInfo("de-DE");
+            string val = "1.234,5 MB";
+            var expected = ByteSize.FromMegaBytes(1234.5);
+
+            var result = ByteSize.Parse(val, cultureInfo);
+
+            Assert.Equal(expected, result);
         }
     }
 }
