@@ -3,9 +3,9 @@
   <PropertyGroup>
     <Title>ByteSize</Title>
     <Description>ByteSize is a utility class that makes byte size representation in code easier by removing ambiguity of the value being represented. ByteSize is to bytes what System.TimeSpan is to time.</Description>
-    <Copyright>Copyright © Omar Khudeira 2013-2019</Copyright>
+    <Copyright>Copyright © Omar Khudeira 2013-2020</Copyright>
     <AssemblyTitle>ByteSize</AssemblyTitle>
-    <Version>2.0.0-beta1</Version>
+    <Version>2.0.0</Version>
     <AssemblyVersion>2.0.0</AssemblyVersion>
     <Authors>Omar Khudeira</Authors>
     <TargetFrameworks>netstandard1.0;net45</TargetFrameworks>
@@ -23,6 +23,7 @@ In the past `ByteSize` assumed `1 KB == 1024 B`, that means if you're upgrading
 from v1, you'll see differences in values.
 
 Other Breaking Changes:
+
 - Renamed property `LargestWholeNumberSymbol` and `LargestWholeNumberValue` to `LargestWholeNumberDecimalSymbol` and `LargestWholeNumberDecimalValue` respectively.
 - Drop support for all platforms _except_ `netstandard1.0` and `net45`.
 
@@ -30,6 +31,7 @@ New Features:
 
 - Support for binary and decimal values (e.g. `ByteSize.FromKibiByte` and `ByteSize.FromKiloByte`).
 - New constructor that takes a `long` value as the number of bits.
+- Support for culture on Parse and TryParse
 
 View all release notes at https://github.com/omar/ByteSize/releases.</PackageReleaseNotes>
     <PackageProjectUrl>https://github.com/omar/ByteSize</PackageProjectUrl>
