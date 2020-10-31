@@ -64,7 +64,7 @@ namespace ByteSizeLib
                 if (Math.Abs(this.KiloBytes) >= 1)
                     return KiloByteSymbol;
 
-                if (Math.Abs(this.Bytes) >= 1)
+                if (Math.Abs(this.Bytes) >= 0)
                     return ByteSymbol;
 
                 return BitSymbol;

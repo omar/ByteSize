@@ -156,16 +156,16 @@ namespace ByteSizeLib.Tests
 		}
 
         [Fact]
-		public void ReturnsZeroBits()
+		public void ReturnsZeroBytes()
 		{
 			// Arrange
-			var b = ByteSize.FromBits(0);
+			var b = ByteSize.FromBytes(0);
 
 			// Act
 			var result = b.ToString();
 
 			// Assert
-			Assert.Equal("0 b", result);
+			Assert.Equal("0 B", result);
 		}
 	}
 }
