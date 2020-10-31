@@ -1,10 +1,10 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30320.27
+# Visual Studio 15
+VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{00000000-0000-0000-0000-000000000000}") = "ByteSizeLib", "ByteSizeLib\ByteSizeLib.csproj", "{7B49A533-D1CE-4826-926B-10187E7C45F6}"
+Project("FAE04EC0-301F-11D3-BF4B-00C04F79EFBC") = "ByteSizeLib", "ByteSizeLib\ByteSizeLib.csproj", "{7B49A533-D1CE-4826-926B-10187E7C45F6}"
 EndProject
-Project("{00000000-0000-0000-0000-000000000000}") = "ByteSizeLib.Tests", "ByteSizeLib.Tests\ByteSizeLib.Tests.csproj", "{C676A686-F1B5-48CB-90B3-B1F78FA42691}"
+Project("FAE04EC0-301F-11D3-BF4B-00C04F79EFBC") = "ByteSizeLib.Tests", "ByteSizeLib.Tests\ByteSizeLib.Tests.csproj", "{C676A686-F1B5-48CB-90B3-B1F78FA42691}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -14,6 +14,9 @@ Global
 		Release|Any CPU = Release|Any CPU
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{7B49A533-D1CE-4826-926B-10187E7C45F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -40,11 +43,5 @@ Global
 		{C676A686-F1B5-48CB-90B3-B1F78FA42691}.Release|x64.Build.0 = Release|Any CPU
 		{C676A686-F1B5-48CB-90B3-B1F78FA42691}.Release|x86.ActiveCfg = Release|Any CPU
 		{C676A686-F1B5-48CB-90B3-B1F78FA42691}.Release|x86.Build.0 = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {4724D946-5F5C-42BD-97EC-217579BC5A15}
 	EndGlobalSection
 EndGlobal
