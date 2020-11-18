@@ -77,5 +77,10 @@ namespace ByteSizeLib
         {
             return this.ToString("0.##", CultureInfo.CurrentCulture, useBinaryByte: true);
         }
+
+        public string ToBinaryString(IFormatProvider formatProvider)
+        {
+            return this.ToString("0.##", formatProvider, useBinaryByte: true);
+        }
     }
 }
