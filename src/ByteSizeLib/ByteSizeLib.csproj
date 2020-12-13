@@ -6,7 +6,7 @@
     <Copyright>Copyright © Omar Khudeira 2013-2020</Copyright>
     <AssemblyTitle>ByteSize</AssemblyTitle>
     <Authors>Omar Khudeira</Authors>
-    <TargetFrameworks>net5.0;netstandard2.1;netstandard2.0;net45</TargetFrameworks>
+    <TargetFrameworks>netstandard1.0;netstandard2.1;netstandard2.0;net45;net5.0;</TargetFrameworks>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <AssemblyName>ByteSize</AssemblyName>
     <PackageId>ByteSize</PackageId>
