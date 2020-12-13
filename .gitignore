@@ -1,6 +1,8 @@
 # use glob syntax
 syntax: glob
 
+.vs/
+.idea/
 *.userprefs
 *.obj
 *.pdb

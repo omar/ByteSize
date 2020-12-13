@@ -1,0 +1,66 @@
+name: DotNet
+
+on:
+  pull_request:
+    branches:
+      - $default-branch
+  push:
+    branches:
+      - $default-branch
+  release:
+    types: [published]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    name: Build
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - uses: actions/cache@v2
+        with:
+          path: ~/.nuget/packages
+          key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-nuget-
+
+      - name: Setup dotnet
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '3.1'
+
+      - name: Setup dotnet
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '5.0'
+
+      - name: Install GitVersion
+        run: dotnet tool install -g GitVersion.Tool
+
+      - name: GitVersion
+        run: dotnet gitversion /l console /output buildserver
+
+      - name: DotNet Build
+        shell: pwsh
+        run: |
+          dotnet restore
+          dotnet build --no-restore
+          dotnet build --configuration Release --no-restore
+          dotnet pack --configuration Release --no-restore --no-build
+
+      - name: DotNet Test
+        shell: pwsh
+        run: |
+          dotnet test --no-build --no-restore
+
+      - name: Push NuGet
+        if: |
+          github.event.action == 'published'
+        shell: pwsh
+        run: dotnet nuget push **/*.nupkg --source $Env:SOURCE --api-key $Env:TOKEN
+        env:
+          SOURCE: 'https://api.nuget.org/v3/index.json'
+          TOKEN: ${{ secrets.NUGET_API_KEY }}

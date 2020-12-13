@@ -1,7 +1,0 @@
-langauge: generic
-
-services:
-  - docker
-
-script: 
-  - make test-in-docker
