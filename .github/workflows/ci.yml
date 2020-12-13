@@ -3,10 +3,10 @@ name: DotNet
 on:
   pull_request:
     branches:
-      - master
+      - $default-branch
   push:
     branches:
-      - master
+      - $default-branch
   release:
     types: [published]
 
