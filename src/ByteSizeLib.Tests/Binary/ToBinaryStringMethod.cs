@@ -1,7 +1,7 @@
 using System.Globalization;
 using Xunit;
 
-namespace ByteSizeLib.Tests.BinaryByteSizeTests
+namespace ByteSizeLib.Tests.Binary
 {
     public class ToBinaryStringMethod
     {

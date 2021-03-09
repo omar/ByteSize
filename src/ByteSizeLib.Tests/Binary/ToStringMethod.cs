@@ -1,6 +1,6 @@
 ﻿using Xunit;
 
-namespace ByteSizeLib.Tests.BinaryByteSizeTests
+namespace ByteSizeLib.Tests.Binary
 {
     public class ToStringMethod
     {
