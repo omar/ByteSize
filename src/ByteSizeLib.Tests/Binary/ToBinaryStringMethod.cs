@@ -7,7 +7,7 @@ namespace ByteSizeLib.Tests.Binary
     {
 
         [Fact]
-        public void ReturnsDefaultRepresenation()
+        public void ReturnsDefaultRepresentation()
         {
             // Arrange
             var b = ByteSize.FromKiloBytes(10);
@@ -20,7 +20,7 @@ namespace ByteSizeLib.Tests.Binary
         }
 
         [Fact]
-        public void ReturnsDefaultRepresenationCurrentCulture()
+        public void ReturnsDefaultRepresentationCurrentCulture()
         {
             // Arrange
             var b = ByteSize.FromKiloBytes(10);
