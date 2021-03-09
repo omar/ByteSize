@@ -24,7 +24,7 @@ namespace ByteSizeLib.Tests.BinaryByteSizeTests
         {
             // Arrange
             var b = ByteSize.FromKiloBytes(10);
-            var s = CultureInfo.CurrentCulture.NumberFormat.CurrencyDecimalSeparator;
+            var s = CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator;
 
             // Act
             var result = b.ToBinaryString(CultureInfo.CurrentCulture);
