@@ -32,5 +32,5 @@ namespace ByteSizeLib.Tests.BinaryByteSizeTests
             // Assert
             Assert.Equal($"9{s}77 KiB", result);
         }
-	}
+    }
 }

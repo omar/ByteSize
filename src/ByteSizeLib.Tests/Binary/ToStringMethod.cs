@@ -83,5 +83,5 @@ namespace ByteSizeLib.Tests.BinaryByteSizeTests
             // Assert
             Assert.Equal(10.ToString("0.0 TiB"), result);
         }
-	}
+    }
 }
