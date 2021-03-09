@@ -1,6 +1,3 @@
-using System;
-using System.Globalization;
-
 namespace ByteSizeLib
 {
     public partial struct ByteSize
