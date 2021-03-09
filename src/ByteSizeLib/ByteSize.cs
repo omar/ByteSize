@@ -14,8 +14,8 @@ namespace ByteSizeLib
         public const long BitsInByte = 8;
         public const string BitSymbol = "b";
         public const string ByteSymbol = "B";
-        public long Bits { get; private set; }
-        public double Bytes { get; private set; }
+        public long Bits { get; }
+        public double Bytes { get; }
 
         public string LargestWholeNumberBinarySymbol
         {
