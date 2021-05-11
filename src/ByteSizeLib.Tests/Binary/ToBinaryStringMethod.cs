@@ -1,13 +1,13 @@
 using System.Globalization;
 using Xunit;
 
-namespace ByteSizeLib.Tests.BinaryByteSizeTests
+namespace ByteSizeLib.Tests.Binary
 {
     public class ToBinaryStringMethod
     {
 
         [Fact]
-        public void ReturnsDefaultRepresenation()
+        public void ReturnsDefaultRepresentation()
         {
             // Arrange
             var b = ByteSize.FromKiloBytes(10);
@@ -20,7 +20,7 @@ namespace ByteSizeLib.Tests.BinaryByteSizeTests
         }
 
         [Fact]
-        public void ReturnsDefaultRepresenationCurrentCulture()
+        public void ReturnsDefaultRepresentationCurrentCulture()
         {
             // Arrange
             var b = ByteSize.FromKiloBytes(10);
@@ -32,5 +32,5 @@ namespace ByteSizeLib.Tests.BinaryByteSizeTests
             // Assert
             Assert.Equal($"9{s}77 KiB", result);
         }
-	}
+    }
 }
