@@ -7,7 +7,7 @@ namespace ByteSizeLib
     /// Represents a byte size value with support for decimal (KiloByte) and
     /// binary values (KibiByte).
     /// </summary>
-    public partial struct ByteSize : IComparable<ByteSize>, IEquatable<ByteSize>
+    public partial struct ByteSize : IComparable<ByteSize>, IEquatable<ByteSize>, IFormattable
     {         
         public static readonly ByteSize MinValue = ByteSize.FromBits(long.MinValue);
         public static readonly ByteSize MaxValue = ByteSize.FromBits(long.MaxValue);
@@ -168,7 +168,12 @@ namespace ByteSizeLib
             return this.ToString(format, CultureInfo.CurrentCulture);
         }
 
-        public string ToString(string format, IFormatProvider provider, bool useBinaryByte = false)
+        public string ToString(string format, IFormatProvider provider)
+        {
+            return this.ToString(format, provider, useBinaryByte: false);
+        }
+
+        public string ToString(string format, IFormatProvider provider, bool useBinaryByte)
         {
             if (!format.Contains("#") && !format.Contains("0"))
                 format = "0.## " + format;
