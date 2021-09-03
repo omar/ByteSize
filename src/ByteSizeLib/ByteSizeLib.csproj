@@ -12,23 +12,9 @@
     <PackageId>ByteSize</PackageId>
     <PackageTags>bytes</PackageTags>
     <PackageReleaseNotes>
-**HUGE BREAKING CHANGE**:
-
-By default `ByteSize` now assumes `1 KB == 1000 B` and `1 KiB == 1024 B` to
-adhere to the IEC and NIST standards (https://en.wikipedia.org/wiki/Binary_prefix).
-In the past `ByteSize` assumed `1 KB == 1024 B`, that means if you're upgrading
-from v1, you'll see differences in values.
-
-Other Breaking Changes:
-
-- Renamed property `LargestWholeNumberSymbol` and `LargestWholeNumberValue` to `LargestWholeNumberDecimalSymbol` and `LargestWholeNumberDecimalValue` respectively.
-- Drop support for all platforms _except_ `netstandard1.0` and `net45`.
-
-New Features:
-
-- Support for binary and decimal values (e.g. `ByteSize.FromKibiByte` and `ByteSize.FromKiloByte`).
-- New constructor that takes a `long` value as the number of bits.
-- Support for culture on Parse and TryParse
+- Support multiple (*) and divide (/) operators of ByteSize object
+- Add ToString IFormattable parameter overload
+- Add target for .NET 5
 
 View all release notes at https://github.com/omar/ByteSize/releases.</PackageReleaseNotes>
     <PackageProjectUrl>https://github.com/omar/ByteSize</PackageProjectUrl>

@@ -87,6 +87,12 @@ total.AddGigaBytes(10);
 var delta = total.Subtract(ByteSize.FromKiloBytes(10));
 delta = delta - ByteSize.FromGigaBytes(100);
 delta = delta.AddMegaBytes(-100);
+
+// Multiple
+var multiple = ByteSize.FromBytes(4) * ByteSize.FromBytes(2); // 8
+
+// Divide
+var divide = ByteSize.FromBytes(16) / ByteSize.FromBytes(8); // 2
 ```
 
 ### Constructors
