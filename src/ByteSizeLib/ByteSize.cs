@@ -298,6 +298,20 @@ namespace ByteSizeLib
             return new ByteSize(b.Bytes - 1);
         }
 
+        public static ByteSize operator *(ByteSize a, ByteSize b) 
+        {
+            return new ByteSize(a.Bytes * b.Bytes);
+        }
+
+        public static ByteSize operator /(ByteSize a, ByteSize b)
+        {
+            if (b.Bytes == 0)
+            {
+                throw new DivideByZeroException();
+            }
+            return new ByteSize(a.Bytes / b.Bytes);
+        }
+
         public static bool operator ==(ByteSize b1, ByteSize b2)
         {
             return b1.Bits == b2.Bits;
