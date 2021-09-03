@@ -130,7 +130,7 @@ namespace ByteSizeLib
         {
             Bits = bits;
 
-            Bytes = bits / BitsInByte;
+            Bytes = (double)bits / BitsInByte;
         }
 
         public ByteSize(double bytes)
