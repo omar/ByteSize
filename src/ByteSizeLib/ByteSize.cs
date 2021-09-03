@@ -8,7 +8,7 @@ namespace ByteSizeLib
     /// binary values (KibiByte).
     /// </summary>
     public partial struct ByteSize : IComparable<ByteSize>, IEquatable<ByteSize>
-    {         
+    {
         public static readonly ByteSize MinValue = ByteSize.FromBits(long.MinValue);
         public static readonly ByteSize MaxValue = ByteSize.FromBits(long.MaxValue);
         public const long BitsInByte = 8;
@@ -208,7 +208,7 @@ namespace ByteSizeLib
 
             if (format.IndexOf(ByteSize.BitSymbol) != -1)
                 return output(this.Bits);
-            
+
             if (useBinaryByte)
             {
                 return string.Format("{0} {1}", this.LargestWholeNumberBinaryValue.ToString(format, provider), this.LargestWholeNumberBinarySymbol);
@@ -293,6 +293,20 @@ namespace ByteSizeLib
             return new ByteSize(b.Bytes - 1);
         }
 
+        public static ByteSize operator *(ByteSize a, ByteSize b) 
+        {
+            return new ByteSize(a.Bytes * b.Bytes);
+        }
+
+        public static ByteSize operator /(ByteSize a, ByteSize b)
+        {
+            if (b.Bytes == 0)
+            {
+                throw new DivideByZeroException();
+            }
+            return new ByteSize(a.Bytes / b.Bytes);
+        }
+
         public static bool operator ==(ByteSize b1, ByteSize b2)
         {
             return b1.Bits == b2.Bits;
@@ -334,7 +348,7 @@ namespace ByteSizeLib
 
         public static ByteSize Parse(string s, NumberStyles numberStyles, IFormatProvider formatProvider)
         {
-           
+
             // Arg checking
             if (string.IsNullOrWhiteSpace(s))
                 throw new ArgumentNullException("s", "String is null or whitespace");
@@ -378,7 +392,7 @@ namespace ByteSizeLib
                     if (number % 1 != 0) // Can't have partial bits
                         throw new FormatException($"Can't have partial bits for value '{s}'.");
 
-                    return FromBits((long) number);
+                    return FromBits((long)number);
 
                 case "B":
                     return FromBytes(number);
@@ -417,7 +431,7 @@ namespace ByteSizeLib
 
                 case "pb":
                     return FromPetaBytes(number);
-                
+
                 default:
                     throw new FormatException($"Bytes of magnitude '{sizePart}' is not supported.");
             }
@@ -425,7 +439,7 @@ namespace ByteSizeLib
 
         public static bool TryParse(string s, out ByteSize result)
         {
-            try 
+            try
             {
                 result = Parse(s);
                 return true;
