@@ -168,19 +168,19 @@ namespace ByteSizeLib
             return this.ToString(format, CultureInfo.CurrentCulture);
         }
 
-        public string ToString(string format, IFormatProvider provider)
+        public string ToString(string? format, IFormatProvider? provider)
         {
             return this.ToString(format, provider, useBinaryByte: false);
         }
 
-        public string ToString(string format, IFormatProvider provider, bool useBinaryByte)
+        public string ToString(string? format, IFormatProvider? provider, bool useBinaryByte)
         {
-            if (!format.Contains("#") && !format.Contains("0"))
+            if (format != null && !format.Contains("#") && !format.Contains("0"))
                 format = "0.## " + format;
 
             if (provider == null) provider = CultureInfo.CurrentCulture;
 
-            Func<string, bool> has = s => format.IndexOf(s, StringComparison.CurrentCultureIgnoreCase) != -1;
+            Func<string, bool> has = s => format != null && format.IndexOf(s, StringComparison.CurrentCultureIgnoreCase) != -1;
             Func<double, string> output = n => n.ToString(format, provider);
 
             // Binary
@@ -208,10 +208,10 @@ namespace ByteSizeLib
                 return output(this.KiloBytes);
 
             // Byte and Bit symbol must be case-sensitive
-            if (format.IndexOf(ByteSize.ByteSymbol) != -1)
+            if (format != null && format.IndexOf(ByteSize.ByteSymbol, StringComparison.Ordinal) != -1)
                 return output(this.Bytes);
 
-            if (format.IndexOf(ByteSize.BitSymbol) != -1)
+            if (format != null && format.IndexOf(ByteSize.BitSymbol, StringComparison.Ordinal) != -1)
                 return output(this.Bits);
             
             if (useBinaryByte)
@@ -224,7 +224,7 @@ namespace ByteSizeLib
             }
         }
 
-        public override bool Equals(object value)
+        public override bool Equals(object? value)
         {
             if (value == null)
                 return false;
