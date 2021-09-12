@@ -38,6 +38,10 @@ View all release notes at https://github.com/omar/ByteSize/releases.</PackageRel
     <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="All" Version="1.0.0" />
   </ItemGroup>
 
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard1.0' ">
+    <PackageReference Include="System.ComponentModel.TypeConverter" Version="4.3.0" />
+  </ItemGroup>
+
   <!-- Workaround for https://github.com/GitTools/GitVersion/issues/1031 -->
   <PropertyGroup Condition="'$(GitVersion_SemVer)' != ''">
     <GetVersion>false</GetVersion>
