@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel;
 using System.Globalization;
 
 namespace ByteSizeLib
@@ -7,6 +8,7 @@ namespace ByteSizeLib
     /// Represents a byte size value with support for decimal (KiloByte) and
     /// binary values (KibiByte).
     /// </summary>
+    [TypeConverter(typeof(ByteSizeTypeConverter))]
     public partial struct ByteSize : IComparable<ByteSize>, IEquatable<ByteSize>, IFormattable
     {         
         public static readonly ByteSize MinValue = ByteSize.FromBits(long.MinValue);
