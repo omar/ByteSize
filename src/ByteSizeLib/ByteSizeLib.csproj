@@ -9,6 +9,8 @@
     <Authors>Omar Khudeira</Authors>
     <TargetFrameworks>netstandard1.0;netstandard2.1;netstandard2.0;net45;net5.0;</TargetFrameworks>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <LangVersion>8.0</LangVersion>
+    <Nullable>enable</Nullable>
     <AssemblyName>ByteSize</AssemblyName>
     <PackageId>ByteSize</PackageId>
     <PackageTags>bytes</PackageTags>

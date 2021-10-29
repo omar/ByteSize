@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Globalization;
 using Xunit;
 
@@ -130,7 +130,7 @@ namespace ByteSizeLib.Tests
         {
             Assert.Throws<ArgumentNullException>(() =>
                 {
-                    ByteSize.Parse(null);
+                    ByteSize.Parse(null!);
                 });
         }
 

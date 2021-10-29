@@ -166,5 +166,31 @@ namespace ByteSizeLib.Tests
             // Assert
             Assert.Equal("0 b", result);
         }
+
+        [Fact]
+        public void StringInterpolationWithFormat()
+        {
+            // Arrange
+            var b = ByteSize.FromBytes(12);
+
+            // Act
+            var result = $"{b:0.0}";
+
+            // Assert
+            Assert.Equal("12.0 B", result);
+        }
+
+        [Fact]
+        public void StringInterpolationWithoutFormat()
+        {
+            // Arrange
+            var b = ByteSize.FromBytes(12);
+
+            // Act
+            var result = $"{b}";
+
+            // Assert
+            Assert.Equal("12 B", result);
+        }
     }
 }
