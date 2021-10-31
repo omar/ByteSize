@@ -125,10 +125,7 @@ namespace ByteSizeLib
             }
         }
 
-        /// <summary>
-        /// Initializes a new instance of the ByteSize structure to the specified
-        /// number of units.
-        /// </summary>
+        /// <inheritdoc cref="FromKiloBytes" />
         /// <param name="bits">Number of bits.</param>
         public ByteSize(long bits)
             : this()
@@ -138,10 +135,7 @@ namespace ByteSizeLib
             Bytes = (double)bits / BitsInByte;
         }
 
-        /// <summary>
-        /// Initializes a new instance of the ByteSize structure to the specified
-        /// number of units.
-        /// </summary>
+        /// <inheritdoc cref="FromKiloBytes" />
         /// <param name="bytes">Number of bytes.</param>
         public ByteSize(double bytes)
             : this()
@@ -152,20 +146,14 @@ namespace ByteSizeLib
             Bytes = bytes;
         }
 
-        /// <summary>
-        /// Initializes a new instance of the ByteSize structure to the specified
-        /// number of units.
-        /// </summary>
+        /// <inheritdoc cref="FromKiloBytes" />
         /// <param name="value">Number of bits.</param>
         public static ByteSize FromBits(long value)
         {
             return new ByteSize(value);
         }
 
-        /// <summary>
-        /// Initializes a new instance of the ByteSize structure to the specified
-        /// number of units.
-        /// </summary>
+        /// <inheritdoc cref="FromKiloBytes" />
         /// <param name="value">Number of bytes.</param>
         public static ByteSize FromBytes(double value)
         {
@@ -201,7 +189,6 @@ namespace ByteSizeLib
         /// <param name="format"></param>
         /// <param name="provider"></param>
         /// <param name="useBinaryByte"></param>
-        /// <returns></returns>
         public string ToString(string? format, IFormatProvider? provider, bool useBinaryByte)
         {
             if (format != null && !format.Contains("#") && !format.Contains("0"))

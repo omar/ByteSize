@@ -30,37 +30,28 @@ namespace ByteSizeLib
             return new ByteSize(value * BytesInKiloByte);
         }
 
-        /// <inheritdoc [cref="ByteSize.FromKiloBytes"]
+        /// <inheritdoc cref="FromKiloBytes" />
         /// <param name="value">Number of megabytes (1 MB = 1000 KB).</param>
         public static ByteSize FromMegaBytes(double value)
         {
             return new ByteSize(value * BytesInMegaByte);
         }
 
-        /// <summary>
-        /// Initializes a new instance of the ByteSize structure to the specified
-        /// number of units.
-        /// </summary>
+        /// <inheritdoc cref="FromKiloBytes" />
         /// <param name="value">Number of gigabytes (1 GB = 1000 MB).</param>
         public static ByteSize FromGigaBytes(double value)
         {
             return new ByteSize(value * BytesInGigaByte);
         }
 
-        /// <summary>
-        /// Initializes a new instance of the ByteSize structure to the specified
-        /// number of units.
-        /// </summary>
+        /// <inheritdoc cref="FromKiloBytes" />
         /// <param name="value">Number of terabytes (1 TB = 1000 GB).</param>
         public static ByteSize FromTeraBytes(double value)
         {
             return new ByteSize(value * BytesInTeraByte);
         }
 
-        /// <summary>
-        /// Initializes a new instance of the ByteSize structure to the specified
-        /// number of units.
-        /// </summary>
+        /// <inheritdoc cref="FromKiloBytes" />
         /// <param name="value">Number of terabytes (1 PB = 1000 TB).</param>
         public static ByteSize FromPetaBytes(double value)
         {
@@ -77,40 +68,28 @@ namespace ByteSizeLib
             return this + ByteSize.FromKiloBytes(value);
         }
 
-        /// <summary>
-        /// Returns a new ByteSize object whose value is the sum of the specified
-        /// value and this instance.
-        /// </summary>
+        /// <inheritdoc cref="AddKiloBytes" />
         /// <param name="value">Number of megabytes (1 MB = 1000 KB).</param>
         public ByteSize AddMegaBytes(double value)
         {
             return this + ByteSize.FromMegaBytes(value);
         }
 
-        /// <summary>
-        /// Returns a new ByteSize object whose value is the sum of the specified
-        /// value and this instance.
-        /// </summary>
+        /// <inheritdoc cref="AddKiloBytes" />
         /// <param name="value">Number of gigabytes (1 GB = 1000 MB).</param>
         public ByteSize AddGigaBytes(double value)
         {
             return this + ByteSize.FromGigaBytes(value);
         }
 
-        /// <summary>
-        /// Returns a new ByteSize object whose value is the sum of the specified
-        /// value and this instance.
-        /// </summary>
+        /// <inheritdoc cref="AddKiloBytes" />
         /// <param name="value">Number of terabytes (1 TB = 1000 GB).</param>
         public ByteSize AddTeraBytes(double value)
         {
             return this + ByteSize.FromTeraBytes(value);
         }
 
-        /// <summary>
-        /// Returns a new ByteSize object whose value is the sum of the specified
-        /// value and this instance.
-        /// </summary>
+        /// <inheritdoc cref="AddKiloBytes" />
         /// <param name="value">Number of petabytes (1 PB = 1000 TB).</param>
         public ByteSize AddPetaBytes(double value)
         {
