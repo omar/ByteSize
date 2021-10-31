@@ -125,6 +125,11 @@ namespace ByteSizeLib
             }
         }
 
+        /// <summary>
+        /// Initializes a new instance of the ByteSize structure to the specified
+        /// number of units.
+        /// </summary>
+        /// <param name="bits">Number of bits.</param>
         public ByteSize(long bits)
             : this()
         {
@@ -133,6 +138,11 @@ namespace ByteSizeLib
             Bytes = (double)bits / BitsInByte;
         }
 
+        /// <summary>
+        /// Initializes a new instance of the ByteSize structure to the specified
+        /// number of units.
+        /// </summary>
+        /// <param name="bytes">Number of bytes.</param>
         public ByteSize(double bytes)
             : this()
         {
@@ -142,37 +152,56 @@ namespace ByteSizeLib
             Bytes = bytes;
         }
 
+        /// <summary>
+        /// Initializes a new instance of the ByteSize structure to the specified
+        /// number of units.
+        /// </summary>
+        /// <param name="value">Number of bits.</param>
         public static ByteSize FromBits(long value)
         {
             return new ByteSize(value);
         }
 
+        /// <summary>
+        /// Initializes a new instance of the ByteSize structure to the specified
+        /// number of units.
+        /// </summary>
+        /// <param name="value">Number of bytes.</param>
         public static ByteSize FromBytes(double value)
         {
             return new ByteSize(value);
         }
 
         /// <summary>
-        /// Converts the value of the current object to a string.
-        /// The prefix symbol (bit, byte, kilo, mebi, gibi, tebi) used is the
+        /// Converts the value of the current object to a decimal byte string.
+        /// The prefix symbol (bit, byte, kilo, mega, etc.) used is the
         /// largest prefix such that the corresponding value is greater than or
         /// equal to one.
+        /// Use <see cref="ByteSize.ToBinaryString"/> for binary string representation.
         /// </summary>
         public override string ToString()
         {
             return this.ToString("0.##", CultureInfo.CurrentCulture);
         }
 
+        /// <inheritdoc />
+        /// <param name="format">Number of pebibytes (1 PiB = 1024 TiB).</param>
         public string ToString(string format)
         {
             return this.ToString(format, CultureInfo.CurrentCulture);
         }
 
+        /// <inheritdoc />
         public string ToString(string? format, IFormatProvider? provider)
         {
             return this.ToString(format, provider, useBinaryByte: false);
         }
 
+        /// <inheritdoc />
+        /// <param name="format"></param>
+        /// <param name="provider"></param>
+        /// <param name="useBinaryByte"></param>
+        /// <returns></returns>
         public string ToString(string? format, IFormatProvider? provider, bool useBinaryByte)
         {
             if (format != null && !format.Contains("#") && !format.Contains("0"))
