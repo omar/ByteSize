@@ -172,23 +172,43 @@ namespace ByteSizeLib
             return this.ToString("0.##", CultureInfo.CurrentCulture);
         }
 
-        /// <inheritdoc />
-        /// <param name="format">Number of pebibytes (1 PiB = 1024 TiB).</param>
+        /// <summary>
+        /// Converts the value of the current object to a decimal byte string.
+        /// The prefix symbol (bit, byte, kilo, mega, etc.) used is the
+        /// largest prefix such that the corresponding value is greater than or
+        /// equal to one.
+        /// Use <see cref="ByteSize.ToBinaryString"/> for binary string representation.
+        /// </summary>
+        /// <param name="format">A numeric format string.</param>
         public string ToString(string format)
         {
             return this.ToString(format, CultureInfo.CurrentCulture);
         }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// Converts the value of the current object to a decimal byte string.
+        /// The prefix symbol (bit, byte, kilo, mega, etc.) used is the
+        /// largest prefix such that the corresponding value is greater than or
+        /// equal to one.
+        /// Use <see cref="ByteSize.ToBinaryString"/> for binary string representation.
+        /// </summary>
+        /// <param name="format">A numeric format string.</param>
+        /// <param name="provider">An object that supplies culture-specific formatting information.</param>
         public string ToString(string? format, IFormatProvider? provider)
         {
             return this.ToString(format, provider, useBinaryByte: false);
         }
 
-        /// <inheritdoc />
-        /// <param name="format"></param>
-        /// <param name="provider"></param>
-        /// <param name="useBinaryByte"></param>
+        /// <summary>
+        /// Converts the value of the current object to a decimal byte string.
+        /// The prefix symbol (bit, byte, kilo, mega, etc.) used is the
+        /// largest prefix such that the corresponding value is greater than or
+        /// equal to one.
+        /// Use <see cref="ByteSize.ToBinaryString"/> for binary string representation.
+        /// </summary>
+        /// <param name="format">A numeric format string.</param>
+        /// <param name="provider">An object that supplies culture-specific formatting information.</param>
+        /// <param name="useBinaryByte">Set to True to use binary byte values (1 KiB = 1024) instead of decimal values (1 KB = 1000 B).</param>
         public string ToString(string? format, IFormatProvider? provider, bool useBinaryByte)
         {
             if (format != null && !format.Contains("#") && !format.Contains("0"))
