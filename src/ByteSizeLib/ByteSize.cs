@@ -125,7 +125,7 @@ namespace ByteSizeLib
             }
         }
 
-        /// <inheritdoc cref="FromKiloBytes" />
+        /// <inheritdoc cref="FromBits" />
         /// <param name="bits">Number of bits.</param>
         public ByteSize(long bits)
             : this()
@@ -135,7 +135,7 @@ namespace ByteSizeLib
             Bytes = (double)bits / BitsInByte;
         }
 
-        /// <inheritdoc cref="FromKiloBytes" />
+        /// <inheritdoc cref="FromBits" />
         /// <param name="bytes">Number of bytes.</param>
         public ByteSize(double bytes)
             : this()
@@ -146,14 +146,17 @@ namespace ByteSizeLib
             Bytes = bytes;
         }
 
-        /// <inheritdoc cref="FromKiloBytes" />
+        /// <summary>
+        /// Initializes a new instance of the ByteSize structure to the specified
+        /// number of units.
+        /// </summary>
         /// <param name="value">Number of bits.</param>
         public static ByteSize FromBits(long value)
         {
             return new ByteSize(value);
         }
 
-        /// <inheritdoc cref="FromKiloBytes" />
+        /// <inheritdoc cref="FromBits" />
         /// <param name="value">Number of bytes.</param>
         public static ByteSize FromBytes(double value)
         {
@@ -289,21 +292,34 @@ namespace ByteSizeLib
             return this.Bits.CompareTo(other.Bits);
         }
 
+        /// <summary>
+        /// Returns a new ByteSize object whose value is the sum of the specified
+        /// value and this instance.
+        /// </summary>
+        /// <param name="bs">The ByteSize instance to sum.</param>
         public ByteSize Add(ByteSize bs)
         {
             return new ByteSize(this.Bytes + bs.Bytes);
         }
 
+        /// <inheritdoc cref="Add" />
+        /// <param name="value">The number of bits.</param>
         public ByteSize AddBits(long value)
         {
             return this + FromBits(value);
         }
 
+        /// <inheritdoc cref="Add" />
+        /// <param name="value">The number of bytes.</param>
         public ByteSize AddBytes(double value)
         {
             return this + ByteSize.FromBytes(value);
         }
 
+        /// <summary>
+        /// Subtracts the specified ByteSize object with this instance.
+        /// </summary>
+        /// <param name="bs">The ByteSize instance to subtract.</param>
         public ByteSize Subtract(ByteSize bs)
         {
             return new ByteSize(this.Bytes - bs.Bytes);
@@ -378,15 +394,31 @@ namespace ByteSizeLib
             return b1.Bits >= b2.Bits;
         }
 
+        /// <summary>
+        /// Converts the string representation of a binary OR decimal byte to its ByteSize equivalent.
+        /// </summary>
+        /// <param name="s">A string that contains a ByteSize to convert.</param>
         public static ByteSize Parse(string s)
         {
             return Parse(s, NumberFormatInfo.CurrentInfo);
         }
+
+        /// <summary>
+        /// Converts the string representation of a binary OR decimal byte to its ByteSize equivalent.
+        /// </summary>
+        /// <param name="s">A string that contains a ByteSize to convert.</param>
+        /// <param name="provider">An object that supplies culture-specific formatting information.</param>
         public static ByteSize Parse(string s, IFormatProvider formatProvider)
         {
             return Parse(s, NumberStyles.Float | NumberStyles.AllowThousands, formatProvider);
         }
 
+        /// <summary>
+        /// Converts the string representation of a binary OR decimal byte to its ByteSize equivalent.
+        /// </summary>
+        /// <param name="s">A string that contains a ByteSize to convert.</param>
+        /// <param name="numberStyles">Number style of the string being parsed.</param>
+        /// <param name="provider">An object that supplies culture-specific formatting information.</param>
         public static ByteSize Parse(string s, NumberStyles numberStyles, IFormatProvider formatProvider)
         {
            
