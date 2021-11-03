@@ -168,7 +168,7 @@ namespace ByteSizeLib
         /// The prefix symbol (bit, byte, kilo, mega, etc.) used is the
         /// largest prefix such that the corresponding value is greater than or
         /// equal to one.
-        /// Use <see cref="ByteSize.ToBinaryString"/> for binary string representation.
+        /// Use <see cref="ByteSize.ToBinaryString()"/> for binary string representation.
         /// </summary>
         public override string ToString()
         {
@@ -180,7 +180,7 @@ namespace ByteSizeLib
         /// The prefix symbol (bit, byte, kilo, mega, etc.) used is the
         /// largest prefix such that the corresponding value is greater than or
         /// equal to one.
-        /// Use <see cref="ByteSize.ToBinaryString"/> for binary string representation.
+        /// Use <see cref="ByteSize.ToBinaryString()"/> for binary string representation.
         /// </summary>
         /// <param name="format">A numeric format string.</param>
         public string ToString(string format)
@@ -193,7 +193,7 @@ namespace ByteSizeLib
         /// The prefix symbol (bit, byte, kilo, mega, etc.) used is the
         /// largest prefix such that the corresponding value is greater than or
         /// equal to one.
-        /// Use <see cref="ByteSize.ToBinaryString"/> for binary string representation.
+        /// Use <see cref="ByteSize.ToBinaryString()"/> for binary string representation.
         /// </summary>
         /// <param name="format">A numeric format string.</param>
         /// <param name="provider">An object that supplies culture-specific formatting information.</param>
@@ -207,7 +207,7 @@ namespace ByteSizeLib
         /// The prefix symbol (bit, byte, kilo, mega, etc.) used is the
         /// largest prefix such that the corresponding value is greater than or
         /// equal to one.
-        /// Use <see cref="ByteSize.ToBinaryString"/> for binary string representation.
+        /// Use <see cref="ByteSize.ToBinaryString()"/> for binary string representation.
         /// </summary>
         /// <param name="format">A numeric format string.</param>
         /// <param name="provider">An object that supplies culture-specific formatting information.</param>
@@ -407,7 +407,7 @@ namespace ByteSizeLib
         /// Converts the string representation of a binary OR decimal byte to its ByteSize equivalent.
         /// </summary>
         /// <param name="s">A string that contains a ByteSize to convert.</param>
-        /// <param name="provider">An object that supplies culture-specific formatting information.</param>
+        /// <param name="formatProvider">An object that supplies culture-specific formatting information.</param>
         public static ByteSize Parse(string s, IFormatProvider formatProvider)
         {
             return Parse(s, NumberStyles.Float | NumberStyles.AllowThousands, formatProvider);
@@ -418,7 +418,7 @@ namespace ByteSizeLib
         /// </summary>
         /// <param name="s">A string that contains a ByteSize to convert.</param>
         /// <param name="numberStyles">Number style of the string being parsed.</param>
-        /// <param name="provider">An object that supplies culture-specific formatting information.</param>
+        /// <param name="formatProvider">An object that supplies culture-specific formatting information.</param>
         public static ByteSize Parse(string s, NumberStyles numberStyles, IFormatProvider formatProvider)
         {
            
