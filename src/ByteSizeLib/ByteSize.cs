@@ -126,7 +126,7 @@ namespace ByteSizeLib
         }
 
         /// <summary>
-        /// Initializes a new instance of the ByteSize structure to the specified
+        /// Initializes a new instance of the <see cref="ByteSize" /> structure to the specified
         /// number of units.
         /// </summary>
         /// <param name="bits">Number of bits.</param>
@@ -139,7 +139,7 @@ namespace ByteSizeLib
         }
 
         /// <summary>
-        /// Initializes a new instance of the ByteSize structure to the specified
+        /// Initializes a new instance of the <see cref="ByteSize" /> structure to the specified
         /// number of units.
         /// </summary>
         /// <param name="bytes">Number of bytes.</param>
@@ -296,10 +296,10 @@ namespace ByteSizeLib
         }
 
         /// <summary>
-        /// Returns a new ByteSize object whose value is the sum of the specified
+        /// Returns a new <see cref="ByteSize" /> object whose value is the sum of the specified
         /// value and this instance.
         /// </summary>
-        /// <param name="bs">The ByteSize instance to sum.</param>
+        /// <param name="bs">The <see cref="ByteSize" /> instance to sum.</param>
         public ByteSize Add(ByteSize bs)
         {
             return new ByteSize(this.Bytes + bs.Bytes);
@@ -320,9 +320,9 @@ namespace ByteSizeLib
         }
 
         /// <summary>
-        /// Subtracts the specified ByteSize object with this instance.
+        /// Subtracts the specified <see cref="ByteSize" /> object with this instance.
         /// </summary>
-        /// <param name="bs">The ByteSize instance to subtract.</param>
+        /// <param name="bs">The <see cref="ByteSize" /> instance to subtract.</param>
         public ByteSize Subtract(ByteSize bs)
         {
             return new ByteSize(this.Bytes - bs.Bytes);
@@ -398,18 +398,18 @@ namespace ByteSizeLib
         }
 
         /// <summary>
-        /// Converts the string representation of a binary OR decimal byte to its ByteSize equivalent.
+        /// Converts the string representation of a binary or decimal byte to its <see cref="ByteSize" /> equivalent.
         /// </summary>
-        /// <param name="s">A string that contains a ByteSize to convert.</param>
+        /// <param name="s">A string that contains a <see cref="ByteSize" /> to convert.</param>
         public static ByteSize Parse(string s)
         {
             return Parse(s, NumberFormatInfo.CurrentInfo);
         }
 
         /// <summary>
-        /// Converts the string representation of a binary OR decimal byte to its ByteSize equivalent.
+        /// Converts the string representation of a binary or decimal byte to its <see cref="ByteSize" /> equivalent.
         /// </summary>
-        /// <param name="s">A string that contains a ByteSize to convert.</param>
+        /// <param name="s">A string that contains a <see cref="ByteSize" /> to convert.</param>
         /// <param name="formatProvider">An object that supplies culture-specific formatting information.</param>
         public static ByteSize Parse(string s, IFormatProvider formatProvider)
         {
@@ -417,9 +417,9 @@ namespace ByteSizeLib
         }
 
         /// <summary>
-        /// Converts the string representation of a binary OR decimal byte to its ByteSize equivalent.
+        /// Converts the string representation of a binary or decimal byte to its <see cref="ByteSize" /> equivalent.
         /// </summary>
-        /// <param name="s">A string that contains a ByteSize to convert.</param>
+        /// <param name="s">A string that contains a <see cref="ByteSize" /> to convert.</param>
         /// <param name="numberStyles">Number style of the string being parsed.</param>
         /// <param name="formatProvider">An object that supplies culture-specific formatting information.</param>
         public static ByteSize Parse(string s, NumberStyles numberStyles, IFormatProvider formatProvider)
