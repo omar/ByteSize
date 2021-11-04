@@ -20,35 +20,35 @@ namespace ByteSizeLib
         public double TeraBytes => Bytes / BytesInTeraByte;
         public double PetaBytes => Bytes / BytesInPetaByte;
 
-        /// <inheritdoc cref="FromBits" />
+        /// <inheritdoc cref="ByteSize.ByteSize(long)" />
         /// <param name="value">Number of kilobytes (1 KB = 1000 B).</param>
         public static ByteSize FromKiloBytes(double value)
         {
             return new ByteSize(value * BytesInKiloByte);
         }
 
-        /// <inheritdoc cref="FromBits" />
+        /// <inheritdoc cref="ByteSize.ByteSize(long)" />
         /// <param name="value">Number of megabytes (1 MB = 1000 KB).</param>
         public static ByteSize FromMegaBytes(double value)
         {
             return new ByteSize(value * BytesInMegaByte);
         }
 
-        /// <inheritdoc cref="FromBits" />
+        /// <inheritdoc cref="ByteSize.ByteSize(long)" />
         /// <param name="value">Number of gigabytes (1 GB = 1000 MB).</param>
         public static ByteSize FromGigaBytes(double value)
         {
             return new ByteSize(value * BytesInGigaByte);
         }
 
-        /// <inheritdoc cref="FromBits" />
+        /// <inheritdoc cref="ByteSize.ByteSize(long)" />
         /// <param name="value">Number of terabytes (1 TB = 1000 GB).</param>
         public static ByteSize FromTeraBytes(double value)
         {
             return new ByteSize(value * BytesInTeraByte);
         }
 
-        /// <inheritdoc cref="FromBits" />
+        /// <inheritdoc cref="ByteSize.ByteSize(long)" />
         /// <param name="value">Number of terabytes (1 PB = 1000 TB).</param>
         public static ByteSize FromPetaBytes(double value)
         {

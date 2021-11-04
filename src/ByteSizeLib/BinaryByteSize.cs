@@ -23,35 +23,35 @@ namespace ByteSizeLib
         public double TebiBytes => Bytes / BytesInTebiByte;
         public double PebiBytes => Bytes / BytesInPebiByte;
 
-        /// <inheritdoc cref="FromBits" />
+        /// <inheritdoc cref="ByteSize.ByteSize(long)" />
         /// <param name="value">Number of kibibytes (1 KiB = 1024 B).</param>
         public static ByteSize FromKibiBytes(double value)
         {
             return new ByteSize(value * BytesInKibiByte);
         }
 
-        /// <inheritdoc cref="FromBits" />
+        /// <inheritdoc cref="ByteSize.ByteSize(long)" />
         /// <param name="value">Number of mebibytes (1 MiB = 1024 KiB).</param>
         public static ByteSize FromMebiBytes(double value)
         {
             return new ByteSize(value * BytesInMebiByte);
         }
 
-        /// <inheritdoc cref="FromBits" />
+        /// <inheritdoc cref="ByteSize.ByteSize(long)" />
         /// <param name="value">Number of gibibytes (1 GiB = 1024 MiB).</param>
         public static ByteSize FromGibiBytes(double value)
         {
             return new ByteSize(value * BytesInGibiByte);
         }
 
-        /// <inheritdoc cref="FromBits" />
+        /// <inheritdoc cref="ByteSize.ByteSize(long)" />
         /// <param name="value">Number of tebibytes (1 TiB = 1024 GiB).</param>
         public static ByteSize FromTebiBytes(double value)
         {
             return new ByteSize(value * BytesInTebiByte);
         }
 
-        /// <inheritdoc cref="FromBits" />
+        /// <inheritdoc cref="ByteSize.ByteSize(long)" />
         /// <param name="value">Number of pebibytes (1 PiB = 1024 TiB).</param>
         public static ByteSize FromPebiBytes(double value)
         {

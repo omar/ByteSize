@@ -125,7 +125,10 @@ namespace ByteSizeLib
             }
         }
 
-        /// <inheritdoc cref="FromBits" />
+        /// <summary>
+        /// Initializes a new instance of the ByteSize structure to the specified
+        /// number of units.
+        /// </summary>
         /// <param name="bits">Number of bits.</param>
         public ByteSize(long bits)
             : this()
@@ -135,7 +138,10 @@ namespace ByteSizeLib
             Bytes = (double)bits / BitsInByte;
         }
 
-        /// <inheritdoc cref="FromBits" />
+        /// <summary>
+        /// Initializes a new instance of the ByteSize structure to the specified
+        /// number of units.
+        /// </summary>
         /// <param name="bytes">Number of bytes.</param>
         public ByteSize(double bytes)
             : this()
@@ -146,17 +152,14 @@ namespace ByteSizeLib
             Bytes = bytes;
         }
 
-        /// <summary>
-        /// Initializes a new instance of the ByteSize structure to the specified
-        /// number of units.
-        /// </summary>
+        /// <inheritdoc cref="ByteSize.ByteSize(long)" />
         /// <param name="value">Number of bits.</param>
         public static ByteSize FromBits(long value)
         {
             return new ByteSize(value);
         }
 
-        /// <inheritdoc cref="FromBits" />
+        /// <inheritdoc cref="ByteSize.ByteSize(long)" />
         /// <param name="value">Number of bytes.</param>
         public static ByteSize FromBytes(double value)
         {
