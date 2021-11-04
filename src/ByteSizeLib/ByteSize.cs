@@ -214,7 +214,7 @@ namespace ByteSizeLib
         /// </summary>
         /// <param name="format">A numeric format string.</param>
         /// <param name="provider">An object that supplies culture-specific formatting information.</param>
-        /// <param name="useBinaryByte">Set to True to use binary byte values (1 KiB = 1024) instead of decimal values (1 KB = 1000 B).</param>
+        /// <param name="useBinaryByte"><see langword="true"/> to use binary byte values (1 KiB = 1024) instead of decimal values (1 KB = 1000 B).</param>
         public string ToString(string? format, IFormatProvider? provider, bool useBinaryByte)
         {
             if (format != null && !format.Contains("#") && !format.Contains("0"))
