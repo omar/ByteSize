@@ -320,7 +320,8 @@ namespace ByteSizeLib
         }
 
         /// <summary>
-        /// Subtracts the specified <see cref="ByteSize" /> object with this instance.
+        /// Returns a new <see cref="ByteSize" /> object whose value is the difference of the specified
+        /// value and this instance.
         /// </summary>
         /// <param name="bs">The <see cref="ByteSize" /> instance to subtract.</param>
         public ByteSize Subtract(ByteSize bs)
