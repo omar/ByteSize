@@ -8,15 +8,28 @@ namespace ByteSizeLib
     /// binary values (KibiByte).
     /// </summary>
     public partial struct ByteSize : IComparable<ByteSize>, IEquatable<ByteSize>, IFormattable
-    {         
+    {
+        /// <summary>Minimum number of allowed bits in an instance.</summary>
         public static readonly ByteSize MinValue = ByteSize.FromBits(long.MinValue);
+        /// <summary>Maximum number of allowed bits in an instance.</summary>
         public static readonly ByteSize MaxValue = ByteSize.FromBits(long.MaxValue);
+        /// <summary>Number of bits in 1 byte.</summary>
         public const long BitsInByte = 8;
+        /// <summary>Bit symbol.</summary>
         public const string BitSymbol = "b";
+        /// <summary>Byte symbol.</summary>
         public const string ByteSymbol = "B";
+        /// <summary>Gets the number of bits represented by this object.</summary>
         public long Bits { get; }
+        /// <summary>Gets the number of bytes represented by this object.</summary>
         public double Bytes { get; }
 
+        /// <summary>
+        /// Gets the largest whole number binary symbol.
+        /// Example: 
+        /// <para>- 1024 KiB will return MiB</para>
+        /// <para>- 1023 KiB will return KiB</para>
+        /// </summary>
         public string LargestWholeNumberBinarySymbol
         {
             get
@@ -44,6 +57,12 @@ namespace ByteSizeLib
             }
         }
 
+        /// <summary>
+        /// Gets the largest whole number decimal symbol.
+        /// Example: 
+        /// <para>- 1000 KB will return MB</para>
+        /// <para>- 999 KB will return KB</para>
+        /// </summary>
         public string LargestWholeNumberDecimalSymbol
         {
             get
@@ -71,6 +90,12 @@ namespace ByteSizeLib
             }
         }
 
+        /// <summary>
+        /// Gets the largest whole number binary symbol.
+        /// Example: 
+        /// <para>- 1024 KiB will return 1</para>
+        /// <para>- 1023 KiB will return 1023</para>
+        /// </summary>
         public double LargestWholeNumberBinaryValue
         {
             get
@@ -98,6 +123,12 @@ namespace ByteSizeLib
             }
         }
 
+        /// <summary>
+        /// Gets the largest whole number decimal symbol.
+        /// Example: 
+        /// <para>- 1000 KB will return 1</para>
+        /// <para>- 999 KB will return 999</para>
+        /// </summary>
         public double LargestWholeNumberDecimalValue
         {
             get
@@ -266,6 +297,10 @@ namespace ByteSizeLib
             }
         }
 
+        /// <summary>
+        /// Indicates whether an instance has equal number of bits to this instance.
+        /// </summary>
+        /// <param name="value">The instance to compare.</param>
         public override bool Equals(object? value)
         {
             if (value == null)
@@ -280,16 +315,31 @@ namespace ByteSizeLib
             return Equals(other);
         }
 
+        /// <summary>
+        /// Indicates whether an instance has equal number of bits to this instance.
+        /// </summary>
+        /// <param name="value">The instance to compare.</param>
         public bool Equals(ByteSize value)
         {
             return this.Bits == value.Bits;
         }
 
+        /// <summary>Returns the hash code for this instance.</summary>
         public override int GetHashCode()
         {
             return this.Bits.GetHashCode();
         }
 
+        /// <summary>
+        /// Compares this instance's bit count to the other instance's bit count.
+        /// </summary>
+        /// <param name="other">The instance to compare.</param>
+        /// <returns>
+        /// A signed number indicating the relative values of this instance and other. 
+        /// <para>Negative return value: this instance is less than the one specified.</para>
+        /// <para>Zero return value: this instance is equal to the one specified.</para>
+        /// <para>Positive return value: this instance is greater than the one specified.</para>
+        /// </returns>
         public int CompareTo(ByteSize other)
         {
             return this.Bits.CompareTo(other.Bits);
@@ -329,36 +379,68 @@ namespace ByteSizeLib
             return new ByteSize(this.Bytes - bs.Bytes);
         }
 
+        /// <inheritdoc cref="Add" />
+        /// <param name="b1">The first instance.</param>
+        /// <param name="b2">The second instance.</param>
         public static ByteSize operator +(ByteSize b1, ByteSize b2)
         {
             return new ByteSize(b1.Bytes + b2.Bytes);
         }
 
+        /// <summary>
+        /// Increment this instance by 1 byte.
+        /// </summary>
+        /// <param name="b">The instance to increment.</param>
         public static ByteSize operator ++(ByteSize b)
         {
+            // TODO: I can't imagine this method being useful. Might want to get rid of.
             return new ByteSize(b.Bytes + 1);
         }
 
+        /// <summary>
+        /// Returns a instance whose value is the negative value of the specified instance.
+        /// </summary>
+        /// <param name="b">The instance to be negated.</param>
         public static ByteSize operator -(ByteSize b)
         {
             return new ByteSize(-b.Bytes);
         }
 
+        /// <inheritdoc cref="Subtract" />
+        /// <param name="b1">The first instance.</param>
+        /// <param name="b2">The second instance.</param>
         public static ByteSize operator -(ByteSize b1, ByteSize b2)
         {
             return new ByteSize(b1.Bytes - b2.Bytes);
         }
 
+        /// <summary>
+        /// Decrement this instance by 1 byte.
+        /// </summary>
+        /// <param name="b">The instance to decrement.</param>
         public static ByteSize operator --(ByteSize b)
         {
+            // TODO: I can't imagine this method being useful. Might want to get rid of.
             return new ByteSize(b.Bytes - 1);
         }
 
+        /// <summary>
+        /// Multiply two instances.
+        /// </summary>
+        /// <param name="a">First instance to multiply.</param>
+        /// <param name="b">Second instance to multiply.</param>
         public static ByteSize operator *(ByteSize a, ByteSize b) 
         {
             return new ByteSize(a.Bytes * b.Bytes);
         }
 
+        /// <summary>
+        /// Divides two instances.
+        /// </summary>
+        /// <param name="a">The dividend.</param>
+        /// <param name="b">The divisor.</param>
+        /// <returns></returns>
+        /// <exception cref="DivideByZeroException">Returned if b is zero.</exception>
         public static ByteSize operator /(ByteSize a, ByteSize b)
         {
             if (b.Bytes == 0)
@@ -368,31 +450,61 @@ namespace ByteSizeLib
             return new ByteSize(a.Bytes / b.Bytes);
         }
 
+        /// <summary>
+        /// Indicates whether two instances have equal number of bits.
+        /// </summary>
+        /// <param name="b1">The first instance to compare.</param>
+        /// <param name="b2">The second instance to compare.</param>
         public static bool operator ==(ByteSize b1, ByteSize b2)
         {
             return b1.Bits == b2.Bits;
         }
 
+        /// <summary>
+        /// Indicates whether two instances have different number of bits.
+        /// </summary>
+        /// <param name="b1">The first instance to compare.</param>
+        /// <param name="b2">The second instance to compare.</param>
         public static bool operator !=(ByteSize b1, ByteSize b2)
         {
             return b1.Bits != b2.Bits;
         }
 
+        /// <summary>
+        /// Indicates whether one instance has less bits than the other.
+        /// </summary>
+        /// <param name="b1">The first instance to compare.</param>
+        /// <param name="b2">The second instance to compare.</param>
         public static bool operator <(ByteSize b1, ByteSize b2)
         {
             return b1.Bits < b2.Bits;
         }
 
+        /// <summary>
+        /// Indicates whether one instance has less or equal bits or than the other.
+        /// </summary>
+        /// <param name="b1">The first instance to compare.</param>
+        /// <param name="b2">The second instance to compare.</param>
         public static bool operator <=(ByteSize b1, ByteSize b2)
         {
             return b1.Bits <= b2.Bits;
         }
 
+        /// <summary>
+        /// Indicates whether one instance has more bits or than the other.
+        /// </summary>
+        /// <param name="b1">The first instance to compare.</param>
+        /// <param name="b2">The second instance to compare.</param>
         public static bool operator >(ByteSize b1, ByteSize b2)
         {
             return b1.Bits > b2.Bits;
         }
 
+        /// <summary>
+        /// Indicates whether one instance has more bits or equal than the other.
+        /// </summary>
+        /// <param name="b1">The first instance to compare.</param>
+        /// <param name="b2">The second instance to compare.</param>
         public static bool operator >=(ByteSize b1, ByteSize b2)
         {
             return b1.Bits >= b2.Bits;
@@ -514,6 +626,12 @@ namespace ByteSizeLib
             }
         }
 
+        /// <summary>
+        /// Converts the string representation of a binary or decimal byte to its <see cref="ByteSize" /> equivalent.
+        /// Return value indicates success or failure of the parsing.
+        /// </summary>
+        /// <param name="s">A string that contains a <see cref="ByteSize" /> to convert.</param>
+        /// <param name="result">Object reference to store the result if successful.</param>
         public static bool TryParse(string s, out ByteSize result)
         {
             try 
@@ -528,6 +646,14 @@ namespace ByteSizeLib
             }
         }
 
+        /// <summary>
+        /// Converts the string representation of a binary or decimal byte to its <see cref="ByteSize" /> equivalent.
+        /// Return value indicates success or failure of the parsing.
+        /// </summary>
+        /// <param name="s">A string that contains a <see cref="ByteSize" /> to convert.</param>
+        /// <param name="numberStyles">Number style of the string being parsed.</param>
+        /// <param name="formatProvider">An object that supplies culture-specific formatting information.</param>
+        /// <param name="result">Object reference to store the result if successful.</param>
         public static bool TryParse(string s, NumberStyles numberStyles, IFormatProvider formatProvider, out ByteSize result)
         {
             try
