@@ -1,5 +1,3 @@
-using System;
-
 namespace ByteSizeLib
 {
     public partial struct ByteSize
