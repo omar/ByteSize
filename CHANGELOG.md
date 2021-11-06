@@ -1,4 +1,4 @@
-### 2.1.1 (2021-06-11)
+### 2.1.1 (2021-11-06)
 - Add method documentation
 - Fix potential System.NullReferenceException in the ToString() methods
 
