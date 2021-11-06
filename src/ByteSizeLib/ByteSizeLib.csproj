@@ -8,7 +8,6 @@
     <AssemblyTitle>ByteSize</AssemblyTitle>
     <Authors>Omar Khudeira</Authors>
     <TargetFrameworks>netstandard1.0;netstandard2.1;netstandard2.0;net45;net5.0;</TargetFrameworks>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <LangVersion>8.0</LangVersion>
     <Nullable>enable</Nullable>
     <AssemblyName>ByteSize</AssemblyName>
@@ -28,6 +27,7 @@ View all release notes at https://github.com/omar/ByteSize/releases.</PackageRel
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(GITHUB_ACTIONS)' == 'true'">
