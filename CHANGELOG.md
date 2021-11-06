@@ -1,5 +1,5 @@
 ### 2.1.1 (2021-11-06)
-- Add method documentation
+- Add documentation
 - Fix potential System.NullReferenceException in the ToString() methods
 
 ### 2.1.0 (2021-09-03)
