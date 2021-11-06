@@ -480,7 +480,7 @@ namespace ByteSizeLib
         }
 
         /// <summary>
-        /// Indicates whether one instance has less or equal bits or than the other.
+        /// Indicates whether one instance has less or equal bits than the other.
         /// </summary>
         /// <param name="b1">The first instance to compare.</param>
         /// <param name="b2">The second instance to compare.</param>
@@ -490,7 +490,7 @@ namespace ByteSizeLib
         }
 
         /// <summary>
-        /// Indicates whether one instance has more bits or than the other.
+        /// Indicates whether one instance has more bits than the other.
         /// </summary>
         /// <param name="b1">The first instance to compare.</param>
         /// <param name="b2">The second instance to compare.</param>
