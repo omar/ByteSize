@@ -388,7 +388,7 @@ namespace ByteSizeLib
         }
 
         /// <summary>
-        /// Increment this instance by 1 byte.
+        /// Returns an instance whose value is 1 byte greater than this instance.
         /// </summary>
         /// <param name="b">The instance to increment.</param>
         public static ByteSize operator ++(ByteSize b)
@@ -398,7 +398,7 @@ namespace ByteSizeLib
         }
 
         /// <summary>
-        /// Returns a instance whose value is the negative value of the specified instance.
+        /// Returns a new instance whose value is the negative value of the specified instance.
         /// </summary>
         /// <param name="b">The instance to be negated.</param>
         public static ByteSize operator -(ByteSize b)
@@ -415,7 +415,7 @@ namespace ByteSizeLib
         }
 
         /// <summary>
-        /// Decrement this instance by 1 byte.
+        /// Returns a new instance whose value is 1 byte less than this instance.
         /// </summary>
         /// <param name="b">The instance to decrement.</param>
         public static ByteSize operator --(ByteSize b)
