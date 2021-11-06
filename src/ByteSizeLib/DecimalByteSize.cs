@@ -4,23 +4,31 @@ namespace ByteSizeLib
     {
         /// <summary>Number of bytes in 1 kilobyte.</summary>
         public const long BytesInKiloByte = 1_000;
+        
         /// <summary>Number of bytes in 1 megabyte.</summary>
         public const long BytesInMegaByte = 1_000_000;
+        
         /// <summary>Number of bytes in 1 gigabyte.</summary>
         public const long BytesInGigaByte = 1_000_000_000;
+        
         /// <summary>Number of bytes in 1 terabyte.</summary>
         public const long BytesInTeraByte = 1_000_000_000_000;
+        
         /// <summary>Number of bytes in 1 petabyte.</summary>
         public const long BytesInPetaByte = 1_000_000_000_000_000;
 
         /// <summary>Kilobyte symbol.</summary>
         public const string KiloByteSymbol = "KB";
+        
         /// <summary>Megabyte symbol.</summary>
         public const string MegaByteSymbol = "MB";
+        
         /// <summary>Gigabyte symbol.</summary>
         public const string GigaByteSymbol = "GB";
+        
         /// <summary>Terabyte symbol.</summary>
         public const string TeraByteSymbol = "TB";
+        
         /// <summary>Petabyte symbol.</summary>
         public const string PetaByteSymbol = "PB";
 
