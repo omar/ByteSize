@@ -439,7 +439,6 @@ namespace ByteSizeLib
         /// </summary>
         /// <param name="a">The dividend.</param>
         /// <param name="b">The divisor.</param>
-        /// <returns></returns>
         /// <exception cref="DivideByZeroException">Returned if b is zero.</exception>
         public static ByteSize operator /(ByteSize a, ByteSize b)
         {
