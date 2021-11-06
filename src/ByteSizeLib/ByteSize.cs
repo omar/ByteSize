@@ -124,7 +124,7 @@ namespace ByteSizeLib
         }
 
         /// <summary>
-        /// Gets the largest whole number decimal symbol.
+        /// Gets the largest whole number decimal value.
         /// Example: 
         /// <para>- 1000 KB will return 1</para>
         /// <para>- 999 KB will return 999</para>
