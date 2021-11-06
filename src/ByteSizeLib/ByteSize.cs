@@ -91,7 +91,7 @@ namespace ByteSizeLib
         }
 
         /// <summary>
-        /// Gets the largest whole number binary symbol.
+        /// Gets the largest whole number binary value.
         /// Example: 
         /// <para>- 1024 KiB will return 1</para>
         /// <para>- 1023 KiB will return 1023</para>
