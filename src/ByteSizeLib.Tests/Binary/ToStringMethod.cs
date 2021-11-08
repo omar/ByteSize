@@ -1,8 +1,6 @@
-﻿using System.Globalization;
-using System.Threading;
-using Xunit;
+﻿using Xunit;
 
-namespace ByteSizeLib.Tests.BinaryByteSizeTests
+namespace ByteSizeLib.Tests.Binary
 {
     public class ToStringMethod
     {
@@ -83,5 +81,5 @@ namespace ByteSizeLib.Tests.BinaryByteSizeTests
             // Assert
             Assert.Equal(10.ToString("0.0 TiB"), result);
         }
-	}
+    }
 }

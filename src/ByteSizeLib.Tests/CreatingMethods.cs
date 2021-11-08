@@ -19,6 +19,20 @@ namespace ByteSizeLib.Tests
         }
 
         [Fact]
+        public void FromBitsFraction()
+        {
+            // Arrange
+            long value = 12;
+
+            // Act
+            var result = ByteSize.FromBits(value);
+
+            // Assert
+            Assert.Equal(12, result.Bits);
+            Assert.Equal(1.5, result.Bytes);
+        }
+
+        [Fact]
         public void FromBytesMethod()
         {
             // Arrange

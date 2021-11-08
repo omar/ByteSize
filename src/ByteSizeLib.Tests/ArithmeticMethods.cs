@@ -83,6 +83,26 @@ namespace ByteSizeLib.Tests
         }
 
         [Fact]
+        public void MultiplyOperator()
+        {
+            var a = ByteSize.FromBytes(2);
+            var b = ByteSize.FromBytes(2);
+            var actual = a * b;
+
+            Assert.Equal(4, actual.Bytes);
+        }
+
+        [Fact]
+        public void DivideOperator()
+        {
+            var a = ByteSize.FromBytes(4);
+            var b = ByteSize.FromBytes(2);
+            var actual = a / b;
+
+            Assert.Equal(2, actual.Bytes);
+        }
+
+        [Fact]
         public void MaxValueBits()
         {
             var size = ByteSize.FromBits(long.MaxValue);

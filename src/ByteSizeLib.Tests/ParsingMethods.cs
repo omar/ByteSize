@@ -1,6 +1,5 @@
-﻿using System;
+using System;
 using System.Globalization;
-using System.Threading;
 using Xunit;
 
 namespace ByteSizeLib.Tests
@@ -98,8 +97,20 @@ namespace ByteSizeLib.Tests
 
             Assert.Throws<FormatException>(() =>
                 {
-                    ByteSize.Parse(val);
+                    ByteSize.Parse(val, CultureInfo.InvariantCulture);
                 });
+        }
+
+        [Fact]
+        public void ParsePartialBitsCurrentCulture()
+        {
+            var s = CultureInfo.CurrentCulture.NumberFormat.CurrencyDecimalSeparator;
+            string val = $"10{s}5b";
+
+            Assert.Throws<FormatException>(() =>
+            {
+                ByteSize.Parse(val, CultureInfo.CurrentCulture);
+            });
         }
 
         // Parse method throws exceptions
@@ -119,7 +130,7 @@ namespace ByteSizeLib.Tests
         {
             Assert.Throws<ArgumentNullException>(() =>
                 {
-                    ByteSize.Parse(null);
+                    ByteSize.Parse(null!);
                 });
         }
 
@@ -130,7 +141,7 @@ namespace ByteSizeLib.Tests
         {
             string val = "1b";
             var expected = ByteSize.FromBits(1);
-            
+
             var result = ByteSize.Parse(val);
 
             Assert.Equal(expected, result);
@@ -157,7 +168,7 @@ namespace ByteSizeLib.Tests
             var result = ByteSize.Parse(val);
 
             Assert.Equal(expected, result);
-            
+
             CultureInfo.CurrentCulture = new CultureInfo("en-US");
         }
 

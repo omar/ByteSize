@@ -1,9 +1,6 @@
-﻿using System;
-using System.Globalization;
-using System.Threading;
-using Xunit;
+﻿using Xunit;
 
-namespace ByteSizeLib.Tests.BinaryByteSizeTests
+namespace ByteSizeLib.Tests.Binary
 {
     public class ParsingMethods
     {

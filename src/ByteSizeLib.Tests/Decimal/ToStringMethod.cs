@@ -1,5 +1,4 @@
 ﻿using System.Globalization;
-using System.Threading;
 using Xunit;
 
 namespace ByteSizeLib.Tests.Decimal
@@ -204,33 +203,33 @@ namespace ByteSizeLib.Tests.Decimal
 
             // Assert
             Assert.Equal("9,8 MB", result);
-		}
-
-		[Fact]
-		public void ReturnsCultureSpecificFormat()
-		{
-			// Arrange
-			var b = ByteSize.FromKiloBytes(10.5);
-
-			// Act
-			var deCulture = new CultureInfo("de-DE");
-			var result = b.ToString("0.0 KB", deCulture);
-
-			// Assert
-			Assert.Equal(10.5.ToString("0.0 KB", deCulture), result);
-		}
+        }
 
         [Fact]
-		public void ReturnsZeroBytes()
-		{
-			// Arrange
-			var b = ByteSize.FromBytes(0);
+        public void ReturnsCultureSpecificFormat()
+        {
+            // Arrange
+            var b = ByteSize.FromKiloBytes(10.5);
 
-			// Act
-			var result = b.ToString();
+            // Act
+            var deCulture = new CultureInfo("de-DE");
+            var result = b.ToString("0.0 KB", deCulture);
 
-			// Assert
-			Assert.Equal("0 B", result);
-		}
-	}
+            // Assert
+            Assert.Equal(10.5.ToString("0.0 KB", deCulture), result);
+        }
+
+        [Fact]
+        public void ReturnsZeroBytes()
+        {
+          // Arrange
+          var b = ByteSize.FromBytes(0);
+
+          // Act
+          var result = b.ToString();
+
+          // Assert
+          Assert.Equal("0 B", result);
+        }
+    }
 }
