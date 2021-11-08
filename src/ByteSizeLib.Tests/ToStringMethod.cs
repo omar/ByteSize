@@ -155,16 +155,16 @@ namespace ByteSizeLib.Tests
         }
 
         [Fact]
-        public void ReturnsZeroBits()
+        public void ReturnsZeroBytes()
         {
             // Arrange
-            var b = ByteSize.FromBits(0);
+            var b = ByteSize.FromBytes(0);
 
             // Act
             var result = b.ToString();
 
             // Assert
-            Assert.Equal("0 b", result);
+            Assert.Equal("0 B", result);
         }
 
         [Fact]
@@ -178,19 +178,6 @@ namespace ByteSizeLib.Tests
 
             // Assert
             Assert.Equal("12.0 B", result);
-        }
-
-        [Fact]
-        public void StringInterpolationWithoutFormat()
-        {
-            // Arrange
-            var b = ByteSize.FromBytes(12);
-
-            // Act
-            var result = $"{b}";
-
-            // Assert
-            Assert.Equal("12 B", result);
         }
     }
 }

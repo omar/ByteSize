@@ -220,16 +220,16 @@ namespace ByteSizeLib.Tests.Decimal
         }
 
         [Fact]
-        public void ReturnsZeroBits()
+        public void ReturnsZeroBytes()
         {
-            // Arrange
-            var b = ByteSize.FromBits(0);
+          // Arrange
+          var b = ByteSize.FromBytes(0);
 
-            // Act
-            var result = b.ToString();
+          // Act
+          var result = b.ToString();
 
-            // Assert
-            Assert.Equal("0 b", result);
+          // Assert
+          Assert.Equal("0 B", result);
         }
     }
 }
