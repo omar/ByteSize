@@ -83,7 +83,7 @@ namespace ByteSizeLib
                 if (Math.Abs(this.KiloBytes) >= 1)
                     return KiloByteSymbol;
 
-                if (Math.Abs(this.Bytes) >= 0)
+                if (Math.Abs(this.Bytes) >= 1)
                     return ByteSymbol;
 
                 return BitSymbol;
@@ -286,7 +286,13 @@ namespace ByteSizeLib
 
             if (format != null && format.IndexOf(ByteSize.BitSymbol, StringComparison.Ordinal) != -1)
                 return output(this.Bits);
-            
+
+            // Always use bytes if the value of the object is 0
+            // as that's the most common format shown. Bits is
+            // not usually displayed.
+            if (this.Bytes == 0)
+                return "0 B";
+
             if (useBinaryByte)
             {
                 return string.Format("{0} {1}", this.LargestWholeNumberBinaryValue.ToString(format, provider), this.LargestWholeNumberBinarySymbol);

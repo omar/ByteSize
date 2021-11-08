@@ -32,5 +32,18 @@ namespace ByteSizeLib.Tests.Binary
             // Assert
             Assert.Equal($"9{s}77 KiB", result);
         }
+
+        [Fact]
+        public void ReturnsZeroBytes()
+        {
+            // Arrange
+            var b = ByteSize.FromKiloBytes(0);
+
+            // Act
+            var result = b.ToBinaryString();
+
+            // Assert
+            Assert.Equal("0 B", result);
+        }
     }
 }
