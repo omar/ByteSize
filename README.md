@@ -5,14 +5,13 @@ by removing ambiguity of the value being represented.
 
 `ByteSize` is to bytes what `System.TimeSpan` is to time.
 
-[![](https://travis-ci.org/omar/ByteSize.svg?branch=master)](https://travis-ci.org/omar/ByteSize)
 [![Stable nuget](https://img.shields.io/nuget/v/ByteSize.svg)](https://www.nuget.org/packages/ByteSize/)
 
 #### Development
 
 - Install [.NET Core SDK](https://dotnet.microsoft.com/download)
-- Build: `make build`
-- Test: `make test`
+- Build: `dotnet build`
+- Test: `dotnet test`
 
 ## v2 Breaking Changes
 
@@ -45,8 +44,8 @@ to _bytes_.
 `ByteSize` adheres to the IEC standard, see this [Wikipedia article](https://en.wikipedia.org/wiki/Kilobyte#Definitions_and_usage).
 That means `ByteSize` assumes:
 
-- `1 kilobyte` = `1000 bytes` with 2 letter abbrevations `b`, `B`,`KB`, `MB`, `GB`, `TB`, `PB`.
-- `1 kibibyte` = `1024 bytes` with 3 letter abbrevations `b`, `B`,`KiB`, `MiB`, `GiB`, `TiB`, `PiB`.
+- Decimal representation: `1 kilobyte` = `1000 bytes` with 2 letter abbrevations `b`, `B`,`KB`, `MB`, `GB`, `TB`, `PB`.
+- Binary representation: `1 kibibyte` = `1024 bytes` with 3 letter abbrevations `b`, `B`,`KiB`, `MiB`, `GiB`, `TiB`, `PiB`.
 
 `ByteSize` manages conversion of the values internally and provides methods to create and retrieve the values as needed. See the examples below.
 
