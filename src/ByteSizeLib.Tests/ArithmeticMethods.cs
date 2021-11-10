@@ -1,4 +1,5 @@
-﻿using Xunit;
+﻿using System.Linq;
+using Xunit;
 
 namespace ByteSizeLib.Tests
 {
@@ -108,6 +109,14 @@ namespace ByteSizeLib.Tests
             var size = ByteSize.FromBits(long.MaxValue);
 
             Assert.Equal(long.MaxValue, size.Bits);
+        }
+
+        [Fact]
+        public void Sum()
+        {
+            var sizes = new[] { ByteSize.FromBytes(2), ByteSize.FromBytes(3) };
+
+            Assert.Equal(ByteSize.FromBytes(5), sizes.Sum());
         }
     }
 }
