@@ -1,7 +1,8 @@
-﻿using ByteSizeLib;
+﻿using System;
+using System.ComponentModel;
 using System.Globalization;
 
-namespace System.ComponentModel
+namespace ByteSizeLib
 {
     /// <summary>
     /// Provides a type converter to convert <see cref="ByteSize"/> objects to and from <see cref="string"/> objects.
