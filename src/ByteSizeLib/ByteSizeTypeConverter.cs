@@ -7,7 +7,7 @@ namespace ByteSizeLib
     /// <summary>
     /// Provides a type converter to convert <see cref="ByteSize"/> objects to and from <see cref="string"/> objects.
     /// </summary>
-    public class ByteSizeTypeConverter : TypeConverter
+    internal class ByteSizeTypeConverter : TypeConverter
     {
         /// <inheritdoc/>
         public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType) => sourceType == typeof(string);
