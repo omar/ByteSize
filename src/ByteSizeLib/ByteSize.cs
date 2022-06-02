@@ -208,6 +208,7 @@ namespace ByteSizeLib
         /// </summary>
         public override string ToString()
         {
+            System.Console.WriteLine("ToString called");
             return this.ToString("0.##", CultureInfo.CurrentCulture);
         }
 
@@ -252,6 +253,8 @@ namespace ByteSizeLib
         {
             if (format != null && !format.Contains("#") && !format.Contains("0"))
                 format = "0.## " + format;
+            else if (format == null) 
+                format = "0.##";
 
             if (provider == null) provider = CultureInfo.CurrentCulture;
 
