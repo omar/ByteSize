@@ -208,7 +208,6 @@ namespace ByteSizeLib
         /// </summary>
         public override string ToString()
         {
-            System.Console.WriteLine("ToString called");
             return this.ToString("0.##", CultureInfo.CurrentCulture);
         }
 
