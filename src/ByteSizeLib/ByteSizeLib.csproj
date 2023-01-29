@@ -8,7 +8,7 @@
     <AssemblyTitle>ByteSize</AssemblyTitle>
     <Authors>Omar Khudeira</Authors>
     <TargetFrameworks>netstandard1.0;netstandard2.1;netstandard2.0;net45;net5.0;</TargetFrameworks>
-    <LangVersion>8.0</LangVersion>
+    <LangVersion>9.0</LangVersion>
     <Nullable>enable</Nullable>
     <AssemblyName>ByteSize</AssemblyName>
     <PackageId>ByteSize</PackageId>
@@ -39,8 +39,11 @@ View all release notes at https://github.com/omar/ByteSize/blob/master/CHANGELOG
     <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="All" Version="1.0.0" />
   </ItemGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard1.0' ">
-    <PackageReference Include="System.ComponentModel.TypeConverter" Version="4.3.0" />
+  <ItemGroup>
+    <PackageReference Condition=" '$(TargetFramework)' == 'netstandard1.0' " 
+					  Include="System.ComponentModel.TypeConverter" Version="4.3.0" />
+    <PackageReference Condition=" '$(TargetFramework)' == 'netstandard1.0' or '$(TargetFramework)' == 'net45' " 
+					  Include="System.ValueTuple" Version="4.5.0" />
   </ItemGroup>
 
   <!-- Workaround for https://github.com/GitTools/GitVersion/issues/1031 -->
