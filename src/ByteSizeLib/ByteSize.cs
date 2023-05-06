@@ -32,6 +32,7 @@ namespace ByteSizeLib
         /// <para>- 1024 KiB will return MiB</para>
         /// <para>- 1023 KiB will return KiB</para>
         /// </summary>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0046:Convert to conditional expression")]
         public string LargestWholeNumberBinarySymbol
         {
             get
@@ -65,6 +66,7 @@ namespace ByteSizeLib
         /// <para>- 1000 KB will return MB</para>
         /// <para>- 999 KB will return KB</para>
         /// </summary>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0046:Convert to conditional expression")]
         public string LargestWholeNumberDecimalSymbol
         {
             get
@@ -98,6 +100,7 @@ namespace ByteSizeLib
         /// <para>- 1024 KiB will return 1</para>
         /// <para>- 1023 KiB will return 1023</para>
         /// </summary>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0046:Convert to conditional expression")]
         public double LargestWholeNumberBinaryValue
         {
             get
@@ -131,6 +134,7 @@ namespace ByteSizeLib
         /// <para>- 1000 KB will return 1</para>
         /// <para>- 999 KB will return 999</para>
         /// </summary>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0046:Convert to conditional expression")]
         public double LargestWholeNumberDecimalValue
         {
             get
@@ -248,17 +252,18 @@ namespace ByteSizeLib
         /// <param name="format">A numeric format string.</param>
         /// <param name="provider">An object that supplies culture-specific formatting information.</param>
         /// <param name="useBinaryByte"><see langword="true"/> to use binary byte values (1 KiB = 1024) instead of decimal values (1 KB = 1000 B).</param>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0046:Convert to conditional expression")]
         public string ToString(string? format, IFormatProvider? provider, bool useBinaryByte)
         {
             if (format != null && !format.Contains("#") && !format.Contains("0"))
                 format = "0.## " + format;
-            else if (format == null) 
-                format = "0.##";
+            else 
+                format ??= "0.##";
 
-            if (provider == null) provider = CultureInfo.CurrentCulture;
+            provider ??= CultureInfo.CurrentCulture;
 
-            Func<string, bool> has = s => format != null && format.IndexOf(s, StringComparison.CurrentCultureIgnoreCase) != -1;
-            Func<double, string> output = n => n.ToString(format, provider);
+            bool has(string s) => format != null && format.IndexOf(s, StringComparison.CurrentCultureIgnoreCase) != -1;
+            string output(double n) => n.ToString(format, provider);
 
             // Binary
             if (has("PiB"))
@@ -291,20 +296,22 @@ namespace ByteSizeLib
             if (format != null && format.IndexOf(ByteSize.BitSymbol, StringComparison.Ordinal) != -1)
                 return output(this.Bits);
 
-            // Always use bytes if the value of the object is 0
-            // as that's the most common format shown. Bits is
-            // not usually displayed.
-            if (this.Bytes == 0)
-                return "0 B";
+            return (this.Bytes, useBinaryByte) switch
+            {
+                // Always use bytes if the value of the object is 0
+                // as that's the most common format shown. Bits is
+                // not usually displayed.
+                (0, _) => "0 B",
 
-            if (useBinaryByte)
-            {
-                return string.Format("{0} {1}", this.LargestWholeNumberBinaryValue.ToString(format, provider), this.LargestWholeNumberBinarySymbol);
-            }
-            else
-            {
-                return string.Format("{0} {1}", this.LargestWholeNumberDecimalValue.ToString(format, provider), this.LargestWholeNumberDecimalSymbol);
-            }
+                (not 0, true) => string.Format(
+                    "{0} {1}", 
+                    this.LargestWholeNumberBinaryValue.ToString(format, provider), 
+                    this.LargestWholeNumberBinarySymbol),
+
+                (not 0, false) => string.Format("{0} {1}", 
+                    this.LargestWholeNumberDecimalValue.ToString(format, provider), 
+                    this.LargestWholeNumberDecimalSymbol),
+            };
         }
 
         /// <summary>
@@ -452,11 +459,11 @@ namespace ByteSizeLib
         /// <exception cref="DivideByZeroException">Thrown if <paramref name="b" /> is zero.</exception>
         public static ByteSize operator /(ByteSize a, ByteSize b)
         {
-            if (b.Bytes == 0)
+            return b.Bytes switch
             {
-                throw new DivideByZeroException();
-            }
-            return new ByteSize(a.Bytes / b.Bytes);
+                not 0 => new ByteSize(a.Bytes / b.Bytes),
+                0 => throw new DivideByZeroException(),
+            };
         }
 
         /// <summary>
