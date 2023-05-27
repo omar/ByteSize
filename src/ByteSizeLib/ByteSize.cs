@@ -237,7 +237,7 @@ namespace ByteSizeLib
         /// </summary>
         /// <param name="format">A numeric format string.</param>
         /// <param name="provider">An object that supplies culture-specific formatting information.</param>
-        public string ToString(string? format, IFormatProvider? provider)
+        public string ToString(string format, IFormatProvider provider)
         {
             return this.ToString(format, provider, useBinaryByte: false);
         }
@@ -253,7 +253,7 @@ namespace ByteSizeLib
         /// <param name="provider">An object that supplies culture-specific formatting information.</param>
         /// <param name="useBinaryByte"><see langword="true"/> to use binary byte values (1 KiB = 1024) instead of decimal values (1 KB = 1000 B).</param>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0046:Convert to conditional expression")]
-        public string ToString(string? format, IFormatProvider? provider, bool useBinaryByte)
+        public string ToString(string format, IFormatProvider provider, bool useBinaryByte)
         {
             if (format != null && !format.Contains("#") && !format.Contains("0"))
                 format = "0.## " + format;
@@ -318,7 +318,7 @@ namespace ByteSizeLib
         /// Indicates whether an instance has equal number of bits to this instance.
         /// </summary>
         /// <param name="value">The instance to compare.</param>
-        public override bool Equals(object? value)
+        public override bool Equals(object value)
         {
             if (value == null)
                 return false;
