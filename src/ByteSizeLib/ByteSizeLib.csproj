@@ -33,6 +33,7 @@ View all release notes at https://github.com/omar/ByteSize/blob/master/CHANGELOG
   <PropertyGroup Condition="'$(Configuration)' == 'Release'">
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <IncludeSymbols>true</IncludeSymbols>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
   
   <PropertyGroup Condition=" '$(GITHUB_ACTIONS)' == 'true'">
