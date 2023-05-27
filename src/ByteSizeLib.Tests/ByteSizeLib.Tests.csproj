@@ -4,6 +4,10 @@
     <TargetFramework>net6.0</TargetFramework>
 
     <IsPackable>false</IsPackable>
+
+    <SignAssembly>True</SignAssembly>
+
+    <AssemblyOriginatorKeyFile>bytetests.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 
   <ItemGroup>

@@ -26,6 +26,8 @@ View all release notes at https://github.com/omar/ByteSize/blob/master/CHANGELOG
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <ImplicitUsings>disable</ImplicitUsings>
+    <SignAssembly>True</SignAssembly>
+    <AssemblyOriginatorKeyFile>bytesize.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)' == 'Release'">
