@@ -236,10 +236,10 @@ namespace ByteSizeLib
         /// Use <see cref="ByteSize.ToBinaryString()"/> for binary string representation.
         /// </summary>
         /// <param name="format">A numeric format string.</param>
-        /// <param name="provider">An object that supplies culture-specific formatting information.</param>
-        public string ToString(string format, IFormatProvider provider)
+        /// <param name="formatProvider">An object that supplies culture-specific formatting information.</param>
+        public string ToString(string format, IFormatProvider formatProvider)
         {
-            return this.ToString(format, provider, useBinaryByte: false);
+            return this.ToString(format, formatProvider, useBinaryByte: false);
         }
 
         /// <summary>
@@ -317,15 +317,15 @@ namespace ByteSizeLib
         /// <summary>
         /// Indicates whether an instance has equal number of bits to this instance.
         /// </summary>
-        /// <param name="value">The instance to compare.</param>
-        public override bool Equals(object value)
+        /// <param name="obj">The instance to compare.</param>
+        public override bool Equals(object obj)
         {
-            if (value == null)
+            if (obj == null)
                 return false;
 
             ByteSize other;
-            if (value is ByteSize)
-                other = (ByteSize)value;
+            if (obj is ByteSize)
+                other = (ByteSize)obj;
             else
                 return false;
 
