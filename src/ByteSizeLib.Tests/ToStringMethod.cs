@@ -177,7 +177,7 @@ namespace ByteSizeLib.Tests
             var result = $"{b:0.0}";
 
             // Assert
-            Assert.Equal("12.0 B", result);
+            Assert.Equal($"{12.0:0.0} B", result);
         }
 
         [Fact]
@@ -203,7 +203,7 @@ namespace ByteSizeLib.Tests
             var result = $"{b}";
 
             // Assert
-            Assert.Equal("1.12 KB", result);
+            Assert.Equal($"{1.12} KB", result);
         }
     }
 }

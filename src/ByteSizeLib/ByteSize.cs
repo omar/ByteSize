@@ -212,7 +212,7 @@ namespace ByteSizeLib
         /// </summary>
         public override string ToString()
         {
-            return this.ToString("0.##", CultureInfo.CurrentCulture);
+            return this.ToString("0.##", null);
         }
 
         /// <summary>
@@ -225,7 +225,7 @@ namespace ByteSizeLib
         /// <param name="format">A numeric format string.</param>
         public string ToString(string format)
         {
-            return this.ToString(format, CultureInfo.CurrentCulture);
+            return this.ToString(format, null);
         }
 
         /// <summary>
