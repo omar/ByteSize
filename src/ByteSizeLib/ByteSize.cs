@@ -212,7 +212,7 @@ namespace ByteSizeLib
         /// </summary>
         public override string ToString()
         {
-            return this.ToString("0.##", CultureInfo.CurrentCulture);
+            return this.ToString("0.##", null);
         }
 
         /// <summary>
@@ -225,7 +225,7 @@ namespace ByteSizeLib
         /// <param name="format">A numeric format string.</param>
         public string ToString(string format)
         {
-            return this.ToString(format, CultureInfo.CurrentCulture);
+            return this.ToString(format, null);
         }
 
         /// <summary>
@@ -236,10 +236,10 @@ namespace ByteSizeLib
         /// Use <see cref="ByteSize.ToBinaryString()"/> for binary string representation.
         /// </summary>
         /// <param name="format">A numeric format string.</param>
-        /// <param name="provider">An object that supplies culture-specific formatting information.</param>
-        public string ToString(string? format, IFormatProvider? provider)
+        /// <param name="formatProvider">An object that supplies culture-specific formatting information.</param>
+        public string ToString(string format, IFormatProvider formatProvider)
         {
-            return this.ToString(format, provider, useBinaryByte: false);
+            return this.ToString(format, formatProvider, useBinaryByte: false);
         }
 
         /// <summary>
@@ -253,11 +253,11 @@ namespace ByteSizeLib
         /// <param name="provider">An object that supplies culture-specific formatting information.</param>
         /// <param name="useBinaryByte"><see langword="true"/> to use binary byte values (1 KiB = 1024) instead of decimal values (1 KB = 1000 B).</param>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0046:Convert to conditional expression")]
-        public string ToString(string? format, IFormatProvider? provider, bool useBinaryByte)
+        public string ToString(string format, IFormatProvider provider, bool useBinaryByte)
         {
             if (format != null && !format.Contains("#") && !format.Contains("0"))
                 format = "0.## " + format;
-            else 
+            else
                 format ??= "0.##";
 
             provider ??= CultureInfo.CurrentCulture;
@@ -304,12 +304,12 @@ namespace ByteSizeLib
                 (0, _) => "0 B",
 
                 (not 0, true) => string.Format(
-                    "{0} {1}", 
-                    this.LargestWholeNumberBinaryValue.ToString(format, provider), 
+                    "{0} {1}",
+                    this.LargestWholeNumberBinaryValue.ToString(format, provider),
                     this.LargestWholeNumberBinarySymbol),
 
-                (not 0, false) => string.Format("{0} {1}", 
-                    this.LargestWholeNumberDecimalValue.ToString(format, provider), 
+                (not 0, false) => string.Format("{0} {1}",
+                    this.LargestWholeNumberDecimalValue.ToString(format, provider),
                     this.LargestWholeNumberDecimalSymbol),
             };
         }
@@ -317,15 +317,15 @@ namespace ByteSizeLib
         /// <summary>
         /// Indicates whether an instance has equal number of bits to this instance.
         /// </summary>
-        /// <param name="value">The instance to compare.</param>
-        public override bool Equals(object? value)
+        /// <param name="obj">The instance to compare.</param>
+        public override bool Equals(object obj)
         {
-            if (value == null)
+            if (obj == null)
                 return false;
 
             ByteSize other;
-            if (value is ByteSize)
-                other = (ByteSize)value;
+            if (obj is ByteSize size)
+                other = size;
             else
                 return false;
 
@@ -405,16 +405,6 @@ namespace ByteSizeLib
         }
 
         /// <summary>
-        /// Returns an instance whose value is 1 byte greater than this instance.
-        /// </summary>
-        /// <param name="b">The instance to increment.</param>
-        public static ByteSize operator ++(ByteSize b)
-        {
-            // TODO: I can't imagine this method being useful. Might want to get rid of.
-            return new ByteSize(b.Bytes + 1);
-        }
-
-        /// <summary>
         /// Returns a new instance whose value is the negative value of the specified instance.
         /// </summary>
         /// <param name="b">The instance to be negated.</param>
@@ -432,21 +422,11 @@ namespace ByteSizeLib
         }
 
         /// <summary>
-        /// Returns a new instance whose value is 1 byte less than this instance.
-        /// </summary>
-        /// <param name="b">The instance to decrement.</param>
-        public static ByteSize operator --(ByteSize b)
-        {
-            // TODO: I can't imagine this method being useful. Might want to get rid of.
-            return new ByteSize(b.Bytes - 1);
-        }
-
-        /// <summary>
         /// Multiply two instances.
         /// </summary>
         /// <param name="a">First instance to multiply.</param>
         /// <param name="b">Second instance to multiply.</param>
-        public static ByteSize operator *(ByteSize a, ByteSize b) 
+        public static ByteSize operator *(ByteSize a, ByteSize b)
         {
             return new ByteSize(a.Bytes * b.Bytes);
         }
@@ -553,7 +533,7 @@ namespace ByteSizeLib
         /// <param name="formatProvider">An object that supplies culture-specific formatting information.</param>
         public static ByteSize Parse(string s, NumberStyles numberStyles, IFormatProvider formatProvider)
         {
-           
+
             // Arg checking
             if (string.IsNullOrWhiteSpace(s))
                 throw new ArgumentNullException("s", "String is null or whitespace");
@@ -561,13 +541,14 @@ namespace ByteSizeLib
             // Get the index of the first non-digit character
             s = s.TrimStart(); // Protect against leading spaces
 
-            var num = 0;
             var found = false;
 
             var numberFormatInfo = NumberFormatInfo.GetInstance(formatProvider);
             var decimalSeparator = Convert.ToChar(numberFormatInfo.NumberDecimalSeparator);
             var groupSeparator = Convert.ToChar(numberFormatInfo.NumberGroupSeparator);
 
+
+            int num;
             // Pick first non-digit number
             for (num = 0; num < s.Length; num++)
                 if (!(char.IsDigit(s[num]) || s[num] == decimalSeparator || s[num] == groupSeparator))
@@ -576,7 +557,7 @@ namespace ByteSizeLib
                     break;
                 }
 
-            if (found == false)
+            if (!found)
                 throw new FormatException($"No byte indicator found in value '{s}'.");
 
             int lastNumber = num;
@@ -586,8 +567,7 @@ namespace ByteSizeLib
             string sizePart = s.Substring(lastNumber, s.Length - lastNumber).Trim();
 
             // Get the numeric part
-            double number;
-            if (!double.TryParse(numberPart, numberStyles, formatProvider, out number))
+            if (!double.TryParse(numberPart, numberStyles, formatProvider, out double number))
                 throw new FormatException($"No number found in value '{s}'.");
 
             // Get the magnitude part
@@ -597,49 +577,28 @@ namespace ByteSizeLib
                     if (number % 1 != 0) // Can't have partial bits
                         throw new FormatException($"Can't have partial bits for value '{s}'.");
 
-                    return FromBits((long) number);
+                    return FromBits((long)number);
 
                 case "B":
                     return FromBytes(number);
             }
 
-            switch (sizePart.ToLowerInvariant())
+            return sizePart.ToLowerInvariant() switch
             {
                 // Binary
-                case "kib":
-                    return FromKibiBytes(number);
-
-                case "mib":
-                    return FromMebiBytes(number);
-
-                case "gib":
-                    return FromGibiBytes(number);
-
-                case "tib":
-                    return FromTebiBytes(number);
-
-                case "pib":
-                    return FromPebiBytes(number);
-
+                "kib" => FromKibiBytes(number),
+                "mib" => FromMebiBytes(number),
+                "gib" => FromGibiBytes(number),
+                "tib" => FromTebiBytes(number),
+                "pib" => FromPebiBytes(number),
                 // Decimal
-                case "kb":
-                    return FromKiloBytes(number);
-
-                case "mb":
-                    return FromMegaBytes(number);
-
-                case "gb":
-                    return FromGigaBytes(number);
-
-                case "tb":
-                    return FromTeraBytes(number);
-
-                case "pb":
-                    return FromPetaBytes(number);
-                
-                default:
-                    throw new FormatException($"Bytes of magnitude '{sizePart}' is not supported.");
-            }
+                "kb" => FromKiloBytes(number),
+                "mb" => FromMegaBytes(number),
+                "gb" => FromGigaBytes(number),
+                "tb" => FromTeraBytes(number),
+                "pb" => FromPetaBytes(number),
+                _ => throw new FormatException($"Bytes of magnitude '{sizePart}' is not supported."),
+            };
         }
 
         /// <summary>
@@ -650,7 +609,7 @@ namespace ByteSizeLib
         /// <param name="result">Object reference to store the result if successful.</param>
         public static bool TryParse(string s, out ByteSize result)
         {
-            try 
+            try
             {
                 result = Parse(s);
                 return true;

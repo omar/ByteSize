@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Xunit;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
+using Xunit;
 
 namespace ByteSizeLib.Tests
 {
@@ -16,7 +12,7 @@ namespace ByteSizeLib.Tests
             var converter = TypeDescriptor.GetConverter(typeof(ByteSize));
             Assert.NotNull(converter);
             var bs = ByteSize.FromBytes(1024);
-            var actual =converter.ConvertToString(bs);
+            var actual = converter.ConvertToString(bs);
             var expected = "1 KiB";
             Assert.Equal(expected, actual);
         }

@@ -70,7 +70,7 @@ namespace ByteSizeLib.Tests.Decimal
             var result = ByteSize.Parse(val);
 
             Assert.Equal(expected, result);
-            
+
             CultureInfo.CurrentCulture = new CultureInfo("en-US");
         }
     }

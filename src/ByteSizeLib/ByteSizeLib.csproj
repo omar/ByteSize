@@ -4,12 +4,12 @@
     <Title>ByteSize</Title>
     <Description>ByteSize is a utility class that makes byte size representation in code easier by removing ambiguity of the value being represented. ByteSize is to bytes what System.TimeSpan is to time.</Description>
     <Copyright>Copyright © Omar Khudeira 2013-2022</Copyright>
-    <Version>2.1.1</Version>
+    <Version>2.1.2</Version>
     <AssemblyTitle>ByteSize</AssemblyTitle>
     <Authors>Omar Khudeira</Authors>
-    <TargetFrameworks>netstandard1.0;netstandard2.1;netstandard2.0;net45;net5.0;</TargetFrameworks>
-    <LangVersion>9.0</LangVersion>
-    <Nullable>enable</Nullable>
+    <TargetFrameworks>net472;net6.0</TargetFrameworks>
+    <LangVersion>latest</LangVersion>
+    <Nullable>disable</Nullable>
     <AssemblyName>ByteSize</AssemblyName>
     <PackageId>ByteSize</PackageId>
     <PackageTags>bytes</PackageTags>
@@ -24,11 +24,18 @@ View all release notes at https://github.com/omar/ByteSize/blob/master/CHANGELOG
     <NeutralLanguage>en</NeutralLanguage>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
-    <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <SignAssembly>True</SignAssembly>
+    <AssemblyOriginatorKeyFile>bytesize.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <IncludeSymbols>true</IncludeSymbols>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+  
   <PropertyGroup Condition=" '$(GITHUB_ACTIONS)' == 'true'">
     <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
@@ -37,13 +44,6 @@ View all release notes at https://github.com/omar/ByteSize/blob/master/CHANGELOG
   <ItemGroup>
     <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" PrivateAssets="All" Version="1.0.3" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="All" Version="1.1.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Condition=" '$(TargetFramework)' == 'netstandard1.0' " 
-					  Include="System.ComponentModel.TypeConverter" Version="4.3.0" />
-    <PackageReference Condition=" '$(TargetFramework)' == 'netstandard1.0' or '$(TargetFramework)' == 'net45' " 
-					  Include="System.ValueTuple" Version="4.5.0" />
   </ItemGroup>
 
   <!-- Workaround for https://github.com/GitTools/GitVersion/issues/1031 -->
