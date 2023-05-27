@@ -405,16 +405,6 @@ namespace ByteSizeLib
         }
 
         /// <summary>
-        /// Returns an instance whose value is 1 byte greater than this instance.
-        /// </summary>
-        /// <param name="b">The instance to increment.</param>
-        public static ByteSize operator ++(ByteSize b)
-        {
-            // TODO: I can't imagine this method being useful. Might want to get rid of.
-            return new ByteSize(b.Bytes + 1);
-        }
-
-        /// <summary>
         /// Returns a new instance whose value is the negative value of the specified instance.
         /// </summary>
         /// <param name="b">The instance to be negated.</param>
@@ -429,16 +419,6 @@ namespace ByteSizeLib
         public static ByteSize operator -(ByteSize b1, ByteSize b2)
         {
             return new ByteSize(b1.Bytes - b2.Bytes);
-        }
-
-        /// <summary>
-        /// Returns a new instance whose value is 1 byte less than this instance.
-        /// </summary>
-        /// <param name="b">The instance to decrement.</param>
-        public static ByteSize operator --(ByteSize b)
-        {
-            // TODO: I can't imagine this method being useful. Might want to get rid of.
-            return new ByteSize(b.Bytes - 1);
         }
 
         /// <summary>
