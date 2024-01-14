@@ -4,7 +4,7 @@
     <Title>ByteSize</Title>
     <Description>ByteSize is a utility class that makes byte size representation in code easier by removing ambiguity of the value being represented. ByteSize is to bytes what System.TimeSpan is to time.</Description>
     <Copyright>Copyright © Omar Khudeira 2013-2022</Copyright>
-    <Version>2.1.1</Version>
+    <Version>2.1.2</Version>
     <AssemblyTitle>ByteSize</AssemblyTitle>
     <Authors>Omar Khudeira</Authors>
     <TargetFrameworks>netstandard1.0;netstandard2.1;netstandard2.0;net45;net5.0;</TargetFrameworks>
@@ -14,8 +14,7 @@
     <PackageId>ByteSize</PackageId>
     <PackageTags>bytes</PackageTags>
     <PackageReleaseNotes>
-- Add documentation
-- Fix potential System.NullReferenceException in the ToString() methods
+- Add strong name support
 
 View all release notes at https://github.com/omar/ByteSize/blob/master/CHANGELOG.md.</PackageReleaseNotes>
     <PackageProjectUrl>https://github.com/omar/ByteSize</PackageProjectUrl>
@@ -27,6 +26,8 @@ View all release notes at https://github.com/omar/ByteSize/blob/master/CHANGELOG
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <AssemblyOriginatorKeyFile>ByteSize.snk</AssemblyOriginatorKeyFile>
+    <SignAssembly>true</SignAssembly>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(GITHUB_ACTIONS)' == 'true'">
