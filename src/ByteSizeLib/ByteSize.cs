@@ -324,8 +324,8 @@ namespace ByteSizeLib
                 return false;
 
             ByteSize other;
-            if (value is ByteSize)
-                other = (ByteSize)value;
+            if (value is ByteSize size)
+                other = size;
             else
                 return false;
 
