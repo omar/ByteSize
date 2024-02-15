@@ -262,7 +262,7 @@ namespace ByteSizeLib
 
             provider ??= CultureInfo.CurrentCulture;
 
-            bool has(string s) => format != null && format.IndexOf(s, StringComparison.CurrentCultureIgnoreCase) != -1;
+            bool has(string s) => format.IndexOf(s, StringComparison.CurrentCultureIgnoreCase) != -1;
             string output(double n) => n.ToString(format, provider);
 
             // Binary
