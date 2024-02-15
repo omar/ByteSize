@@ -290,10 +290,10 @@ namespace ByteSizeLib
                 return output(this.KiloBytes);
 
             // Byte and Bit symbol must be case-sensitive
-            if (format != null && format.IndexOf(ByteSize.ByteSymbol, StringComparison.Ordinal) != -1)
+            if (format.IndexOf(ByteSize.ByteSymbol, StringComparison.Ordinal) != -1)
                 return output(this.Bytes);
 
-            if (format != null && format.IndexOf(ByteSize.BitSymbol, StringComparison.Ordinal) != -1)
+            if (format.IndexOf(ByteSize.BitSymbol, StringComparison.Ordinal) != -1)
                 return output(this.Bits);
 
             return (this.Bytes, useBinaryByte) switch
