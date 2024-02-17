@@ -583,13 +583,13 @@ namespace ByteSizeLib
 
             // Cut the input string in half
             string numberPart = s.Substring(0, lastNumber).Trim();
-            string sizePart = s.Substring(lastNumber, s.Length - lastNumber).Trim();
 
             // Get the numeric part
             double number;
             if (!double.TryParse(numberPart, numberStyles, formatProvider, out number))
                 throw new FormatException($"No number found in value '{s}'.");
 
+            string sizePart = s.Substring(lastNumber, s.Length - lastNumber).Trim();
             // Get the magnitude part
             switch (sizePart)
             {
