@@ -369,23 +369,23 @@ namespace ByteSizeLib
         /// <param name="bs">The <see cref="ByteSize" /> instance to sum.</param>
         public ByteSize Add(ByteSize bs)
         {
-            return new ByteSize(this.Bytes + bs.Bytes);
+            return this + bs;
         }
-
+        
         /// <inheritdoc cref="Add" />
         /// <param name="value">The number of bits.</param>
         public ByteSize AddBits(long value)
         {
             return this + FromBits(value);
         }
-
+        
         /// <inheritdoc cref="Add" />
         /// <param name="value">The number of bytes.</param>
         public ByteSize AddBytes(double value)
         {
             return this + ByteSize.FromBytes(value);
         }
-
+        
         /// <summary>
         /// Returns a new <see cref="ByteSize" /> object whose value is the difference of the specified
         /// value and this instance.
@@ -393,7 +393,21 @@ namespace ByteSizeLib
         /// <param name="bs">The <see cref="ByteSize" /> instance to subtract.</param>
         public ByteSize Subtract(ByteSize bs)
         {
-            return new ByteSize(this.Bytes - bs.Bytes);
+            return this - bs;
+        }
+        
+        /// <inheritdoc cref="Subtract" />
+        /// <param name="value">The number of bits.</param>
+        public ByteSize SubtractBits(long value)
+        {
+            return this - FromBits(value);
+        }
+        
+        /// <inheritdoc cref="Subtract" />
+        /// <param name="value">The number of bytes.</param>
+        public ByteSize SubtractBytes(double value)
+        {
+            return this - ByteSize.FromBytes(value);
         }
 
         /// <inheritdoc cref="Add" />
