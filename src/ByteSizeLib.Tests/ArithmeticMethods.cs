@@ -43,6 +43,24 @@ namespace ByteSizeLib.Tests
         }
 
         [Fact]
+        public void SubtractBitsMethod()
+        {
+            var size = ByteSize.FromBytes(4).SubtractBits(8);
+
+            Assert.Equal(24, size.Bits);
+            Assert.Equal(3, size.Bytes);
+        }
+
+        [Fact]
+        public void SubtractBytesMethod()
+        {
+            var size = ByteSize.FromBytes(4).SubtractBytes(2);
+
+            Assert.Equal(16, size.Bits);
+            Assert.Equal(2, size.Bytes);
+        }
+
+        [Fact]
         public void IncrementOperator()
         {
             var size = ByteSize.FromBytes(2);
